@@ -18,6 +18,7 @@ public class Manager extends User
 	}
 	{
 		requests = new ArrayList<Request>();
+		courses = new ArrayList<Course>();
 	}
 	public ManagerType getManagerType() {
         return managerType;
@@ -51,45 +52,84 @@ public class Manager extends User
         return super.toString() + " " + managerType + " " + requests; 
     }
 	
-	public void addCourse(int yearOfStudy, String courseName, String courseCode, int numberOfCredits) {
-		Course newCourse = new Course(courseName, courseCode, numberOfCredits);
-		    if (this.yearOfStudy == yearOfStudy) {
-		        this.courses.add(newCourse);
-		        System.out.println("Course " + newCourse.getCourseName() + " added for year " + yearOfStudy);
-		    } else {
-		        System.out.println("This course is not applicable for the current year of study.");
-		    }
-	}
+    public void addCourse(String code, int numberOfCredits, String courseName, String description, CourseType courseType) {
+        Course newCourse = new Course();
+        newCourse.setCode(code);
+        newCourse.setNumberOfCredits(numberOfCredits);
+        newCourse.setCourseName(courseName);
+        newCourse.setDescription(description);
+        newCourse.setCourseType(courseType);
+        courses.add(newCourse);
+    }
 
-	public void removeCourse() {
-	}
+    public void removeCourseByCode(String code) {
+        for (Course course : courses) {
+            if (course.getCode().equals(code)) {
+                courses.remove(course);
+                System.out.println("Course with code " + code + " has been removed.");
+                return; 
+            }
+        }
+        System.out.println("Course with code " + code + " not found.");
+    }
+
+
+    public void updateCourse(String code, String newName, String newDescription, CourseType newCourseType) {
+        for (Course course : courses) {
+            if (course.getCode().equals(code)) {
+                course.setCourseName(newName);
+                course.setDescription(newDescription);
+                course.setCourseType(newCourseType);
+                System.out.println("Course with code " + code + " has been updated.");
+                return; 
+            }
+        }
+        System.out.println("Course with code " + code + " not found.");
+    }
+
 	
-	public void updateCourse() {
-	}
-	
-	public boolean approveStudent(Student parameter) {
-	
-		return false;	
-	}
-	
-	
-	public boolean assignCourseToTeacher(Teacher parameter, Course parameter2, CourseType parameter3) {
-	
-		return false;	
-	}
+    public boolean approveStudent(Student student, Course course) {
+	     if (course.getParticipants().size() < course.getMaxCountOfStudents()) {
+	          course.getParticipants().add(student);
+	           System.out.println("Student " + student.getFirstName() + " has been approved for the course " + course.getCourseName() + ".");
+	           return true; 
+	      } else {
+	            System.out.println("No available seats for the course " + course.getCourseName() + ". Approval denied.");
+	            return false; 
+	        }
+	    }
+
 	
 	
-	public Void viewInfoOfTeachers(ArrayList<Teacher> parameter) {
+    public static boolean assignCourseToTeacher(Teacher teacher, Course course) {
+        if (teacher != null && course != null) {
+            teacher.getCourses().add(course);  
+            System.out.println("Teacher " + teacher.getFirstName() + " has been assigned to the course: " + course.getCourseName());
+            return true;
+        }
+        return false;
+    }
+
+
 	
-		return null;	
-	}
-	
-	
-	public Void viewInfoOfStudents(ArrayList<Student> parameter) {
-		// TODO implement me
-		return null;	
-	}
-	
+    public void viewInfoOfStudents(ArrayList<Student> students) {
+        System.out.println("List of Students:");
+        for (Student student : students) {
+            System.out.println("Name: " + student.getFirstName() + ", Age: " + student.getYearOfStudy());
+        }
+    }
+
+    public void viewInfoOfTeachers(ArrayList<Teacher> teachers) {
+        System.out.println("List of Teachers and Their Courses:");
+        for (Teacher teacher : teachers) {
+            System.out.print("Name: " + teacher.getFirstName() + ", Courses: ");
+            for (Course course : teacher.getCourses()) {
+                System.out.print(course.getCourseName() + " ");
+            }
+            System.out.println();
+        }
+    }
+
 	public Void createStatistics(Course parameter) {
 		// TODO implement me
 		return null;	
