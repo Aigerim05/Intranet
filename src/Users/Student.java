@@ -1,6 +1,8 @@
-package Users;
+ package Users;
 
 import java.lang.classfile.Superclass;
+
+import User;
 
 public class Student extends User{
 	private int yearOfStudy;
