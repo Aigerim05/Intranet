@@ -62,6 +62,17 @@ public class Manager extends User
         courses.add(newCourse);
     }
 
+
+	public void displayCourses() {
+        System.out.println("\nList of Courses:");
+        for (Course course : courses) {
+            System.out.println("Code: " + course.getCode());
+            System.out.println("Name: " + course.getCourseName());
+            System.out.println("Credits: " + course.getNumberOfCredits());
+            System.out.println("Description: " + course.getDescription());
+            System.out.println("Type: " + course.getCourseType());
+        }
+    }
     public void removeCourseByCode(String code) {
         for (Course course : courses) {
             if (course.getCode().equals(code)) {
