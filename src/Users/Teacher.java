@@ -77,18 +77,16 @@ public class Teacher extends User implements Employee
     
     
     
-	public void viewCourses(Course parameter) {
-		if (courses != null && !courses.isEmpty()) {
-	        for (Course course : courses) {
-	            System.out.println("Course Code: " + course.getCode());
-	            System.out.println("Course Name: " + course.getCourseName());
-	            System.out.println();
-	        }
-	    } else {
-	        System.out.println("No courses available.");
-	    }
-	    	
-	}
+	public void viewCourses(ArrayList<Course> courses) {  
+    if (courses != null && !courses.isEmpty()) {
+        System.out.println("Available Courses:");
+        for (Course course : courses) {
+            System.out.println("Course Code: " + course.getCode() + " | Course Name: " + course.getCourseName());
+        }
+    } else {
+        System.out.println("No courses available.");
+    }
+}
 
 	public void viewInfoOfStudents(ArrayList<Student> students) {
         System.out.println("List of Students:");
