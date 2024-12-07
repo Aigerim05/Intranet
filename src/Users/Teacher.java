@@ -126,37 +126,18 @@ public class Teacher extends User implements Employee
 	public void assignCourse() {
 		// TODO implement me	
 	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
+
 	public boolean addCourse(Course parameter) {
 		// TODO implement me
 		return false;	
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
-	
+
 	public boolean removeCourse(Course parameter) {
 		// TODO implement me
 		return false;	
 	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!--  end-user-doc  -->
-	 * @generated
-	 * @ordered
-	 */
+
 	
 	public void () {
 		// TODO implement me	
