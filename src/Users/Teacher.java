@@ -90,10 +90,12 @@ public class Teacher extends User implements Employee
 	    return null;	
 	}
 
-	public Void viewInfoAboutStudent(Student parameter) {
-		// TODO implement me
-		return null;	
-	}
+	public void viewInfoOfStudents(ArrayList<Student> students) {
+        System.out.println("List of Students:");
+        for (Student student : students) {
+            System.out.println("Name: " + student.getFirstName() + ", Age: " + student.getYearOfStudy());
+        }
+    }
 	
 	
 	public void sendComplaint(Complaint complaint) {
