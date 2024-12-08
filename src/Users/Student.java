@@ -5,50 +5,50 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Student extends User{
-	private int yearOfStudy;
-	private HashMap<Course, Mark> journal = new HashMap<Course, Mark>();
-	private int maxCredit;
+	private int yearOfStudy = 0;
+	private HashMap<Course, Mark> journal;
+	private int maxCredit = 0;
 	private Department department = Department.SITE;
+	
+	{
+		HashMap<Course, Mark> journal = new HashMap<Course,Mark>();
+	}
 
-	public Student() {
+	public Student(){
+
+	}
+
+	public Student(){
 		super();
 		this.yearOfStudy = (Integer) null;
 		this.journal = null;
 		this.maxCredit = (Integer) null;
 	}
 	
-	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions,int yearOfStudy, HashMap<Course, Mark> journal, int maxCredit, Department department) {
-		super(firstName,lastName,userId,password,language,logins,subscriptions);
+	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins,int yearOfStudy, HashMap<Course, Mark> journal, int maxCredit, Department department) {
+		super(firstName,lastName,userId,password,language,logins);
 		this.yearOfStudy = yearOfStudy;
 		this.journal = journal;
 		this.maxCredit = maxCredit;
 		this.department = department;
 		
 	}
-	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions,int yearOfStudy, HashMap<Course, Mark> journal, int maxCredit) {
-		super(firstName,lastName,userId,password,language,logins,subscriptions);
+	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins,int yearOfStudy,int maxCredit) {
+		super(firstName,lastName,userId,password,language,logins);
 		this.yearOfStudy = yearOfStudy;
-		this.journal = journal;
 		this.maxCredit = maxCredit;
 	}
-	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions,int yearOfStudy, HashMap<Course, Mark> journal) {
-		super(firstName,lastName,userId,password,language,logins,subscriptions);
+	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins,int yearOfStudy) {
+		super(firstName,lastName,userId,password,language,logins);
 		this.yearOfStudy = yearOfStudy;
-		this.journal = journal;
-		this.maxCredit = (Integer) null;
 	}
-	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions,int yearOfStudy) {
-		super(firstName,lastName,userId,password,language,logins,subscriptions);
+	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins,int yearOfStudy) {
+		super(firstName,lastName,userId,password,language,logins);
 		this.yearOfStudy = yearOfStudy;
-		this.journal = null;
-		this.maxCredit = (Integer) null;
 		
 	}
-	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions) {
-		super(firstName,lastName,userId,password,language,logins,subscriptions);
-		this.yearOfStudy = (Integer) null;
-		this.journal = null;
-		this.maxCredit = (Integer) null;
+	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins) {
+		super(firstName,lastName,userId,password,language,logins);
 	}
 	public int getYearOfStudy() {
 		return yearOfStudy;

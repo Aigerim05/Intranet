@@ -4,26 +4,24 @@ import java.util.*;
 
 public class Course {
 
-    private String code;
-    private int numberOfCredits;
-    private String courseName;
-    private String description;
-    private CourseType courseType;
-    private int maxCountOfStudents;
+    private String code = "";
+    private int numberOfCredits = 0;
+    private String courseName = "";
+    private String description = "";
+    private CourseType courseType = CourseType.MAJOR;
+    private int maxCountOfStudents = 0;
     private ArrayList<Student> participants;
+    private ArrayList<User> instructors;
 
     {
         participants = new ArrayList<>();
+        instructors = new ArrayList<>();
     }
 
-    public Course() {
-        this.code = "";
-        this.numberOfCredits = 0;
-        this.courseName = "";
-        this.description = "";
-        this.courseType = CourseType.MAJOR;
-        this.maxCountOfStudents = 0;
+    public Course(){
+    	
     }
+    
 
     public Course(String code) {
         this();
@@ -111,17 +109,35 @@ public class Course {
     public ArrayList<Student> getParticipants() {
         return participants;
     }
+    
+    public void setParticipants(ArrayList<Student> participants) {
+    	this.participants = participants;
+    }
 
     public void addParticipant (Student student) {
 				participants.add(student);				
     }
+    
 		
 
-    @Override
+    public ArrayList<User> getInstructors() {
+		return instructors;
+	}
+
+
+	public void setInstructors(ArrayList<User> instructors) {
+		this.instructors = instructors;
+	}
+	
+	public void addInstructor(User instructor) {
+		instructors.add(instructor);
+	}
+
+	@Override
     public String toString() {
         return "Course [code=" + code + ", numberOfCredits=" + numberOfCredits + ", courseName=" + courseName
                 + ", description=" + description + ", courseType=" + courseType + ", maxCountOfStudents="
-                + maxCountOfStudents + ", participants=" + participants + "]";
+                + maxCountOfStudents + "]";
     }
 
     @Override

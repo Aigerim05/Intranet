@@ -4,14 +4,12 @@ import java.util.*;
 
 public class Mark {
 
-    private double firstAttestation;
-    private double secondAttestation;
-    private double finalExam;
+    private double firstAttestation = 0;
+    private double secondAttestation = 0;
+    private double finalExam = 0;
 
     public Mark() {
-        this.firstAttestation = 0;
-        this.secondAttestation = 0;
-        this.finalExam = 0;
+
     }
 
     public Mark(double firstAttestation) {
