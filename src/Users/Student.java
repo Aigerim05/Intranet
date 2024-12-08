@@ -1,12 +1,21 @@
 package Users;
 
-import java.lang.classfile.Superclass;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Student extends User{
 	private int yearOfStudy;
-	private HashMap<Course, Mark> journal;
+	private HashMap<Course, Mark> journal = new HashMap<Course, Mark>();
 	private int maxCredit;
-	private Department department;
+	private Department department = Department.SITE;
+
+	public Student() {
+		super();
+		this.yearOfStudy = (Integer) null;
+		this.journal = null;
+		this.maxCredit = (Integer) null;
+	}
 	
 	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions,int yearOfStudy, HashMap<Course, Mark> journal, int maxCredit, Department department) {
 		super(firstName,lastName,userId,password,language,logins,subscriptions);
@@ -21,21 +30,18 @@ public class Student extends User{
 		this.yearOfStudy = yearOfStudy;
 		this.journal = journal;
 		this.maxCredit = maxCredit;
-		this.department = null;
 	}
 	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions,int yearOfStudy, HashMap<Course, Mark> journal) {
 		super(firstName,lastName,userId,password,language,logins,subscriptions);
 		this.yearOfStudy = yearOfStudy;
 		this.journal = journal;
 		this.maxCredit = (Integer) null;
-		this.department = null;
 	}
 	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions,int yearOfStudy) {
 		super(firstName,lastName,userId,password,language,logins,subscriptions);
 		this.yearOfStudy = yearOfStudy;
 		this.journal = null;
 		this.maxCredit = (Integer) null;
-		this.department = null;
 		
 	}
 	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins, ArrayList<ResearchJournal> subscriptions) {
@@ -43,7 +49,6 @@ public class Student extends User{
 		this.yearOfStudy = (Integer) null;
 		this.journal = null;
 		this.maxCredit = (Integer) null;
-		this.department = null;
 	}
 	public int getYearOfStudy() {
 		return yearOfStudy;
@@ -54,8 +59,8 @@ public class Student extends User{
 	public HashMap<Course, Mark> getJournal() {
 		return journal;
 	}
-	public void setJournal(HashMap<Course, Mark> journal) {
-		this.journal = journal;
+	public void addToJournal(Course course, Mark mark) {
+		this.journal.put(course, mark);
 	}
 	public int getMaxCredit() {
 		return maxCredit;
@@ -72,7 +77,7 @@ public class Student extends User{
 
 	@Override
 	public String toString() {
-		return super().toString + "Student [yearOfStudy=" + yearOfStudy + ", journal=" + journal + ", maxCredit=" + maxCredit
+		return super().toString + "Student [yearOfStudy=" + yearOfStudy + ", maxCredit=" + maxCredit
 				+ ", department=" + department + "]";
 	}
 

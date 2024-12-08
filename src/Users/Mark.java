@@ -3,81 +3,77 @@ package Users;
 import java.util.*;
 
 public class Mark {
-  private double firstAttestation;
-  private double secondAttestation;
-  private double finalExam;
 
-  public Mark(double firstAttestation, double secondAttestation, double finalExam) {
-    this.firstAttestation = firstAttestation;
-    this.secondAttestation = secondAttestation;
-    this.finalExam = finalExam;
-  }
-  
-  public Mark(double firstAttestation, double secondAttestation) {
-    this.firstAttestation = firstAttestation;
-    this.secondAttestation = secondAttestation;
-    this.finalExam = 0;
-  }
+    private double firstAttestation;
+    private double secondAttestation;
+    private double finalExam;
 
-  public Mark(double firstAttestation) {
-    this.firstAttestation = firstAttestation;
-    this.secondAttestation = 0;
-    this.finalExam = 0;
-  }
+    public Mark() {
+        this.firstAttestation = 0;
+        this.secondAttestation = 0;
+        this.finalExam = 0;
+    }
 
-  public Mark() {
-    this.firstAttestation = 0;
-    this.secondAttestation = 0;
-    this.finalExam = 0;
-  }
+    public Mark(double firstAttestation) {
+        this();
+        this.firstAttestation = firstAttestation;
+    }
 
-  public double getFirstAttestation() {
-    return firstAttestation;
-  }
+    public Mark(double firstAttestation, double secondAttestation) {
+        this(firstAttestation);
+        this.secondAttestation = secondAttestation;
+    }
 
-  public void setFirstAttestation(double firstAttestation) {
-    this.firstAttestation = firstAttestation;
-  }
+    public Mark(double firstAttestation, double secondAttestation, double finalExam) {
+        this(firstAttestation, secondAttestation);
+        this.finalExam = finalExam;
+    }
 
-  public double getSecondAttestation() {
-    return secondAttestation;
-  }
+    public double getFirstAttestation() {
+        return firstAttestation;
+    }
 
-  public void setSecondAttestation(double secondAttestation) {
-    this.secondAttestation = secondAttestation;
-  }
+    public void setFirstAttestation(double firstAttestation) {
+        this.firstAttestation = firstAttestation;
+    }
 
-  public double getfinalExam() {
-    return finalExam;
-  }
+    public double getSecondAttestation() {
+        return secondAttestation;
+    }
 
-  public void setfinalExam(double finalExam) {
-    this.finalExam = finalExam;
-  }
+    public void setSecondAttestation(double secondAttestation) {
+        this.secondAttestation = secondAttestation;
+    }
 
-  @Override
-  public String toString() {
-    return "Mark{" +
-            "firstAttestation=" + firstAttestation +
-            ", secondAttestation=" + secondAttestation +
-            ", finalExam=" + finalExam +
-            '}';
-  }
+    public double getfinalExam() {
+        return finalExam;
+    }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    public void setfinalExam(double finalExam) {
+        this.finalExam = finalExam;
+    }
 
-    Mark mark = (Mark) o;
+    @Override
+    public String toString() {
+        return "Mark{"
+                + "firstAttestation=" + firstAttestation
+                + ", secondAttestation=" + secondAttestation
+                + ", finalExam=" + finalExam
+                + '}';
+    }
 
-    if (Double.compare(mark.firstAttestation, firstAttestation) != 0) return false;
-    if (Double.compare(mark.secondAttestation, secondAttestation) != 0) return false;
-    return Double.compare(mark.finalExam, finalExam) == 0;
-  }
+    @Override
+    public boolean equals(Object o) {
+      if(this == o) return true;
+      if(o == null || getClass() != o.getClass()) return false;
+      Mark mark = (Mark) o;
+      return firstAttestation == mark.firstAttestation
+              && secondAttestation == mark.secondAttestation
+              && finalExam == mark.finalExam;
+    }
 
-  @Override
-  public int hashCode(){
-    return Objects.hash(firstAttestation + secondAttestation + finalExam);
-  }
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstAttestation, secondAttestation, finalExam);
+    }
 }
