@@ -12,13 +12,15 @@ public class News {
     private String content;
 
     // Пустой конструктор
-    public News() {}
+    public News() {
+        this.comments = new ArrayList<>(); // Инициализация ArrayList
+    }
 
     // Конструктор с параметрами
     public News(String newsId, NewsTopic topic, ArrayList<Comment> comments, Date publicationDate, String content) {
         this.newsId = newsId;
         this.topic = topic;
-        this.comments = comments;
+        this.comments = comments != null ? comments : new ArrayList<>();
         this.publicationDate = publicationDate;
         this.content = content;
     }
@@ -45,7 +47,7 @@ public class News {
     }
 
     public void setComments(ArrayList<Comment> comments) {
-        this.comments = comments;
+        this.comments = comments != null ? comments : new ArrayList<>();
     }
 
     public Date getPublicationDate() {
