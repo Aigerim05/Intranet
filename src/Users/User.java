@@ -130,7 +130,7 @@ public abstract class User implements Serializable
 	
 	
 	public void setLanguage() {
-		// TODO implement me
+		
 		return;	
 	}
 	
