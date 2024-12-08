@@ -11,12 +11,11 @@ public class News {
     private Date publicationDate;
     private String content;
 
-    // Пустой конструктор
     public News() {
-        this.comments = new ArrayList<>(); // Инициализация ArrayList
+        this.comments = new ArrayList<>(); 
     }
 
-    // Конструктор с параметрами
+
     public News(String newsId, NewsTopic topic, ArrayList<Comment> comments, Date publicationDate, String content) {
         this.newsId = newsId;
         this.topic = topic;
@@ -25,7 +24,7 @@ public class News {
         this.content = content;
     }
 
-    // Getters и Setters
+
     public String getNewsId() {
         return newsId;
     }
@@ -66,7 +65,7 @@ public class News {
         this.content = content;
     }
 
-    // equals
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,13 +78,13 @@ public class News {
                 Objects.equals(content, news.content);
     }
 
-    // hashCode
+
     @Override
     public int hashCode() {
         return Objects.hash(newsId, topic, comments, publicationDate, content);
     }
 
-    // toString
+
     @Override
     public String toString() {
         return "News{" +
