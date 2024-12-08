@@ -1,5 +1,5 @@
 package Users;
 
-public class Department {
-
+public enum Department {
+	ISE, SEOGI, SITE, SG, BS, KMA, SAM, SCE, SMSGT;
 }

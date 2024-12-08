@@ -1,5 +1,5 @@
 package Users;
 
-public class ManagerType {
-
+public enum ManagerType {
+ OR, DEPARTMENT
 }

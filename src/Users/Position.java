@@ -1,5 +1,6 @@
 package Users;
 
-public class Position {
-
+public enum Position {
+	SENIOR_LECTURER, ASSISTANT_PROFESSOR, PROFESSOR, RESEARCHER, TUTOR, ASSOCIATE_PROFESSOR;
+	
 }

@@ -1,5 +1,5 @@
 package Users;
 
-public class Language {
-
+public enum Language {
+ EN, RU, KZ
 }
