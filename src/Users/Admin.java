@@ -8,20 +8,13 @@ import java.util.Scanner;
 
 public class Admin extends User {
 
-    private ArrayList<User> allUsers;
+   
 
     public Admin() {
         super();
     }
 
-    
-    public ArrayList<User> getAllUsers() {
-        return allUsers;
-    }
-
-    public void setAllUsers(ArrayList<User> allUsers) {
-        this.allUsers = allUsers;
-    }
+    //ewkfnkf
 
     public boolean equals(Object o) {
         if (this == o) return true;
