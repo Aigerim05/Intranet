@@ -3,8 +3,9 @@ package Users;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Student extends User{
+public class Student{
 	private int yearOfStudy = 0;
 	private HashMap<Course, Mark> journal;
 	private int maxCredit = 0;
@@ -94,4 +95,71 @@ public class Student extends User{
 	public int hashCode(){
 		return this.getId().hashCode();
 	}
+
+	public void viewCourses() {
+		System.out.println(this.getFirstName() + " " + this.getLastName() + " is taking the following courses:");
+        for (Course course : journal.keySet()) {
+            System.out.println("Course Code: " + course.getCode() + ", Course Name: " + course.getCourseName() + ", Course Type: " + course.getCourseType());
+        }
+    }
+
+		public void viewTranscript() {
+    	System.out.println(this.getFirstName() + " " + this.getLastName() + " has marks for the following courses:");
+    	for (Course course : journal.keySet()) {
+    	    Mark mark = journal.get(course);
+    	    char grade = (mark.getTotal() >= 90) ? 'A' :
+    	                 (mark.getTotal() >= 80) ? 'B' :
+    	                 (mark.getTotal() >= 70) ? 'C' :
+    	                 (mark.getTotal() >= 60) ? 'D' : 'F';
+    	    System.out.println(course.getCode() + " | " + course.getCourseName() + " : " + grade);
+    	}
+		}
+
+		public boolean rateTeacher() {
+        Scanner scanner = new Scanner(System.in);
+        for (Course course : journal.keySet()) {
+            System.out.println(course.getCourseName() + ":");
+            ArrayList<User> instructors = course.getInstructors();
+            for (User instructor : instructors) {
+                System.out.print(instructor.getName() + " ");
+            }
+            System.out.println();
+            System.out.print("Rate the Instructor of this Course from 1 to 10: ");
+            double rating = scanner.nextDouble();
+            for (User instructor : instructors) {
+                instructor.setRating(rating);
+            }
+						course.setInstructors(instructors);
+            System.out.println("You rated the instructor(s) of " + course.getCourseName() + " with a " + rating);
+        }
+        scanner.close();
+        return true;
+    }
+
+		// public boolean registerForCourse(Course course) {
+		// здесь будет логика того что студент отправляет запрос на регистрацию на курс, а менеджер курса его одобряет/отклоняет
+		// }
+
+		public void viewMarksForCourses() {
+        System.out.println(this.getFirstName() + " " + this.getLastName() + "has marks for the following courses:");
+        for (Course course : journal.keySet()) {
+            Mark mark = journal.get(course);
+            System.out.println(course.getCode() + " | " + course.getCourseName() + " : " 
+                + mark.getFirstAttestation() + " | " 
+                + mark.getSecondAttestation() + " | " 
+                + mark.getFinalExam() + " | " 
+                + mark.getTotal());
+        }
+    }
+
+		public void viewInstructors() {
+        System.out.println(this.getFirstName() + " " + this.getLastName() + " has the following instructors for their courses:");
+        for (Course course : journal.keySet()) {
+            System.out.println("Course Code: " + course.getCode() + ", Course Name: " + course.getCourseName());
+            ArrayList<User> instructors = course.getInstructors();
+            for (User instructor : instructors) {
+                System.out.println("Instructor: " + instructor.getFirstName() + " " + instructor.getLastName());
+            }
+        }
+    }
 }

@@ -43,12 +43,16 @@ public class Mark {
         this.secondAttestation = secondAttestation;
     }
 
-    public double getfinalExam() {
+    public double getFinalExam() {
         return finalExam;
     }
 
-    public void setfinalExam(double finalExam) {
+    public void setFinalExam(double finalExam) {
         this.finalExam = finalExam;
+    }
+
+    public double getTotal() {
+        return firstAttestation + secondAttestation + finalExam;
     }
 
     @Override

@@ -2,6 +2,8 @@ package Users;
 
 import java.util.*;
 
+import Enums.CourseType;
+
 public class Course {
 
     private String code = "";
