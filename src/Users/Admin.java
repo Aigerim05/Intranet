@@ -13,31 +13,21 @@ public class Admin extends User {
     public Admin() {
         super();
     }
-
-    //ewkfnkf
+    
 
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Admin admin = (Admin) o;
-        return allUsers.equals(admin.allUsers);
+        return super.equals(o);
     }
 
     public int hashCode() {
-        return Objects.hash(allUsers);
+        return Objects.hash(super.hashCode());
     }
 
-    public String toString() {
-        if (allUsers == null || allUsers.isEmpty()) {
-            return "Admin:\n  No users found";
-        }
-        
-        StringBuilder sb = new StringBuilder("Admin:\n");
-        for (User user : allUsers) {
-            sb.append("  ").append(user.toString()).append("\n");
-        }
-        return sb.toString();  
-    }
+   
     public void updateUser(User u) {
 		Scanner in = new Scanner(System.in);
 		System.out.println("What do you want to change? ");
@@ -100,12 +90,12 @@ public class Admin extends User {
 
         for (User user : allUsers) {
             if (user.getUserId().equals(removeUserId)) {
-                allUsers.remove(user);
                 userFound = true;
                 break; 
         }
 
         if (userFound) {
+             allUsers.remove(user);
             System.out.println("Successfully removed the user with ID: " + removeUserId);
         } else {
             System.out.println("No user found with the ID: " + removeUserId);

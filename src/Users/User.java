@@ -128,11 +128,6 @@ public abstract class User implements Serializable
     }
 	
 	
-	public void setLanguage() {
-		// TODO implement me
-		return;	
-	}
-	
 	public void viewProfile() {
 		 System.out.println("Profile Information:");
 		    System.out.println("Name: " + firstName);

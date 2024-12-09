@@ -4,32 +4,22 @@ import java.util.Objects;
 public class Teacher extends User 
 {
 	
-	private ArrayList<Student> students;
-	private ArrayList<Course> courses;
+
 	private Position position;
 	private Department department;
 	
 	public Teacher(){
-		
+		super()
 	}
 
-	public Teacher(Position position, Department department) {
-		super();
+	public Teacher(String password, String email, String firstName, String lastName,
+            String userId, Language language,Position position, Department department) {
+		super(password, email, firstName, lastName,userId, language);
 		this.position = position;
 		this.department = department;
 	}
-	{
-		courses = new ArrayList<Course>();
-		students = new ArrayList<Student>();
-	}
-
-	public ArrayList<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(ArrayList<Course> courses) {
-        this.courses = courses;
-    }
+	
+	
 
     public Position getPosition() {
         return position;
@@ -50,12 +40,13 @@ public class Teacher extends User
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Teacher teacher = (Teacher) o;
-        return Objects.equals(courses, teacher.courses);
+        return super.equals(o);
     }
 
     public int hashCode() {
-        return Objects.hash(courses);
+        return Objects.hash(super.hashCode());
     }
 
     public String toString() {
@@ -78,24 +69,7 @@ public class Teacher extends User
         }
     }
     
-    public void assignCourse(Course course) {
-        if (course != null) {
-            this.addCourse(course);
-            System.out.println("Course " + course.getCourseName() + " has been assigned to " + this.getFirstName() + ".");
-        } else {
-            System.out.println("Failed to assign course. Course is null.");
-        }
-    }
 
-    public void viewInfoAboutStudents(ArrayList<Student> students) {
-        if (students != null && !students.isEmpty()) {
-            System.out.println("Students Information:");
-            for (Student student : students) {
-                System.out.println(student.toString());
-            }
-        } else {
-            System.out.println("No students available.");
-        }
-    }
+   
 }
 	

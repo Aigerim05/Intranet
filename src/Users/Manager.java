@@ -5,19 +5,20 @@ import java.util.Objects;
 
 public class Manager extends User 
 {
-	private ArrayList<Course> courses;
+	
 	private ManagerType managerType;
 	private ArrayList<Request> requests;
 	public Manager(){
-		
+		super();
 	}
 	
-	public Manager(ManagerType managerType) {
+	public Manager(String password, String email, String firstName, String lastName,
+            String userId, Language language,ManagerType managerType) {
+		super(password, email, firstName, lastName,userId, language);
 		this.managerType = managerType;
 	}
 	{
 		requests = new ArrayList<Request>();
-		courses = new ArrayList<Course>();
 	}
 	public ManagerType getManagerType() {
         return managerType;
@@ -38,13 +39,15 @@ public class Manager extends User
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Manager manager = (Manager) o;
         return managerType.equals(manager.managerType) &&
-        		requests.equals(manager.requests);
+        		requests.equals(manager.requests) &&
+        		super.equals(o);
     }
 
     public int hashCode() {
-        return Objects.hash(managerType, requests);
+        return Objects.hash(managerType, requests, super.hashCode());
     }
 
     public String toString() {
@@ -61,40 +64,40 @@ public class Manager extends User
 
 
 	
-	public void addCourse(int yearOfStudy,String code, int numberOfCredits, String courseName) {
-		Course newCourse = new Course();
-		Course newCourse = new Course();
-	    newCourse.setCode(code);
-	    newCourse.setNumberOfCredits(numberOfCredits);
-	    newCourse.setCourseName(courseName);
-	    newCourse.setDescription(description);
-	    newCourse.setCourseType(courseType);
-
-	    courses.add(newCourse);
-	} 
-	
-	public void removeCourseByCode(String code) {
-	    for (Course course : courses) {
-	        if (course.getCode().equals(code)) {
-	            courses.remove(course);
-	            System.out.println("Course with code " + code + " has been removed.");
-	            return;
-	        }
-	    }
-	    System.out.println("Course with code " + code + " not found.");
-	}
-	public void updateCourse(String code, String newName, String newDescription, CourseType newCourseType) {
-	    for (Course course : courses) {
-	        if (course.getCode().equals(code)) {
-	            course.setCourseName(newName);
-	            course.setDescription(newDescription);
-	            course.setCourseType(newCourseType);
-	            System.out.println("Course with code " + code + " has been updated.");
-	            return; 
-	        }
-	    }
-	    System.out.println("Course with code " + code + " not found.");
-	}
+//	public void addCourse(int yearOfStudy,String code, int numberOfCredits, String courseName) {
+//		Course newCourse = new Course();
+//		Course newCourse = new Course();
+//	    newCourse.setCode(code);
+//	    newCourse.setNumberOfCredits(numberOfCredits);
+//	    newCourse.setCourseName(courseName);
+//	    newCourse.setDescription(description);
+//	    newCourse.setCourseType(courseType);
+//
+//	    courses.add(newCourse);
+//	} 
+//	
+//	public void removeCourseByCode(String code) {
+//	    for (Course course : courses) {
+//	        if (course.getCode().equals(code)) {
+//	            courses.remove(course);
+//	            System.out.println("Course with code " + code + " has been removed.");
+//	            return;
+//	        }
+//	    }
+//	    System.out.println("Course with code " + code + " not found.");
+//	}
+//	public void updateCourse(String code, String newName, String newDescription, CourseType newCourseType) {
+//	    for (Course course : courses) {
+//	        if (course.getCode().equals(code)) {
+//	            course.setCourseName(newName);
+//	            course.setDescription(newDescription);
+//	            course.setCourseType(newCourseType);
+//	            System.out.println("Course with code " + code + " has been updated.");
+//	            return; 
+//	        }
+//	    }
+//	    System.out.println("Course with code " + code + " not found.");
+//	}
 	
 	public void viewInfoOfTeachers(ArrayList<Teacher> teachers) {
 	    System.out.println("List of Teachers and Their Courses:");
