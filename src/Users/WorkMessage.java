@@ -1,6 +1,13 @@
+package Users;
 import java.util.Objects;
 
 public class WorkMessage extends Message {
+	
+    // Конструктор по умолчанию (для работы фабрики)
+    public WorkMessage() {
+        super(); // Вызываем конструктор родительского класса
+    }
+
     // Constructor
     public WorkMessage(Employee sender, Employee receiver, String content) {
         super(sender, receiver, content);

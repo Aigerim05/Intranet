@@ -3,6 +3,10 @@ package Users;
 public class Complaint extends Message {
     private Urgency urgencyLevel;
     private Student student;
+    
+    public Complaint() {
+        super(); // Вызываем конструктор по умолчанию родительского класса
+    }
 
     public Complaint(Employee sender, Employee receiver, String content, Urgency urgencyLevel, Student student) {
         super(sender, receiver, content);

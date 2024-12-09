@@ -1,39 +1,26 @@
 package Users;
 
-import java.util.Objects;
-
 public class Request extends Message {
-    private RequestStatus signedStatus;
+    private String signedStatus; // Изменено на String
 
-    public Request(Employee sender, Employee receiver, String content, RequestStatus signedStatus) {
-        super(sender, receiver, content); // Call to the parent class constructor
+    // Конструктор по умолчанию
+    public Request() {
+        super();
+    }
+
+    // Конструктор с параметрами
+    public Request(Employee sender, Employee receiver, String content, String signedStatus) {
+        super(sender, receiver, content);
         this.signedStatus = signedStatus;
     }
 
-
-    public RequestStatus getSignedStatus() {
+    public String getSignedStatus() {
         return signedStatus;
     }
 
-    public void setSignedStatus(RequestStatus signedStatus) {
+    public void setSignedStatus(String signedStatus) {
         this.signedStatus = signedStatus;
     }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Request)) return false;
-        if (!super.equals(o)) return false;
-        Request request = (Request) o;
-        return signedStatus == request.signedStatus;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), signedStatus);
-    }
-
 
     @Override
     public String toString() {
@@ -41,7 +28,7 @@ public class Request extends Message {
                 "sender=" + getSender() +
                 ", receiver=" + getReceiver() +
                 ", content='" + getContent() + '\'' +
-                ", signedStatus=" + signedStatus +
+                ", signedStatus='" + signedStatus + '\'' +
                 '}';
     }
 }

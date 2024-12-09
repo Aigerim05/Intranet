@@ -6,16 +6,16 @@ public class Comment {
     private Commentable author;
     private String content;
 
-    // Пустой конструктор
+
     public Comment() {}
 
-    // Конструктор с параметрами
+
     public Comment(Commentable author, String content) {
         this.author = author;
         this.content = content;
     }
 
-    // Getters и Setters
+
     public Commentable getAuthor() {
         return author;
     }
