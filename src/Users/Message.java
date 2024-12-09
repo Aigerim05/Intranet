@@ -41,7 +41,8 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
-
+   
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -58,6 +59,8 @@ public class Message {
         return Objects.hash(sender, receiver, content);
     }
 
+    
+    
     @Override
     public String toString() {
         return "Message{" +
