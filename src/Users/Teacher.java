@@ -7,6 +7,7 @@ public class Teacher extends User
 
 	private Position position;
 	private Department department;
+	private int rating;
 	
 	public Teacher(){
 		super()
@@ -20,6 +21,13 @@ public class Teacher extends User
 	}
 	
 	
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
 
     public Position getPosition() {
         return position;
@@ -65,7 +73,7 @@ public class Teacher extends User
                 System.out.println("Course Code: " + course.getCode() + " | Course Name: " + course.getCourseName());
             }
         } else {
-            System.out.println("No courses available.");
+            System.out.println("No courses");
         }
     }
     

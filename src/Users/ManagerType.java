@@ -1,5 +1,5 @@
 package Users;
 
 public enum ManagerType {
- OR, DEPARTMENT
+ OR, DEPARTMENT;
 }

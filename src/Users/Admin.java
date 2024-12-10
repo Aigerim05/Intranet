@@ -1,34 +1,39 @@
 package Users;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
-
 import java.util.Scanner;
+
+import javax.xml.crypto.Data;
+
+import Attributes.News;
 
 public class Admin extends User {
 
-   
 
-    public Admin() {
-        super();
-    }
-    
 
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Admin admin = (Admin) o;
-        return super.equals(o);
-    }
+	public Admin() {
+		super();
+	}
 
-    public int hashCode() {
-        return Objects.hash(super.hashCode());
-    }
+	public Admin(String password, String email, String firstName, String lastName,
+			String userId, Language language) {
+		super(firstName,lastName,userId,password,language);
+	}
 
-   
-    public void updateUser(User u) {
+	@Override
+	public boolean equals(Object o) {
+		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
+
+
+
+	public void updateUser(User u) {
 		Scanner in = new Scanner(System.in);
 		System.out.println("What do you want to change? ");
 		System.out.println("1 - User ID");
@@ -43,7 +48,7 @@ public class Admin extends User {
 			String newUserId = in.nextLine();
 			u.setUserId(newUserId);
 			System.out.println("Successfully changed the User ID!");
-			
+
 		}
 		else if(choice == 2) {
 			System.out.println("Enter new Password: ");
@@ -57,7 +62,7 @@ public class Admin extends User {
 			u.setFirstName(newFistName);
 			System.out.println("Successfully changed the First Name");
 		}
-		
+
 		else if(choice == 4) {
 			System.out.println("Enter new Last Name: ");
 			String newLastName = in.nextLine();
@@ -80,38 +85,67 @@ public class Admin extends User {
 				System.out.println("Successfully changed the Language to EN");
 			}
 		}
-		
+
 	}
-    public void removeUser() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the User ID to remove: ");
-        String removeUserId = in.nextLine();
-        boolean userFound = false;
+	public void removeUser() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter the User ID to remove: ");
+		String removeUserId = in.nextLine();
+		boolean userFound = false;
 
-        for (User user : allUsers) {
-            if (user.getUserId().equals(removeUserId)) {
-                userFound = true;
-                break; 
-        }
+		for (User user : Data.INSTANCE.users) {
+			if (user.getUserId().equals(removeUserId)) {
+				userFound = true;
+				Data.INSTANCE.users.remove(user);
+				System.out.println("Successfully removed the user with ID: " + removeUserId);
+				break; 
+			}
+		}
 
-        if (userFound) {
-             allUsers.remove(user);
-            System.out.println("Successfully removed the user with ID: " + removeUserId);
-        } else {
-            System.out.println("No user found with the ID: " + removeUserId);
-        }
-    }
+		if (!userFound) {
+			System.out.println("No user found with the ID: " + removeUserId);
+		}
+	}
 
-    }
-    public void viewLogs(User u) {
-        if (u.getLogins() == null || u.getLogins().isEmpty()) {
-            System.out.println("No login records found for user: " + u.getUserId());
-        } else {
-            System.out.println("Login Dates for user " + u.getUserId() + ":");
-            for (Date login : u.getLogins()) {
-                System.out.println(login);
-            }
-        }
-    }
+	@Override
+	public String viewAllUsers() {
+		if (Data.INSTANCE.users.isEmpty()) {
+			return "Admin:\n  No users found";
+		}
 
+		StringBuilder sb = new StringBuilder("Admin:\n");
+		for (User user : Data.INSTANCE.users) {
+			sb.append("  ").append(user.toString()).append("\n");
+		}
+		return sb.toString();  
+	}
+
+
+	public void viewLogs(User u) {
+		if (u.getLogins() == null || u.getLogins().isEmpty()) {
+			System.out.println("No login records found for user: " + u.getUserId());
+		} else {
+			System.out.println("Login Dates for user " + u.getUserId() + ":");
+			for (Date login : u.getLogins()) {
+				System.out.println(login);
+			}
+		}
+	}
+
+
+	public void addNews(News news) {
+		if (news != null) {
+			Data.INSTANCE.news.add(news);
+		}
+	}
+
+	public void removeNews(String newsId) {
+		Data.INSTANCE.news.removeIf(news -> news.getNewsId().equals(newsId));
+	}
+
+	public void displayNews() {
+		for (News news : Data.INSTANCE.news) {
+			System.out.println(news);
+		}
+	}
 }

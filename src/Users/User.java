@@ -116,15 +116,9 @@ public abstract class User implements Serializable
     }
 
     public String toString() {
-        return "User{" +
-               "password='" + password + '\'' +
-               ", email='" + email + '\'' +
-               ", firstName='" + firstName + '\'' +
-               ", lastName='" + lastName + '\'' +
-               ", userId='" + userId + '\'' +
-               ", logins=" + logins +
-               ", subscriptions=" + subscriptions +
-               '}';
+        return "User[password=" + password + ", email=" + email + ", firstName=" + firstName +
+                ", lastName=" + lastName + ", userId=" + userId + ", language=" + language +
+                ", logins=" + logins + ", subscriptions=" + subscriptions + "]";
     }
 	
 	
