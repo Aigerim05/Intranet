@@ -17,6 +17,7 @@ public class Teacher extends User implements Employee
 
 	{
 		courses = new ArrayList<Course>();
+		ratings = new ArrayList<Integer>();
 	}
 
 	public Teacher(){
