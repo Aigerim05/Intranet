@@ -1,4 +1,4 @@
-package Users;
+package Interfaces;
 
 public interface Employee {
 
