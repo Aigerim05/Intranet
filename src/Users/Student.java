@@ -114,11 +114,7 @@ public class Student extends User{
 	}
 
 	public ArrayList<Course> getTakenCoursesArray() {
-		ArrayList<Course> courses = new ArrayList<Course> ();
-		for (Map.Entry<Course, Mark> entry : takenCourses.entrySet()) {
-			courses.add(entry.getKey());
-		}
-		return courses;
+		return new ArrayList<Course>(takenCourses.keySet());
 	}
 
 	public void viewCourses() {
