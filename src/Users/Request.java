@@ -1,7 +1,9 @@
 package Users;
 
+import Interfaces.Employee;
+
 public class Request extends Message {
-    private String signedStatus; // Изменено на String
+    private boolean assignedStatus = false; // Изначально статус false (не подписан)
 
     // Конструктор по умолчанию
     public Request() {
@@ -9,17 +11,28 @@ public class Request extends Message {
     }
 
     // Конструктор с параметрами
-    public Request(Employee sender, Employee receiver, String content, String signedStatus) {
+    public Request(Employee sender, Employee receiver, String content) {
         super(sender, receiver, content);
-        this.signedStatus = signedStatus;
     }
 
-    public String getSignedStatus() {
-        return signedStatus;
+    public boolean isAssignedStatus() {
+        return assignedStatus;
     }
 
-    public void setSignedStatus(String signedStatus) {
-        this.signedStatus = signedStatus;
+    public void setAssignedStatus(boolean assignedStatus) {
+        this.assignedStatus = assignedStatus;
+    }
+
+    // Метод Send
+    @Override
+    public void send(Employee manager, Dean dean) {
+        // Декан подписывает запрос
+        dean.signRequest(this);
+
+        // Добавляем запрос в список запросов менеджера
+        if (manager instanceof Manager) {
+            ((Manager) manager).getRequests().add(this);
+        }
     }
 
     @Override
@@ -28,7 +41,7 @@ public class Request extends Message {
                 "sender=" + getSender() +
                 ", receiver=" + getReceiver() +
                 ", content='" + getContent() + '\'' +
-                ", signedStatus='" + signedStatus + '\'' +
+                ", assignedStatus=" + assignedStatus +
                 '}';
     }
 }
