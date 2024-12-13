@@ -1,22 +1,21 @@
-package Users;
+package Attributes;
 
-import java.util.Objects;
+import Interfaces.Employee;
 
-public class Message {
+public abstract class Message {
     private Employee sender;
     private Employee receiver;
     private String content;
-
+    private String messageId; // Новое поле
 
     public Message() {}
 
-
-    public Message(Employee sender, Employee receiver, String content) {
+    public Message(Employee sender, Employee receiver, String content, String messageId) {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;
+        this.messageId = messageId; // Интеграция messageId
     }
-
 
     public Employee getSender() {
         return sender;
@@ -41,32 +40,25 @@ public class Message {
     public void setContent(String content) {
         this.content = content;
     }
-   
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Message message = (Message) o;
-        return Objects.equals(sender, message.sender) &&
-               Objects.equals(receiver, message.receiver) &&
-               Objects.equals(content, message.content);
+
+    public String getMessageId() {
+        return messageId;
     }
 
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Message message = (Message) obj;
+        return messageId != null && messageId.equals(message.messageId); // Сравнение по messageId
+    }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sender, receiver, content);
-    }
-
-    
-    
-    @Override
-    public String toString() {
-        return "Message{" +
-                "sender=" + sender +
-                ", receiver=" + receiver +
-                ", content='" + content + '\'' +
-                '}';
+        return messageId != null ? messageId.hashCode() : 0; // Генерация hashCode на основе messageId
     }
 }
