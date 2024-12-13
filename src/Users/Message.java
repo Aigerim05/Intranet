@@ -1,6 +1,8 @@
 package Attributes;
 
 import Interfaces.Employee;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Message {
     private Employee sender;
@@ -48,6 +50,8 @@ public abstract class Message {
     public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
+
+    public abstract void send(); // Абстрактный метод send
 
     @Override
     public boolean equals(Object obj) {

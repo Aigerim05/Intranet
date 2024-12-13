@@ -1,5 +1,9 @@
 package Users;
 
+import Attributes.Message;
+import Attributes.Complaint;
+import Attributes.Request;
+
 public class Dean implements Observer {
 
     private String name;

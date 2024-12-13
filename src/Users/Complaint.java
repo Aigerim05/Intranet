@@ -1,48 +1,39 @@
-package Users;
+package Attributes;
+
+import Interfaces.Employee;
+import Users.Teacher;
+import Data.Data;
 
 public class Complaint extends Message {
-    private Urgency urgencyLevel;
-    private Student student;
-    
+    private String department;
+
     public Complaint() {
-        super(); // Вызываем конструктор по умолчанию родительского класса
+        super();
     }
 
-    public Complaint(Employee sender, Employee receiver, String content, Urgency urgencyLevel, Student student) {
-        super(sender, receiver, content);
-        this.urgencyLevel = urgencyLevel;
-        this.student = student;
+    public Complaint(Employee sender, Employee receiver, String content, String messageId, String department) {
+        super(sender, receiver, content, messageId);
+        this.department = department;
     }
 
-    public Urgency getUrgencyLevel() {
-        return urgencyLevel;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setUrgencyLevel(Urgency urgencyLevel) {
-        this.urgencyLevel = urgencyLevel;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Complaint)) return false;
-        if (!super.equals(o)) return false;
-        Complaint that = (Complaint) o;
-        return urgencyLevel == that.urgencyLevel &&
-                java.util.Objects.equals(student, that.student);
-    }
+    public void send() {
+        Employee decan = Data.getInstance().getDecans().stream()
+                .filter(d -> d.getDepartment().equals(this.department))
+                .findFirst()
+                .orElse(null);
 
-    @Override
-    public int hashCode() {
-        return java.util.Objects.hash(super.hashCode(), urgencyLevel, student);
+        if (decan != null) {
+            decan.getComplaints().add(this);
+        }
     }
 
     @Override
@@ -51,8 +42,8 @@ public class Complaint extends Message {
                 "sender=" + getSender() +
                 ", receiver=" + getReceiver() +
                 ", content='" + getContent() + '\'' +
-                ", urgencyLevel=" + urgencyLevel +
-                ", student=" + student +
+                ", messageId='" + getMessageId() + '\'' +
+                ", department='" + department + '\'' +
                 '}';
     }
 }

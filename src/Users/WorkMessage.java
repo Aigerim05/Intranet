@@ -1,33 +1,23 @@
 package Users;
-import java.util.Objects;
+
+import Interfaces.Employee;
+import Attributes.Message;
 
 public class WorkMessage extends Message {
-	
-    // Конструктор по умолчанию (для работы фабрики)
+
     public WorkMessage() {
         super(); // Вызываем конструктор родительского класса
     }
 
-    // Constructor
     public WorkMessage(Employee sender, Employee receiver, String content) {
         super(sender, receiver, content);
     }
 
-    // Equals and hashCode methods
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof WorkMessage)) return false;
-        if (!super.equals(o)) return false;
-        return true;
+    public void send() {
+        getReceiver().getMessages().add(this); // Добавляем WorkMessage в сообщения получателя
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode());
-    }
-
-    // toString method
     @Override
     public String toString() {
         return "WorkMessage{" +
