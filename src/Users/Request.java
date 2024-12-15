@@ -1,6 +1,8 @@
 package Users;
 
 import Interfaces.Employee;
+import Users.Dean;
+import Users.Manager;
 
 public class Request extends Message {
     private boolean assignedStatus = false; // Изначально статус false (не подписан)
@@ -22,16 +24,23 @@ public class Request extends Message {
     public void setAssignedStatus(boolean assignedStatus) {
         this.assignedStatus = assignedStatus;
     }
-
+    
     // Метод Send
-    @Override
-    public void send(Employee manager, Dean dean) {
+    public void send(Employee manager, Employee dean) {
         // Декан подписывает запрос
-        dean.signRequest(this);
-
+    	if(dean instanceof Dean)
+    		((Dean) dean).signRequest(this);
+    	else {
+    		System.out.println("Dean must sign the request");
+    		return;
+    	}
+        
         // Добавляем запрос в список запросов менеджера
         if (manager instanceof Manager) {
-            ((Manager) manager).getRequests().add(this);
+            ((Manager) manager).addRequest(this);
+        }
+        else {
+        	System.out.println("Access Denied");
         }
     }
 

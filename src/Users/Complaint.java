@@ -4,7 +4,14 @@ import Interfaces.Employee;
 import Users.Teacher;
 import Data.Data;
 
-public class Complaint extends Message {
+package Users.Messages;
+
+import Users.Employee;
+import Users.Dean;
+import Users.Teacher;
+import Data.Data;
+
+public class Complaint extends Message implements Sendable{
     private String department;
 
     public Complaint() {
@@ -12,7 +19,7 @@ public class Complaint extends Message {
     }
 
     public Complaint(Employee sender, Employee receiver, String content, String messageId, String department) {
-        super(sender, receiver, content, messageId);
+        super(sender, receiver, content);
         this.department = department;
     }
 
@@ -24,15 +31,15 @@ public class Complaint extends Message {
         this.department = department;
     }
 
-    @Override
     public void send() {
-        Employee decan = Data.getInstance().getDecans().stream()
-                .filter(d -> d.getDepartment().equals(this.department))
-                .findFirst()
-                .orElse(null);
-
+        Dean decan;
+        for(Users.Employee d : Data.getEmployees()) {
+        	if(d instanceof Dean && this.getSender().getDepartment().equals(d.getDepartment())) {
+        		decan = (Dean) d;
+        	}
+        }
         if (decan != null) {
-            decan.getComplaints().add(this);
+            decan.addComplaint(this);
         }
     }
 

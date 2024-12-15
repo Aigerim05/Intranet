@@ -1,8 +1,9 @@
-package Attributes;
+package Users;
 
-import Interfaces.Employee;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
+import java.util.Date;
+
+import Users.Employee;
 
 public abstract class Message {
     private Employee sender;
@@ -12,46 +13,39 @@ public abstract class Message {
 
     public Message() {}
 
-    public Message(Employee sender, Employee receiver, String content, String messageId) {
+    public Message(Employee sender, Employee receiver, String content) {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;
-        this.messageId = messageId; // Интеграция messageId
+        this.messageId = generateId(); // Интеграция messageId
     }
-
+    
+    // метод для генерирования айди основываясь на времени и ранд числу
+    private String generateId() {
+    	Random random = new Random();
+        Date d = new Date();
+    	String currentTime = String.valueOf(d.getHours()) + String.valueOf(d.getMinutes());
+            
+        int randomNum = random.nextInt(10000);
+        return currentTime + Integer.toString(randomNum, 36);
+    }
+    
     public Employee getSender() {
         return sender;
     }
-
-    public void setSender(Employee sender) {
-        this.sender = sender;
-    }
-
     public Employee getReceiver() {
         return receiver;
     }
-
-    public void setReceiver(Employee receiver) {
-        this.receiver = receiver;
-    }
-
     public String getContent() {
         return content;
     }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void editMessage(String content) {
+    	this.content = content;
     }
-
     public String getMessageId() {
         return messageId;
     }
 
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
-
-    public abstract void send(); // Абстрактный метод send
 
     @Override
     public boolean equals(Object obj) {
@@ -65,4 +59,10 @@ public abstract class Message {
     public int hashCode() {
         return messageId != null ? messageId.hashCode() : 0; // Генерация hashCode на основе messageId
     }
+
+	@Override
+	public String toString() {
+		return "Message [sender=" + sender + ", receiver=" + receiver + ", content=" + content + ", messageId="
+				+ messageId + "]";
+	}
 }

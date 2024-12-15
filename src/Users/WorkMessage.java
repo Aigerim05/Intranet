@@ -3,7 +3,7 @@ package Users;
 import Interfaces.Employee;
 import Attributes.Message;
 
-public class WorkMessage extends Message {
+public class WorkMessage extends Message implements Sendable{
 
     public WorkMessage() {
         super(); // Вызываем конструктор родительского класса
@@ -15,7 +15,7 @@ public class WorkMessage extends Message {
 
     @Override
     public void send() {
-        getReceiver().getMessages().add(this); // Добавляем WorkMessage в сообщения получателя
+        getReceiver().addMessage(this); // Добавляем WorkMessage в сообщения получателя
     }
 
     @Override
