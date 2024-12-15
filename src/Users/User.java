@@ -1,7 +1,6 @@
 package Users;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Vector;
@@ -13,14 +12,14 @@ public abstract class User implements Serializable
 	private String firstName;
 	private String lastName;
 	private String userId;
-	private Language language;
+	protected Language language;
 	private Vector<Date> logins;
 	private Vector<ResearchJournal> subscriptions;
-	
+	private ResearchDecorator researchDecorator;
 	{
-		logins = new Vector<Date>();
-	    subscriptions = new Vector<ResearchJournal>();
-		}
+		logins = new Vector<>();
+	    subscriptions = new Vector<>();
+	}
 	public User() {
 		
 	}
@@ -98,9 +97,14 @@ public abstract class User implements Serializable
         this.subscriptions = subscriptions;
     }
 
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    @Override
+	public boolean equals(Object o) {
+        if (this == o) {
+			return true;
+		}
+        if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
         User user = (User) o;
         return password.equals(user.password) &&
                email.equals(user.email) &&
@@ -111,11 +115,13 @@ public abstract class User implements Serializable
                subscriptions.equals(user.subscriptions);
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return Objects.hash(password, email, firstName, lastName, userId, logins, subscriptions);
     }
 
-    public String toString() {
+    @Override
+	public String toString() {
         return "User[password=" + password + ", email=" + email + ", firstName=" + firstName +
                 ", lastName=" + lastName + ", userId=" + userId + ", language=" + language +
                 ", logins=" + logins + ", subscriptions=" + subscriptions + "]";

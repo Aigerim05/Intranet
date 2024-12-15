@@ -3,9 +3,8 @@ package Users;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import Interfaces.Employee;
-public class Teacher extends User implements Employee
+import java.util.Scanner;
+public class Teacher extends User
 {
 
 
@@ -13,7 +12,7 @@ public class Teacher extends User implements Employee
 	private Department department;
 	private ArrayList<Integer> ratings;
 	private ArrayList<Course> courses;
-
+	private ResearchDecorator researchDecorator;
 	{
 		courses = new ArrayList<>();
 		ratings = new ArrayList<>();
@@ -24,13 +23,16 @@ public class Teacher extends User implements Employee
 	}
 
 	public Teacher(String password, String email, String firstName, String lastName,
-			String userId, Language language,Position position, Department department) {
+			String userId, Language language,Position position, Department department, ResearchDecorator researchDecorator) {
 		super(password, email, firstName, lastName, userId, language);
 		this.position = position;
 		this.department = department;
+		this.researchDecorator = researchDecorator;
 	}
 
-
+	public ResearchDecorator getResearchDecorator() {
+		return researchDecorator;
+	}
 	public ArrayList<Integer> getRatings() {
 		return ratings;
 	}
@@ -141,9 +143,43 @@ public class Teacher extends User implements Employee
 		}
 		return sum / (double) ratings.size();  
 	}
+	
+	public ResearchDecorator createResearcher(Teacher teacher) {
+	    if (teacher.getPosition() == Position.PROFESSOR) {
+	        Scanner scanner = new Scanner(System.in);
+
+	        System.out.print("Enter User Name: ");
+	        String name = scanner.nextLine();
+
+	        System.out.print("Enter Department: ");
+	        String department = scanner.nextLine();
+
+	        System.out.print("Enter H-Index: ");
+	        int hIndex = scanner.nextInt();
+	        return new ResearchDecorator(new User(), hIndex, teacher.getDepartment());
+	    } else {
+	        return null; 
+	    }
+	}
+
+	
+
+	public ResearchDecorator askForResearcherRole() {
+	    Scanner scanner = new Scanner(System.in);
+
+	    System.out.print("Do you want to become a researcher? (yes/no): ");
+	    String response = scanner.nextLine().trim().toLowerCase();
+
+	    if ("yes".equals(response)) {
+	        return createResearcher(this);
+	    } else {
+	        return null;
+	    }
+	}
 
 
 }
+
 
 
 	
