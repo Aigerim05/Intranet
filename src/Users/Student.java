@@ -1,9 +1,7 @@
 package Users;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 import Enums.Department;
@@ -26,33 +24,14 @@ public class Student extends User{
 
 	}
 
-	public Student(String firstName, String lastName, String userId, String password, String email, Language language, ArrayList<Date> logins,int yearOfStudy, HashMap<Course, Mark> journal, int maxCredit, Department department) {
+	public Student(String firstName, String lastName, String userId, String password, Language language, int yearOfStudy, int maxCredit, Department department) {
 		super(firstName,lastName,userId,password,language);
 		this.yearOfStudy = yearOfStudy;
-		this.journal = journal;
 		this.maxCredit = maxCredit;
 		this.department = department;
 
 	}
-	public Student(String firstName, String lastName, String userId, String email, Language language, int yearOfStudy, int maxCredit) {
-		super(firstName, lastName, userId, email, language);
-		this.yearOfStudy = yearOfStudy;
-		this.maxCredit = maxCredit;
-	}
 
-	public Student(String firstName, String lastName, String userId, String email, Language language, int yearOfStudy) {
-		super(firstName, lastName, userId, email, language);
-		this.yearOfStudy = yearOfStudy;
-	}
-
-	public Student(String firstName, String lastName, String userId, String email, Language language, int yearOfStudy, Department department) {
-		super(firstName, lastName, userId, email, language);
-		this.department = department;
-	}
-
-	public Student(String firstName, String lastName, String userId, String email, Language language) {
-		super(firstName, lastName, userId, email, language);
-	}
 
 	public int getYearOfStudy() {
 		return yearOfStudy;

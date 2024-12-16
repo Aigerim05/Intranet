@@ -14,9 +14,8 @@ public class Admin extends User {
 		super();
 	}
 
-	public Admin(String password, String email, String firstName, String lastName,
-			String userId, Language language) {
-		super(firstName,lastName,userId,password,language);
+	public Admin(String firstName, String lastName, String userId, String password, Language language) {
+		super(firstName, lastName, userId, password, language);
 	}
 
 	@Override
@@ -86,16 +85,32 @@ public class Admin extends User {
 		}
 
 	}
+
+	public void addUser(User user) {
+		Data.getInstance().users.add(user);
+		if (user instanceof Student) {
+			Data.getInstance().students.add((Student) user);
+		} else if (user instanceof Teacher) {
+			Data.getInstance().teachers.add((Teacher) user);
+		} else if (user instanceof Manager) {
+			Data.getInstance().managers.add((Manager) user);
+		}
+		// For a Researcher the separate logic
+		//		} else if (user instanceof ResearchDecorator) {
+		//			Data.getInstance().researchDecorators.add((ResearchDecorator) user);
+		//		}
+	}
+
 	public void removeUser() {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter the User ID to remove: ");
 		String removeUserId = in.nextLine();
 		boolean userFound = false;
 
-		for (User user : Data.INSTANCE.users) {
+		for (User user : Data.getInstance().users) {
 			if (user.getUserId().equals(removeUserId)) {
 				userFound = true;
-				Data.INSTANCE.users.remove(user);
+				Data.getInstance().users.remove(user);
 				System.out.println("Successfully removed the user with ID: " + removeUserId);
 				break; 
 			}
@@ -106,14 +121,14 @@ public class Admin extends User {
 		}
 	}
 
-	@Override
+
 	public String viewAllUsers() {
-		if (Data.INSTANCE.users.isEmpty()) {
+		if (Data.getInstance().users.isEmpty()) {
 			return "Admin:\n  No users found";
 		}
 
 		StringBuilder sb = new StringBuilder("Admin:\n");
-		for (User user : Data.INSTANCE.users) {
+		for (User user : Data.getInstance().users) {
 			sb.append("  ").append(user.toString()).append("\n");
 		}
 		return sb.toString();  
@@ -134,16 +149,16 @@ public class Admin extends User {
 
 	public void addNews(News news) {
 		if (news != null) {
-			Data.INSTANCE.news.add(news);
+			Data.getInstance().news.add(news);
 		}
 	}
 
 	public void removeNews(String newsId) {
-		Data.INSTANCE.news.removeIf(news -> news.getNewsId().equals(newsId));
+		Data.getInstance().news.removeIf(news -> news.getNewsId().equals(newsId));
 	}
 
 	public void displayNews() {
-		for (News news : Data.INSTANCE.news) {
+		for (News news : Data.getInstance().news) {
 			System.out.println(news);
 		}
 	}

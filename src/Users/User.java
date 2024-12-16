@@ -10,29 +10,33 @@ public abstract class User implements Serializable
 {
 
 	public String password;
-	public String email;
 	private String firstName;
 	private String lastName;
 	private String userId;
 	private Language language;
 	private Vector<Date> logins;
-	private Vector<ResearchJournal> subscriptions;
+	//	private Vector<ResearchJournal> subscriptions;
 
 	{
 		logins = new Vector<Date>();
-		subscriptions = new Vector<ResearchJournal>();
+		//		subscriptions = new Vector<ResearchJournal>();
 	}
 
 	public User() {
 
 	}
 
-	public User(String firstName, String lastName, String userId, String email, Language language) {
+	public User(String userId, String password) {
+		this.userId = userId;
+		this.password = password;
+	}
+
+	public User(String firstName, String lastName, String userId, String password, Language language) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userId = userId;
-		this.email = email;
 		this.language = language;
+		this.password = password;
 	}
 
 	public String getPassword() {
@@ -43,13 +47,6 @@ public abstract class User implements Serializable
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -89,13 +86,13 @@ public abstract class User implements Serializable
 		this.logins = logins;
 	}
 
-	public Vector<ResearchJournal> getSubscriptions() {
-		return subscriptions;
-	}
-
-	public void setSubscriptions(Vector<ResearchJournal> subscriptions) {
-		this.subscriptions = subscriptions;
-	}
+	//	public Vector<ResearchJournal> getSubscriptions() {
+	//		return subscriptions;
+	//	}
+	//
+	//	public void setSubscriptions(Vector<ResearchJournal> subscriptions) {
+	//		this.subscriptions = subscriptions;
+	//	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -121,21 +118,11 @@ public abstract class User implements Serializable
 				", password='" + password + '\'' +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
-				", email='" + email + '\'' +
 				'}';
 	}
 
 
-	public void viewProfile() {
-		System.out.println("Profile Information:");
-		System.out.println("Name: " + firstName);
-		System.out.println("Surname: " + lastName);
-		System.out.println("Email: " + email);
-		System.out.println("User ID: " + userId);
-		System.out.println("Language: " + language);
-		System.out.println("Logins: " + logins);
-		System.out.println("Subscriptions: " + subscriptions);	
-	}
+
 
 
 }
