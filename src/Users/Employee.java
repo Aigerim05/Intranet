@@ -1,7 +1,4 @@
 package Users;
-
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
 
 import Attributes.Message;
