@@ -5,8 +5,7 @@ import java.util.Objects;
 import Enums.Department;
 import Enums.Language;
 import Enums.Position;
-import Interfaces.Employee;
-public class Teacher extends User implements Employee
+public class Teacher extends User 
 {
 
 

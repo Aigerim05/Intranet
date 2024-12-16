@@ -88,13 +88,13 @@ public class Manager extends User implements Employee
 		newCourse.setDescription(description);
 		newCourse.setCourseType(courseType);
 
-		Data.INSTANCE.courses.add(newCourse);
+		Data.getInstance().courses.add(newCourse);
 	} 
 
 	public void removeCourseByCode(String code) {
-		for (Course course : Data.INSTANCE.courses) {
+		for (Course course : Data.getInstance().courses) {
 			if (course.getCode().equals(code)) {
-				Data.INSTANCE.courses.remove(course);
+				Data.getInstance().courses.remove(course);
 				System.out.println("Course with code " + code + " has been removed.");
 				return;
 			}
@@ -102,7 +102,7 @@ public class Manager extends User implements Employee
 		System.out.println("Course with code " + code + " not found.");
 	}
 	public void updateCourse(String code, String newName, String newDescription, CourseType newCourseType) {
-		for (Course course : Data.INSTANCE.courses) {
+		for (Course course : Data.getInstance().courses) {
 			if (course.getCode().equals(code)) {
 				course.setCourseName(newName);
 				course.setDescription(newDescription);
@@ -116,7 +116,7 @@ public class Manager extends User implements Employee
 
 	public void viewInfoOfTeachers() {
 		System.out.println("List of Teachers and Their Courses:");
-		for (Teacher teacher : Data.INSTANCE.teachers) {
+		for (Teacher teacher : Data.getInstance().teachers) {
 			System.out.print("Name: " + teacher.getFirstName() + ", Courses: ");
 			for (Course course : teacher.getCourses()) {
 				System.out.print(course.getCourseName() + " ");

@@ -177,7 +177,7 @@ public class Course {
 		try {
 			if (participants != null && participants.add(student)) {
 				currCountOfStudents++;
-				System.out.println("Student " + student.getFirstName() + " " + student.getLastName() + " was added to the course " + course.getCode() + " " + course.getCourseName());
+				System.out.println("Student " + student.getFirstName() + " " + student.getLastName() + " was added to the course " + this.getCode() + " " + this.getCourseName());
 			} else {
 				System.out.println("Failed to add student " + student.getFirstName() + " to the course.");
 			}
@@ -194,7 +194,7 @@ public class Course {
 			if (participants != null && participants.contains(student)) {
 				participants.remove(student);
 				currCountOfStudents--;
-				System.out.println("Student " + student.getFirstName() + " " + student.getLastName() + " was removed from the course " + course.getCode() + " " + course.getCourseName());
+				System.out.println("Student " + student.getFirstName() + " " + student.getLastName() + " was removed from the course " + this.getCode() + " " + this.getCourseName());
 			} else {
 				System.out.println("Student " + student.getFirstName() + " not found in the course " + getCode());
 			}
