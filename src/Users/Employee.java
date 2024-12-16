@@ -1,20 +1,27 @@
 package Users;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
 
-import java.util.Scanner;
+import Attributes.Message;
+import Enums.Language;
 
-public class Employee {
-	public ResearchDecorator askForResearcherRole() {
-        Scanner scanner = new Scanner(System.in);
+public class Employee extends User{
 
-        System.out.print("Do you want to become a researcher? (yes/no): ");
-        String response = scanner.nextLine().trim().toLowerCase();
+	private ArrayList<Message> messages;
 
-        if ("yes".equals(response)) {
-            return ResearchUtils.createResearcher();
-        } else {
-            return null;
-        }
-    }
-		
+	{
+		messages = new ArrayList<>();
+	}
+
+	public Employee() {
+		super();
+	}
+
+
+	public Employee(String firstName, String lastName, String userId, String password, Language language, ResearchDecorator researcher) {
+		super(firstName, lastName, userId, password, language);
+	}
+
 }

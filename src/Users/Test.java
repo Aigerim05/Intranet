@@ -11,7 +11,7 @@ public class Test {
 		//		Data.getInstance().users.add(admin);
 		DataOperation dataOperation = new DataOperation();
 		dataOperation.login();
-
+		
 
 	}
 

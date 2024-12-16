@@ -156,6 +156,39 @@ public class Manager extends User implements Employee
 		return;
 	}
 
+	public void ReportGeneration(Course course) {
+		if(course == null || course.getParticipants().isEmpty()) {
+			System.out.println("No participants for the course");
+		}
+
+		double total = 0;
+		double highScore = Double.MIN_VALUE;
+		double lowScore = Double.MAX_VALUE;
+		int studentCount = course.getParticipants().size();
+
+		for(Student student: course.getParticipants()) {
+			Mark mark = student.getJournal().get(course);
+			if(mark != null) {
+				double totalMark = mark.getTotal();
+				total += totalMark;
+
+				if(totalMark > highScore) {
+					highScore = totalMark;
+				}
+				if(totalMark < lowScore) {
+					lowScore = totalMark;
+				}
+			}
+
+
+		}
+		double average = total/studentCount;
+		System.out.println("Course:" + course.getCourseName());
+		System.out.println("Average Score: " + average);
+		System.out.println("Highest Score:" + highScore);
+		System.out.println("Lowest Score: " + lowScore);
+		System.out.println("Total number of Students:" + studentCount);
+	}
 
 
 

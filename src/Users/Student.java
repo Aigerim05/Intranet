@@ -72,26 +72,6 @@ public class Student extends User{
 				+ ", department=" + department + "current credits= " + currCredit + "]";
 	}
 
-	@Override
-	public boolean equals(Object other){
-		if(other == null) {
-			return false;
-		}
-		if(other == this) {
-			return true;
-		}
-		if(!(other instanceof Student)) {
-			return false;
-		}
-		Student otherStudent = (Student) other;
-		return this.getUserId().equals(otherStudent.getUserId());
-	}
-
-	@Override
-	public int hashCode(){
-		return this.getUserId().hashCode();
-	}
-
 	public ArrayList<Course> getTakenCoursesArray() {
 		return new ArrayList<Course>(takenCourses.keySet());
 	}
@@ -123,7 +103,7 @@ public class Student extends User{
 
 			int rating = scanner.nextInt();
 
-			teacher.addRating(rating);
+			teacher.getRatings().add(rating);
 			System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
 		} catch (NullPointerException e) {
 			System.out.println("Error: The teacher object or some of its properties are null.");

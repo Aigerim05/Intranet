@@ -7,14 +7,14 @@ public class ResearchJournal {
 	private String name;
 	private ArrayList<ResearchPaper> listOfSubscribers;
 	private ArrayList<ResearchPaper> listOfResearchPapers;
-	
+
 	{
 		listOfSubscribers = new ArrayList<>();
 		listOfResearchPapers = new ArrayList<>();
 	}
 	public ResearchJournal() {
 	}
-	
+
 	public ResearchJournal(String name) {
 		this.name = name;
 	}
@@ -71,10 +71,10 @@ public class ResearchJournal {
 	}
 
 	public void addPaper(ResearchPaper paper) {
-		
-		
+
+
 	}
-	
-	
+
+
 
 }

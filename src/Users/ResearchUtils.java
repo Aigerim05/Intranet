@@ -3,38 +3,39 @@ package Users;
 import java.util.Scanner;
 
 public class ResearchUtils {
+	//	public void printResearchPapersOfAllResearchers() {
+	//
+	//	}
 
-	public void printResearchPapersOfAllResearchers() {
-		
+	public static ResearchDecorator createResearcher(User user) {
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.print("Enter research field: ");
+		String field = scanner.nextLine();
+
+		System.out.print("Enter H-Index: ");
+		int hIndex = scanner.nextInt();
+
+		return new ResearchDecorator(user, hIndex, field);
 	}
-	    public static ResearchDecorator createResearcher() {
-	    	 Scanner scanner = new Scanner(System.in);
 
-	         System.out.print("Enter User Name: ");
-	         String name = scanner.nextLine();
+	public static ResearchDecorator askForResearcherRole(User user) {
+		Scanner scanner = new Scanner(System.in);
 
-	         System.out.print("Enter Department: ");
-	         String departmentName = scanner.nextLine();
-	         
-	         System.out.print("Enter H-Index: ");
-	         int hIndex = scanner.nextInt();
-	         Department department = Department.valueOf(departmentName.toUpperCase());
-	         UserFactory user = new UserFactory();
-	         ResearchDecorator researcher = new ResearchDecorator(user, hIndex, department);
-	         return researcher;
-	    }
+		System.out.print("Do you want to become a researcher? (yes/no): ");
+		String response = scanner.nextLine().trim().toLowerCase();
 
-	    public static ResearchDecorator askForResearcherRole() {
-	    	Scanner scanner = new Scanner(System.in);
-
-	        System.out.print("Do you want to become a researcher? (yes/no): ");
-	        String response = scanner.nextLine().trim().toLowerCase();
-
-	        if ("yes".equals(response)) {
-	            return createResearcher();
-	        } else {
-	            return null;
-	        }
-	    }
+		if ("yes".equals(response)) {
+			return createResearcher(user);
+		} else {
+			return null;
+		}
 	}
+
+	//	public static ResearchPaper createResearchPaper() {
+	//
+	//	}
+}
+
+
 

@@ -1,9 +1,13 @@
 package Users;
+
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
 import Enums.Format;
+
+
 public class ResearchPaper {
 	private String name;
 	private ArrayList<ResearchDecorator> authors;
@@ -13,14 +17,14 @@ public class ResearchPaper {
 	private boolean isFreeAccess;
 	private int numberOfCitations;
 	protected Format format;
-	
+
 	{
 		authors = new ArrayList<>();
 	}
-	
+
 	public  ResearchPaper() {
 	}
-	
+
 	public ResearchPaper(String name, ResearchJournal researchJournal,int pages, Date publicationDate, boolean isFreeAccess, int numberOfCitations) {
 		this.name = name;
 		this.pages = pages;
@@ -114,12 +118,14 @@ public class ResearchPaper {
 				&& Objects.equals(publicationDate, other.publicationDate)
 				&& Objects.equals(researchJournal, other.researchJournal);
 	}
-	
-	 public void getCitations(Format format) {
-	        if (format == Format.PlainText) {
-	          System.out.println(authors);
-	        } else if (format == Format.Bibtex) {
-	            System.out.println("Research Paper {\n authors={" + authors + " }");
-	        }
-	    }
+
+	public void getCitation(Format format) {
+		if (format == Format.PLAINTEXT) {
+			System.out.println(authors);
+		} else if (format == Format.BIBTEXT) {
+			System.out.println("Research Paper {\n authors={" + authors + " }");
+		}
+	}
+
+
 }

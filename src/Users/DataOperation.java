@@ -48,7 +48,6 @@ public class DataOperation {
 				if(user instanceof Admin admin) {
 					AdminController adminController = new AdminController(admin);
 					adminController.run();
-					
 				}
 			}
 			else {
@@ -63,6 +62,8 @@ public class DataOperation {
 
 
 }
+
+
 
 
 

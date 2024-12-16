@@ -122,18 +122,6 @@ public class Admin extends User {
 	}
 
 
-	public String viewAllUsers() {
-		if (Data.getInstance().users.isEmpty()) {
-			return "Admin:\n  No users found";
-		}
-
-		StringBuilder sb = new StringBuilder("Admin:\n");
-		for (User user : Data.getInstance().users) {
-			sb.append("  ").append(user.toString()).append("\n");
-		}
-		return sb.toString();  
-	}
-
 
 	public void viewLogs(User u) {
 		if (u.getLogins() == null || u.getLogins().isEmpty()) {

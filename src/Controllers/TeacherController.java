@@ -40,43 +40,68 @@ public class TeacherController {
 		return true;
 	}
 	
+//	public void putMark() {
+//	    Data data = Data.getInstance();
+//	    Scanner scanner = new Scanner(System.in);
+//	    System.out.println("Enter the student ID:");
+//	    String studentId = DataOperation.readFromConsole();
+//	    Student student = null;
+//	    for (Student s : data.students) {
+//	        if (s.getUserId().equals(studentId)) {
+//	            student = s;
+//	            break;
+//	        }
+//	    }
+//	    if (student == null) {
+//	        System.out.println("Student not found!");
+//	        return;
+//	    }
+//	    System.out.println("Enter the course code:");
+//	    String courseCode = DataOperation.readFromConsole();
+//	    Course course = null;
+//	    for (Course c : data.courses) {
+//	        if (c.getCode().equals(courseCode)) {
+//	            course = c;
+//	            break;
+//	        }
+//	    }
+//	    if (course == null) {
+//	        System.out.println("Course not found!");
+//	        return;
+//	    }
+//	    System.out.println("Enter 1 for first attestation, 2 for second attestation, 3 for final:");
+//	    int attType = Integer.parseInt(DataOperation.readFromConsole());
+//	    System.out.println("Enter the score:");
+//	    double score = Double.parseDouble(DataOperation.readFromConsole());
+//
+//	    teacher.putMark(student, course, attType, score);
+//	}
+	
 	public void putMark() {
-	    Data data = Data.getInstance();
-	    Scanner scanner = new Scanner(System.in);
-	    System.out.println("Enter the student ID:");
-	    String studentId = DataOperation.readFromConsole();
-	    Student student = null;
-	    for (Student s : data.students) {
-	        if (s.getUserId().equals(studentId)) {
-	            student = s;
-	            break;
-	        }
-	    }
-	    if (student == null) {
-	        System.out.println("Student not found!");
-	        return;
-	    }
-	    System.out.println("Enter the course code:");
-	    String courseCode = DataOperation.readFromConsole();
-	    Course course = null;
-	    for (Course c : data.courses) {
-	        if (c.getCode().equals(courseCode)) {
-	            course = c;
-	            break;
-	        }
-	    }
-	    if (course == null) {
-	        System.out.println("Course not found!");
-	        return;
-	    }
-	    System.out.println("Enter 1 for first attestation, 2 for second attestation, 3 for final:");
-	    int attType = Integer.parseInt(DataOperation.readFromConsole());
-	    System.out.println("Enter the score:");
-	    double score = Double.parseDouble(DataOperation.readFromConsole());
-
-	    teacher.putMark(student, course, attType, score);
+		while(true) {
+			System.out.println("Choose the number of course: ");
+			int n = 1;
+			for(Course c: teacher.getCourses()) {
+				System.out.println(n++ + " " + c.getCourseName());
+			int option = Integer.parseInt(DataOperation.readFromConsole());
+			Course course = teacher.getCourses().get(option-1);
+			System.out.println("Enter student Id: ");
+			String userId = DataOperation.readFromConsole();
+			Student studentMark = null;
+			for(Student s: course.getParticipants()) {
+				if(s.getUserId() == userId) {
+					studentMark = s;
+					break;
+				}
+			System.out.println("Enter 1 for first attestation \n Enter 2 for second attestaion \n Enter 3 for final scores");
+			int attType = Integer.parseInt(DataOperation.readFromConsole());
+			System.out.println("Enter Score:");
+			double score = Double.parseDouble(DataOperation.readFromConsole());
+			teacher.putMark(studentMark, course, attType, score);
+			}
+		}
 	}
-
+	}
 	public void run() throws IOException {
 		try {
 			System.out.println("Welcome!");
