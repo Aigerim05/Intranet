@@ -118,14 +118,20 @@ public class Teacher extends User
 		return courses.add(course);
 	}
 
-	public void putMark(Student student, Course course, double firstAtt, double secondAtt, double Final) {
-		Mark mark = new Mark(firstAtt, secondAtt, Final);
+	public void putMark(Student student, Course course, int attType, double score) {
+		if (student.getJournal().containsKey(course)) {
+			Mark mark = student.getJournal().get(course);
 
-		student.getJournal().put(course, mark);
-	}
+			if (attType == 1) {
+				mark.setFirstAttestation(score);  
+			} else if (attType == 2) {
+				mark.setSecondAttestation(score);  
+			} else if (attType == 3) {
+				mark.setFinalExam(score);  
+			}
 
-	public boolean addRating(int rate) {
-		return this.ratings.add(rate);
+			student.getJournal().put(course, mark);
+		}
 	}
 
 	public double getAverageRating() {

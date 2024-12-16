@@ -103,7 +103,7 @@ public class Student extends User{
 
 			int rating = scanner.nextInt();
 
-			teacher.addRating(rating);
+			teacher.getRatings().add(rating);
 			System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
 		} catch (NullPointerException e) {
 			System.out.println("Error: The teacher object or some of its properties are null.");
