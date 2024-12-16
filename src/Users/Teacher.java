@@ -7,7 +7,7 @@ import Enums.Language;
 import Enums.Position;
 public class Teacher extends User 
 {
-
+	private ResearchDecorator researcher;
 
 	private Position position;
 	private Department department;
@@ -23,11 +23,18 @@ public class Teacher extends User
 		super();
 	}
 
+
 	public Teacher(String password, String email, String firstName, String lastName,
-			String userId, Language language,Position position, Department department) {
+			String userId, Language language,Position position, Department department, ResearchDecorator researcher) {
 		super(firstName,lastName,userId,password,language);
 		this.position = position;
 		this.department = department;
+		if (position == Position.PROFESSOR) {
+			this.researcher = ResearchUtils.createResearcher(this);
+		}
+		else {
+			this.researcher = ResearchUtils.askForResearcherRole(this);
+		}
 	}
 
 

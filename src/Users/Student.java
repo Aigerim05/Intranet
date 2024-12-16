@@ -72,26 +72,6 @@ public class Student extends User{
 				+ ", department=" + department + "current credits= " + currCredit + "]";
 	}
 
-	@Override
-	public boolean equals(Object other){
-		if(other == null) {
-			return false;
-		}
-		if(other == this) {
-			return true;
-		}
-		if(!(other instanceof Student)) {
-			return false;
-		}
-		Student otherStudent = (Student) other;
-		return this.getUserId().equals(otherStudent.getUserId());
-	}
-
-	@Override
-	public int hashCode(){
-		return this.getUserId().hashCode();
-	}
-
 	public ArrayList<Course> getTakenCoursesArray() {
 		return new ArrayList<Course>(takenCourses.keySet());
 	}
