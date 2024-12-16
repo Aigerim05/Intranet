@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class ResearchDecorator  {
-	private User user;
+	private UserFactory user;
 	private int hIndex;
 	private ArrayList<ResearchPaper> researchPaper;
 	private ArrayList<ResearchProject> reserachProjects;
@@ -18,15 +18,15 @@ public class ResearchDecorator  {
 	public ResearchDecorator() {
 		
 	}
-	public ResearchDecorator(User user, int hIndex, Department department) {
+	public ResearchDecorator(UserFactory user, int hIndex, Department department) {
 		this.user = user;
 		this.hIndex = hIndex;
 		this.department  = department;
 	}
-	public User getUser() {
+	public UserFactory getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserFactory user) {
 		this.user = user;
 	}
 	public int gethIndex() {

@@ -1,11 +1,14 @@
 package Users;
 
-
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-public class Teacher extends User
-{
+
+import Enums.Department;
+import Enums.Language;
+import Enums.Position;
+
+public class Teacher extends User {
 
 
 	private Position position;
@@ -16,15 +19,15 @@ public class Teacher extends User
 	{
 		courses = new ArrayList<>();
 		ratings = new ArrayList<>();
+
 	}
 
 	public Teacher(){
 		super();
 	}
 
-	public Teacher(String password, String email, String firstName, String lastName,
-			String userId, Language language,Position position, Department department, ResearchDecorator researchDecorator) {
-		super(password, email, firstName, lastName, userId, language);
+	public Teacher(String password, String email, String firstName, String lastName,String userId, Language language,Position position, Department department, ResearchDecorator researchDecorator) {
+		super(firstName,lastName,userId,password,language);
 		this.position = position;
 		this.department = department;
 		this.researchDecorator = researchDecorator;
@@ -33,6 +36,9 @@ public class Teacher extends User
 	public ResearchDecorator getResearchDecorator() {
 		return researchDecorator;
 	}
+
+
+
 	public ArrayList<Integer> getRatings() {
 		return ratings;
 	}
@@ -99,17 +105,22 @@ public class Teacher extends User
 	}
 
 
-	public void viewCourses() { 
-		if (courses != null && !courses.isEmpty()) {
-			for (Course course : courses) {
-				System.out.println("Course Code: " + course.getCode() + " | Course Name: " + course.getCourseName());
-			}
-		} else {
-			System.out.println("No courses available.");
-		}
+	public String viewCourses() { 
+	    Data data = Data.getInstance(); 
+	    if (data.courses.isEmpty()) { 
+	        return "Teacher:\n  No courses found"; 
+	    }
+	    StringBuilder sb = new StringBuilder("Teacher:\n"); 
+	    for (Course course : data.courses) { 
+	        sb.append("Course Code: ").append(course.getCode())
+	          .append(" | Course Name: ").append(course.getCourseName())
+	          .append("\n"); 
+	    }
+	    return sb.toString();  
 	}
 
-	
+
+
 
 	public void putMark(Student student, Course course, int attType, double score) {
 	    if (student.getJournal().containsKey(course)) {
@@ -128,6 +139,7 @@ public class Teacher extends User
 	}
 
 
+
 	public boolean addRating(int rate) {
 		return this.ratings.add(rate);
 	}
@@ -143,20 +155,22 @@ public class Teacher extends User
 		}
 		return sum / (double) ratings.size();  
 	}
+
 	
 	public ResearchDecorator createResearcher(Teacher teacher) {
 	    if (teacher.getPosition() == Position.PROFESSOR) {
 	        Scanner scanner = new Scanner(System.in);
-
 	        System.out.print("Enter User Name: ");
 	        String name = scanner.nextLine();
-
 	        System.out.print("Enter Department: ");
-	        String department = scanner.nextLine();
-
+	        String departmentName = scanner.nextLine();
 	        System.out.print("Enter H-Index: ");
 	        int hIndex = scanner.nextInt();
-	        return new ResearchDecorator(new User(), hIndex, teacher.getDepartment());
+	        Department department = Department.valueOf(departmentName.toUpperCase());
+	         UserFactory user = new UserFactory();
+	        ResearchDecorator researcher = new ResearchDecorator(user, hIndex, department);
+	        return researcher;
+
 	    } else {
 	        return null; 
 	    }
@@ -166,7 +180,6 @@ public class Teacher extends User
 
 	public ResearchDecorator askForResearcherRole() {
 	    Scanner scanner = new Scanner(System.in);
-
 	    System.out.print("Do you want to become a researcher? (yes/no): ");
 	    String response = scanner.nextLine().trim().toLowerCase();
 
@@ -179,7 +192,3 @@ public class Teacher extends User
 
 
 }
-
-
-
-	

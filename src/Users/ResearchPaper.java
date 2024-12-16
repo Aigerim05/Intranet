@@ -1,9 +1,9 @@
 package Users;
-
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+
+import Enums.Format;
 public class ResearchPaper {
 	private String name;
 	private ArrayList<ResearchDecorator> authors;

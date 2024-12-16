@@ -1,5 +1,6 @@
 package Users;
 
+
 import java.util.Scanner;
 
 public class Employee {
@@ -16,5 +17,4 @@ public class Employee {
         }
     }
 		
-	
 }

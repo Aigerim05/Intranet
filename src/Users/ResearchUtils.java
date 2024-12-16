@@ -14,12 +14,13 @@ public class ResearchUtils {
 	         String name = scanner.nextLine();
 
 	         System.out.print("Enter Department: ");
-	         String department = scanner.nextLine();
-
+	         String departmentName = scanner.nextLine();
+	         
 	         System.out.print("Enter H-Index: ");
 	         int hIndex = scanner.nextInt();
-
-	         ResearchDecorator researcher = new ResearchDecorator(new User(name), hIndex, new Department(department));
+	         Department department = Department.valueOf(departmentName.toUpperCase());
+	         UserFactory user = new UserFactory();
+	         ResearchDecorator researcher = new ResearchDecorator(user, hIndex, department);
 	         return researcher;
 	    }
 
