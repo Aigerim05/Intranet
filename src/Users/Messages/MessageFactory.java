@@ -1,18 +1,17 @@
-package Users;
+package Users.Messages;
 
-import Interfaces.Employee;
+import Users.Employee;
 import Users.Teacher;
 
 public class MessageFactory {
 
-    public Message getMessage(String type, Employee caller) {
+    public static Message getMessage(String type, Employee caller) {
         switch (type) {
             case "Complaint":
                 if (caller instanceof Teacher) {
                     return new Complaint();
                 } else {
-                    // Возвращаем простое сообщение или выводим сообщение об ошибке
-                    return new SimpleMessage(null, null, "Access Denied");
+                    System.out.println("Only Teacher Can Send Complaints");
                 }
             case "WorkMessage":
                 return new WorkMessage();
@@ -21,7 +20,7 @@ public class MessageFactory {
             case "SimpleMessage":
                 return new SimpleMessage();
             default:
-                throw new IllegalArgumentException("Неизвестный тип сообщения: " + type);
+                throw new IllegalArgumentException("Message Type Uknown: " + type);
         }
     }
 }

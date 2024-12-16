@@ -1,9 +1,3 @@
-package Attributes;
-
-import Interfaces.Employee;
-import Users.Teacher;
-import Data.Data;
-
 package Users.Messages;
 
 import Users.Employee;
@@ -11,7 +5,7 @@ import Users.Dean;
 import Users.Teacher;
 import Data.Data;
 
-public class Complaint extends Message implements Sendable{
+public class Complaint extends Message {
     private String department;
 
     public Complaint() {
@@ -32,14 +26,10 @@ public class Complaint extends Message implements Sendable{
     }
 
     public void send() {
-        Dean decan;
-        for(Users.Employee d : Data.getEmployees()) {
-        	if(d instanceof Dean && this.getSender().getDepartment().equals(d.getDepartment())) {
-        		decan = (Dean) d;
+        for(Dean d : Data.instance.getDeans()) {
+        	if(this.getSender().getDepartment().equals(d.getDepartment())) {
+        		d.addComplaint(this);
         	}
-        }
-        if (decan != null) {
-            decan.addComplaint(this);
         }
     }
 

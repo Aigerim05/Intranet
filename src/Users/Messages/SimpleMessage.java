@@ -1,8 +1,8 @@
-package Users;
+package Users.Messages;
 
-import Interfaces.Employee;
+import Users.Employee;
 
-public class SimpleMessage extends Message implements Sendable{
+public class SimpleMessage extends Message{
 
     public SimpleMessage() {
         super();
@@ -23,4 +23,3 @@ public class SimpleMessage extends Message implements Sendable{
 	}
     
 }
-

@@ -1,12 +1,11 @@
-package Users;
+package Users.Messages;
 
-import Interfaces.Employee;
-import Attributes.Message;
+import Users.Employee;
 
-public class WorkMessage extends Message implements Sendable{
+public class WorkMessage extends Message{
 
     public WorkMessage() {
-        super(); // Вызываем конструктор родительского класса
+        super(); 
     }
 
     public WorkMessage(Employee sender, Employee receiver, String content) {
@@ -15,7 +14,7 @@ public class WorkMessage extends Message implements Sendable{
 
     @Override
     public void send() {
-        getReceiver().addMessage(this); // Добавляем WorkMessage в сообщения получателя
+        getReceiver().addMessage(this); 
     }
 
     @Override
