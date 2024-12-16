@@ -1,12 +1,18 @@
 package Users;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import Users.Messages.Message;
+import Users.Messages.MessageFactory;
+
 public class Employee {
     private String name;
-    private String department;
 
+    private ArrayList<Message> messages = new ArrayList<>();
+    
     public Employee(String name, String department) {
         this.name = name;
-        this.department = department;
     }
 
     public String getName() {
@@ -17,19 +23,8 @@ public class Employee {
         this.name = name;
     }
 
-    public String getDepartment() {
-        return department;
+    public void addMessage(Message m) {
+    	this.messages.add(m);
     }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "name='" + name + '\'' +
-                ", department='" + department + '\'' +
-                '}';
-    }
+    
 }
