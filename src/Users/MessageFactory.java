@@ -1,4 +1,4 @@
-package Attributes;
+package Users;
 
 import Interfaces.Employee;
 import Users.Teacher;
