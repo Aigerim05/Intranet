@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import Enums.Department;
 import Enums.Language;
+import Enums.Position;
 
 public class UserFactory {
 
@@ -32,20 +33,23 @@ public class UserFactory {
 			Department department = UserOperation.enterDepartment(departmentChoice);
 			return new Student(firstName, lastName, userId, password, language, yearOfStudy, maxCredit, department);
 
-			//		} else if (userType.equalsIgnoreCase("Teacher")) {
-			//			System.out.println("Enter position \n 1) Professor"); 
-			//			int positionChoice = Integer.parseInt(scanner.nextLine());
-			//			Position position = UserOperation.enterPosition(positionChoice);
-			//			System.out.println("Enter department \n 1) SITE");
-			//			int departmentChoice = Integer.parseInt(scanner.nextLine());
-			//
-			//			// тут нужно дописать специфичные филды Employee 
-			//			return new Teacher(firstName, lastName, userId, password, language, );
-			//		} else if (userType.equalsIgnoreCase("Manager")) {
-			//
-			//			создание менеджера
-			//			return new Manager(firstName, secondName, .......);
-		} else {
+		} else if (userType.equalsIgnoreCase("Teacher")) {
+			System.out.println("Enter position \n 1) PROFESSOR \n 2) SENIOR_LECTURER \n 3) ASSISTANT_PROFESSOR \n 4) TUTOR \n 5) ASSOCIATE_PROFESSOR"); 
+			int positionChoice = Integer.parseInt(scanner.nextLine());
+			Position position = UserOperation.enterPosition(positionChoice);
+			System.out.println("Enter department: 1) SITE \n 2) ISE \n 3) SEOGI \n 4) SG \n 5) BS \n 6) KMA \n 7) SAM \n 8) SCE \n 9) SMSGT");
+			int departmentChoice = Integer.parseInt(scanner.nextLine());
+			Department department = UserOperation.enterDepartment(departmentChoice);
+			return new Teacher(firstName, lastName, userId, password, language, position, department);
+		} 
+
+
+
+		// else if (userType.equalsIgnoreCase("Manager")) {
+
+		//			создание менеджера
+		//			return new Manager(firstName, secondName, .......);
+		else {
 			System.out.println("Invalid user type");
 			return null;
 		}

@@ -1,8 +1,9 @@
 package Users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ResearchDecorator {
+public class ResearchDecorator implements Serializable{
 
 
 	private User user;

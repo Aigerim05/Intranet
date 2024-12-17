@@ -1,13 +1,13 @@
 package Controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import Users.Admin;
 import Users.Data;
 import Users.DataOperation;
 import Users.UserFactory;
+import Users.UserOperation;
 
 public class AdminController {
 	private Admin admin;
@@ -30,18 +30,14 @@ public class AdminController {
 		}
 	}
 
-	public void printList(ArrayList list) {
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(i+1+ ")" +list.get(i));
-		}
-	}
+
 
 	public boolean viewUsers() {
 		if(Data.getInstance().users.isEmpty()) {
 			System.out.println("No users yet...Try adding one");
 			return false;
 		}
-		printList(Data.getInstance().users);
+		UserOperation.printList(Data.getInstance().users);
 		return true;
 	}
 
