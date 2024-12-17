@@ -87,7 +87,7 @@ public class TeacherController {
 
 	
 	public void putMark() {
-		while(true) {
+		
 			System.out.println("Choose student to which you want to put marks: (Enter number)");
 			showCourses(); 
 			int selectedCourseIndex = in.nextInt() - 1; 
@@ -97,7 +97,7 @@ public class TeacherController {
 			Student student = selectedCourse.getParticipants().get(selectedStudentIndex);
 			 putAssessment(student, selectedCourse);
 			
-		}
+		
 	}
 	public void displayTeacherRating() {
         double averageRating = teacher.getAverageRating();
