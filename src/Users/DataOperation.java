@@ -36,6 +36,7 @@ public class DataOperation {
 		System.out.println("Enter password: ");
 		String password = readFromConsole();
 		User user = null;
+
 		for(User u: Data.getInstance().users) {
 			if(u.getUserId().equals(userId) && u.getPassword().equals(password)) {
 				System.out.println("Login was successful!");

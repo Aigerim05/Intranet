@@ -2,21 +2,19 @@ package Controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import Users.Course;
 import Users.Data;
+import Users.DataOperation;
 import Users.Manager;
 import Users.Student;
 import Users.Teacher;
 
 public class StudentController {
 	private Student student;
-	private Scanner in;
 
-	public StudentController(Student student, Scanner in) {
+	public StudentController(Student student) {
 		this.student = student;
-		this.in = in;
 	}
 
 	private void save() {
@@ -28,7 +26,7 @@ public class StudentController {
 	}
 
 	private void exit() {
-		System.out.println("Logging out...");
+		System.out.println("Bye bye");
 		save();
 	}
 
@@ -45,8 +43,18 @@ public class StudentController {
 				System.out.println("6) View Transcript");
 				System.out.println("7) Logout");
 				System.out.print("Enter your choice: ");
-				String input = in.nextLine();
-				int choice = Integer.parseInt(input);
+				String input = DataOperation.readFromConsole();
+				if (input.isEmpty()) {
+					System.out.println("No input provided. Please enter a choice.");
+					continue;
+				}
+				int choice;
+				try {
+					choice = Integer.parseInt(input);
+				} catch (NumberFormatException e) {
+					System.out.println("Invalid input. Please enter a number between 1 and 7.");
+					continue;
+				}
 
 				switch (choice) {
 				case 1:
@@ -59,38 +67,38 @@ public class StudentController {
 					student.viewInstructors();
 					break;
 				case 4:
-					registerCourse: while (true) {
-						registerForCourse();
-						System.out.println("\n1) Register for another course\n2) Return to main menu");
-						System.out.print("Enter your choice: ");
-						String regInput = in.nextLine();
-						int regChoice = Integer.parseInt(regInput);
-						if (regChoice == 1) {
-							continue registerCourse;
-						} else if (regChoice == 2) {
-							break registerCourse;
-						} else {
-							System.out.println("Invalid choice. Returning to main menu.");
-							break registerCourse;
+					registerCourseLoop:
+						while (true) {
+							registerForCourse();
+							System.out.println("\n1) Register for another course");
+							System.out.println("2) Return to main menu");
+							String regInput = DataOperation.readFromConsole();
+							if (regInput.equals("1")) {
+								continue registerCourseLoop;
+							} else if (regInput.equals("2")) {
+								break registerCourseLoop;
+							} else {
+								System.out.println("Invalid choice. Returning to main menu.");
+								break registerCourseLoop;
+							}
 						}
-					}
 					break;
 				case 5:
-					rateTeacherLoop: while (true) {
-						rateTeacher();
-						System.out.println("\n1) Rate another teacher\n2) Return to main menu");
-						System.out.print("Enter your choice: ");
-						String rateInput = in.nextLine();
-						int rateChoice = Integer.parseInt(rateInput);
-						if (rateChoice == 1) {
-							continue rateTeacherLoop;
-						} else if (rateChoice == 2) {
-							break rateTeacherLoop;
-						} else {
-							System.out.println("Invalid choice. Returning to main menu.");
-							break rateTeacherLoop;
+					rateTeacherLoop:
+						while (true) {
+							rateTeacher();
+							System.out.println("\n1) Rate another teacher");
+							System.out.println("2) Return to main menu");
+							String rateInput = DataOperation.readFromConsole();
+							if (rateInput.equals("1")) {
+								continue rateTeacherLoop;
+							} else if (rateInput.equals("2")) {
+								break rateTeacherLoop;
+							} else {
+								System.out.println("Invalid choice. Returning to main menu.");
+								break rateTeacherLoop;
+							}
 						}
-					}
 					break;
 				case 6:
 					student.viewTranscript();
@@ -99,7 +107,7 @@ public class StudentController {
 					exit();
 					break menu;
 				default:
-					System.out.println("Invalid choice. Please try again.");
+					System.out.println("Invalid choice. Please enter a number between 1 and 7.");
 					break;
 				}
 			}
@@ -125,7 +133,18 @@ public class StudentController {
 		}
 
 		System.out.print("Enter the number of the course you want to register for: ");
-		int courseChoice = Integer.parseInt(in.nextLine());
+		String input = DataOperation.readFromConsole();
+		if (input.isEmpty()) {
+			System.out.println("No input provided. Returning.");
+			return;
+		}
+		int courseChoice;
+		try {
+			courseChoice = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			System.out.println("Invalid input. Please enter a valid course number.");
+			return;
+		}
 
 		if (courseChoice < 1 || courseChoice > availableCourses.size()) {
 			System.out.println("Invalid course selection.");
@@ -142,7 +161,12 @@ public class StudentController {
 		student.registerToCourse(selectedCourse, manager);
 	}
 
-	private void rateTeacher() {
+	private void rateTeacher() { 
+		if (student.getJournal() == null || student.getJournal().isEmpty()) {
+			System.out.println("You are not enrolled in any courses to rate teachers.");
+			return;
+		}
+
 		System.out.println("Your Instructors:");
 		ArrayList<Teacher> teachers = new ArrayList<>();
 		for (Course course : student.getJournal().keySet()) {
@@ -165,7 +189,18 @@ public class StudentController {
 		}
 
 		System.out.print("Enter the number of the instructor you want to rate: ");
-		int instructorChoice = Integer.parseInt(in.nextLine());
+		String input = DataOperation.readFromConsole();
+		if (input.isEmpty()) {
+			System.out.println("No input provided. Returning.");
+			return;
+		}
+		int instructorChoice;
+		try {
+			instructorChoice = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			System.out.println("Invalid input. Please enter a valid instructor number.");
+			return;
+		}
 
 		if (instructorChoice < 1 || instructorChoice > teachers.size()) {
 			System.out.println("Invalid instructor selection.");

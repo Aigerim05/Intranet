@@ -39,6 +39,16 @@ public class Teacher extends User
 
 
 
+	public ResearchDecorator getResearcher() {
+		return researcher;
+	}
+
+
+	public void setResearcher(ResearchDecorator researcher) {
+		this.researcher = researcher;
+	}
+
+
 	public ArrayList<Integer> getRatings() {
 		return ratings;
 	}

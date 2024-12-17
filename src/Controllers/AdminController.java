@@ -11,12 +11,13 @@ import Users.UserOperation;
 
 public class AdminController {
 	private Admin admin;
+	Scanner in = new Scanner(System.in);
 
 	public AdminController(Admin admin) {
 		this.admin = admin;
 	}
 
-	Scanner in = new Scanner(System.in);
+
 
 	private void save() throws IOException {
 		Data.write();

@@ -57,7 +57,7 @@ public class TeacherController {
 		try {
 			System.out.println("Welcome!");
 			menu : while(true){
-				System.out.println("What do you want to do?\n 1) View courses \n 2) Put Mark \n 3) Ratings \n 3) Exit");
+				System.out.println("What do you want to do?\n 1) View courses \n 2) Put Mark \n 3) View my rating \n 4) Exit");
 				int choiceMenu  = in.nextInt();
 				if(choiceMenu == 1){
 					viewCourse: while(true){
@@ -67,7 +67,9 @@ public class TeacherController {
 						if(choiceViewCourses  == 1) {
 							break viewCourse;
 						}
+
 					}
+					continue menu;
 				}
 				else if (choiceMenu == 2) {
 					chooseCourse: while (true) {
@@ -99,54 +101,40 @@ public class TeacherController {
 												continue chooseStudent;
 											}
 											else if(choiceAnotherStudent == 2) {
-												break chooseStudent;
+												continue chooseCourse;
 											}
 
 										}
 
 									}
+
 									else if(choiceGetStudent == 2) {
-										break getStudent;
+										continue chooseCourse;
 									}
 
 								}
-
-
-
-
-
-
-								//
-								//								System.out.println("\n 1) Choose another course \n 2) Return back");
-								//								int choiceGetCourse = in.nextInt();
-								//								if(choiceGetCourse  == 1) {
-								//									continue getCourse;
-								//								}
-								//								else if (choiceGetCourse  == 2) {
-								//									break getCourse;
-								//								}
 							}
 						}
 						else if(choiceChooseCourse == 2) {
-							break chooseCourse;
+							continue menu;
 						}
 					}
 
 				}
-				else if (choiceMenu == 3) {exit(); break menu;}
-				break;
-				//					displayTeacherRating();
-				//					System.out.println("\n 1) Return back \n 2) Exit");
-				//					int subChoice = in.nextInt();
-				//					if (subChoice == 1) {
-				//						continue menu;
-				//					} else if (subChoice == 2) {
-				//						exit();
-				//						break;
-				//					}
-				//					else if (choice == 4){exit(); break menu;}
-				//					break;
+				else if (choiceMenu == 3) {
 
+					displayTeacherRating();
+					System.out.println("\n 1) Return back \n 2) Exit");
+					int subChoice = in.nextInt();
+					if (subChoice == 1) {
+						continue menu;
+					} else if (subChoice == 2) {
+						exit();
+						break;
+					}
+				}
+				else if (choiceMenu == 4) {exit(); break menu;}
+				break;
 			}
 		} catch (Exception e) {
 			System.out.println("Something bad happened... \n Saving resources...");
@@ -178,6 +166,13 @@ public class TeacherController {
 
 
 	public void displayTeacherRating() {
+		if (teacher.getRatings().isEmpty()) {
+			System.out.println("No ratings yet for " + teacher.getFirstName() + " " + teacher.getLastName());
+			return;
+		}
+		else {
+			System.out.println("Ratings for " + teacher.getFirstName() + " " + teacher.getLastName() + ":");
+		}
 		double averageRating = teacher.getAverageRating();
 		System.out.println("Average Rating: " + averageRating);
 	}
