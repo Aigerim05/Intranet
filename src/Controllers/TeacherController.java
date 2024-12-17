@@ -34,10 +34,10 @@ public class TeacherController {
 		UserOperation.printList(Data.getInstance().courses);
 	}
 
+
 	public void viewStudents(Course c) {
 		UserOperation.printList(c.getParticipants());
-	}
-
+}
 
 	public void putAssessment(Student student, Course course) {
 		System.out.println("Enter 1 for first attestation \nEnter 2 for second attestation \nEnter 3 for final scores");
