@@ -1,10 +1,6 @@
 package Controllers;
 
-import Users.Course;
-import Users.Data;
-import Users.Manager;
-import Users.Student;
-import Users.Teacher;
+import Users.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,9 +9,9 @@ public class StudentController {
     private Student student;
     private Scanner in;
 
-    public StudentController(Student student) {
+    public StudentController(Student student, Scanner in) {
         this.student = student;
-        this.in = new Scanner(System.in);
+        this.in = in;
     }
 
     private void save() {
@@ -44,7 +40,8 @@ public class StudentController {
                 System.out.println("6) View Transcript");
                 System.out.println("7) Logout");
                 System.out.print("Enter your choice: ");
-                int choice = Integer.parseInt(in.nextLine());
+                String input = in.nextLine();
+                int choice = Integer.parseInt(input);
 
                 switch (choice) {
                     case 1:
@@ -57,10 +54,38 @@ public class StudentController {
                         student.viewInstructors();
                         break;
                     case 4:
-                        registerForCourse();
+                        registerCourse: while (true) {
+                            registerForCourse();
+                            System.out.println("\n1) Register for another course\n2) Return to main menu");
+                            System.out.print("Enter your choice: ");
+                            String regInput = in.nextLine();
+                            int regChoice = Integer.parseInt(regInput);
+                            if (regChoice == 1) {
+                                continue registerCourse;
+                            } else if (regChoice == 2) {
+                                break registerCourse;
+                            } else {
+                                System.out.println("Invalid choice. Returning to main menu.");
+                                break registerCourse;
+                            }
+                        }
                         break;
                     case 5:
-                        rateTeacher();
+                        rateTeacherLoop: while (true) {
+                            rateTeacher();
+                            System.out.println("\n1) Rate another teacher\n2) Return to main menu");
+                            System.out.print("Enter your choice: ");
+                            String rateInput = in.nextLine();
+                            int rateChoice = Integer.parseInt(rateInput);
+                            if (rateChoice == 1) {
+                                continue rateTeacherLoop;
+                            } else if (rateChoice == 2) {
+                                break rateTeacherLoop;
+                            } else {
+                                System.out.println("Invalid choice. Returning to main menu.");
+                                break rateTeacherLoop;
+                            }
+                        }
                         break;
                     case 6:
                         student.viewTranscript();
