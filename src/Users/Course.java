@@ -1,11 +1,12 @@
 package Users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import Enums.CourseType;
 
-public class Course {
+public class Course implements Serializable{
 
 	private String code;
 	private int numberOfCredits;
@@ -19,9 +20,9 @@ public class Course {
 	private ArrayList<Course> prerequisites;
 
 	{
-		participants = new ArrayList<Student>();
-		instructors = new ArrayList<Teacher>();
-		prerequisites = new ArrayList<Course>();
+		participants = new ArrayList<>();
+		instructors = new ArrayList<>();
+		prerequisites = new ArrayList<>();
 		currCountOfStudents = 0;
 	}
 

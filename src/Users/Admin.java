@@ -9,11 +9,6 @@ import Enums.Language;
 public class Admin extends User {
 
 
-
-	public Admin() {
-		super();
-	}
-
 	public Admin(String firstName, String lastName, String userId, String password, Language language) {
 		super(firstName, lastName, userId, password, language);
 	}

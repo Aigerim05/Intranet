@@ -15,8 +15,8 @@ public class Student extends User{
 	private Department department;
 	private HashMap<Course, Mark> takenCourses;
 	{
-		HashMap<Course, Mark> journal = new HashMap<Course,Mark>();
-		HashMap<Course, Mark> takenCourses = new HashMap<Course,Mark>();
+		HashMap<Course, Mark> journal = new HashMap<>();
+		HashMap<Course, Mark> takenCourses = new HashMap<>();
 		currCredit = 0;
 	}
 
@@ -73,7 +73,7 @@ public class Student extends User{
 	}
 
 	public ArrayList<Course> getTakenCoursesArray() {
-		return new ArrayList<Course>(takenCourses.keySet());
+		return new ArrayList<>(takenCourses.keySet());
 	}
 
 	public void viewCourses() {
@@ -96,22 +96,27 @@ public class Student extends User{
 	}
 
 	public void rateTeacher(Teacher teacher) { 
+//		Scanner scanner = new Scanner(System.in);
+//
+//		try (scanner) {
+//			System.out.print("Rate the Teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " from 1 to 10: ");
+//
+//			int rating = scanner.nextInt();
+//
+//			teacher.getRatings().add(rating);
+//			System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
+//		} catch (NullPointerException e) {
+//			System.out.println("Error: The teacher object or some of its properties are null.");
+//		} catch (Exception e) {
+//			System.out.println("An unexpected error occurred: " + e.getMessage());
+//		}
 		Scanner scanner = new Scanner(System.in);
-
-		try {
-			System.out.print("Rate the Teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " from 1 to 10: ");
-
-			int rating = scanner.nextInt();
-
-			teacher.getRatings().add(rating);
-			System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
-		} catch (NullPointerException e) {
-			System.out.println("Error: The teacher object or some of its properties are null.");
-		} catch (Exception e) {
-			System.out.println("An unexpected error occurred: " + e.getMessage());
-		} finally {
-			scanner.close();  
-		}
+		System.out.print("Rate the Teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " from 1 to 10: ");
+		
+		int rating = scanner.nextInt();
+		
+		teacher.getRatings().add(rating);
+		System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
 	}
 
 

@@ -24,8 +24,8 @@ public class Teacher extends User
 	}
 
 
-	public Teacher(String password, String email, String firstName, String lastName,
-			String userId, Language language,Position position, Department department, ResearchDecorator researcher) {
+	public Teacher(String firstName, String lastName,
+			String userId, String password,  Language language, Position position, Department department) {
 		super(firstName,lastName,userId,password,language);
 		this.position = position;
 		this.department = department;
@@ -96,7 +96,7 @@ public class Teacher extends User
 
 	@Override
 	public String toString() {
-		return "Teacher{" +
+		return super.toString() + "Teacher{" +
 				"courses=" + courses +
 				", position=" + position +
 				", department=" + department +

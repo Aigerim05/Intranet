@@ -1,13 +1,18 @@
 package Users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-class ResearchDecorator {
+public class ResearchDecorator implements Serializable{
+
     private User user;
     private int hIndex;
     private ArrayList<ResearchPaper> researchPapers;
     private ArrayList<ResearchProject> reserachProjects;
     private String field;
+
+
+
 
     {
         researchPapers = new ArrayList<>();

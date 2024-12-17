@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Controllers.AdminController;
+import Controllers.TeacherController;
 
 public class DataOperation {
 
@@ -49,7 +50,13 @@ public class DataOperation {
 					AdminController adminController = new AdminController(admin);
 					adminController.run();
 				}
+				else if(user instanceof Teacher) {
+					Teacher teacher = (Teacher) user;
+					TeacherController teacherController = new TeacherController(teacher);
+					teacherController.run();
+				}
 			}
+
 			else {
 				System.out.println("No such user in the system.");
 			}

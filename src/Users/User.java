@@ -8,6 +8,7 @@ import java.util.Vector;
 import Enums.Language;
 public abstract class User implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 
 	public String password;
 	private String firstName;
