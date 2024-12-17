@@ -18,7 +18,7 @@ public abstract class User implements Serializable
 	//	private Vector<ResearchJournal> subscriptions;
 
 	{
-		logins = new Vector<Date>();
+		logins = new Vector<>();
 		//		subscriptions = new Vector<ResearchJournal>();
 	}
 

@@ -15,8 +15,8 @@ public class Teacher extends User
 	private ArrayList<Course> courses;
 
 	{
-		courses = new ArrayList<Course>();
-		ratings = new ArrayList<Integer>();
+		courses = new ArrayList<>();
+		ratings = new ArrayList<>();
 	}
 
 	public Teacher(){

@@ -45,8 +45,7 @@ public class DataOperation {
 
 		try {
 			if( user != null) {
-				if(user instanceof Admin) {
-					Admin admin = (Admin) user;
+				if(user instanceof Admin admin) {
 					AdminController adminController = new AdminController(admin);
 					adminController.run();
 				}
@@ -63,6 +62,8 @@ public class DataOperation {
 
 
 }
+
+
 
 
 

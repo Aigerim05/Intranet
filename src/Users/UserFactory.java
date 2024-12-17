@@ -7,6 +7,7 @@ import Enums.Language;
 
 public class UserFactory {
 
+
 	public static User createUser(String userType) {
 		Scanner scanner = new Scanner(System.in);
 
