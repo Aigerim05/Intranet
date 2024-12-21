@@ -39,7 +39,13 @@ public class News implements Comparable<News>{
 			System.out.println(c.getComment()+"/n");
 		}
 	}
-
+	public void printCommets() {
+		for(Comment c: this.comments) {
+			System.out.println(c.getComment());
+		}
+	}
+	
+	
 	public String toString() {
 		return "News[id=" + id + ", topic=" + topic + ", publicationDate=" + publicationDate + "]";
 	}
