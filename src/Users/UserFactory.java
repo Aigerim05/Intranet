@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import Enums.Department;
 import Enums.Language;
+import Enums.ManagerType;
 import Enums.Position;
 
 public class UserFactory {
@@ -49,6 +50,17 @@ public class UserFactory {
 			System.out.println("Enter salary:");
 			double salary = Double.parseDouble(scanner.nextLine());
 			return new EResearcher(firstName, lastName, userId, password, language, salary);
+		} 
+		else if (userType.equalsIgnoreCase("Manager")) {
+			System.out.println("Enter position \n 1) OR \n 2) DEPARTMENT"); 
+			int managerTypeChoice = Integer.parseInt(scanner.nextLine());
+			ManagerType managerType = UserOperation.enterManagerType(managerTypeChoice);
+			if(managerType == ManagerType.DEPARTMENT) {
+				System.out.println("Enter department: 1) SITE \n 2) ISE \n 3) SEOGI \n 4) SG \n 5) BS \n 6) KMA \n 7) SAM \n 8) SCE \n 9) SMSGT");
+				int departmentChoice = Integer.parseInt(scanner.nextLine());
+				Department department = UserOperation.enterDepartment(departmentChoice);
+			}
+			return new Manager(password, firstName, lastName, userId, language, managerType);
 		} 
 		//		else if (userType.equalsIgnoreCase("Employee")) {
 		//			System.out.println("Enter salary: \n"); 

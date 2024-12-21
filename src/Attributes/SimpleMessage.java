@@ -1,6 +1,7 @@
 package Attributes;
 
-import Interfaces.Employee;
+
+import Users.Employee;
 
 public class SimpleMessage extends Message {
 

@@ -11,14 +11,10 @@ public class Student extends User{
 	private int yearOfStudy;
 	private HashMap<Course, Mark> journal;
 	private int maxCredit;
-	private int currCredit;
+	private int currCredit = 0;
 	private Department department;
 	private HashMap<Course, Mark> takenCourses;
-	{
-		HashMap<Course, Mark> journal = new HashMap<>();
-		HashMap<Course, Mark> takenCourses = new HashMap<>();
-		currCredit = 0;
-	}
+
 
 	public Student(){
 
@@ -29,6 +25,8 @@ public class Student extends User{
 		this.yearOfStudy = yearOfStudy;
 		this.maxCredit = maxCredit;
 		this.department = department;
+		this.journal = new HashMap<>();  
+		this.takenCourses = new HashMap<>();
 
 	}
 
@@ -129,10 +127,11 @@ public class Student extends User{
 		for (Course course : journal.keySet()) {
 			Mark mark = journal.get(course);
 			System.out.println(course.getCode() + " | " + course.getCourseName() + " : " 
-					+ mark.getFirstAttestation() + " | " 
-					+ mark.getSecondAttestation() + " | " 
-					+ mark.getFinalExam() + " | " 
-					+ mark.getTotal());
+					+ mark);
+			//					+ mark.getFirstAttestation() + " | " 
+			//					+ mark.getSecondAttestation() + " | " 
+			//					+ mark.getFinalExam() + " | "); 
+			//					+ mark.getTotal());
 		}
 	}
 

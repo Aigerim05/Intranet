@@ -1,10 +1,10 @@
 package Attributes;
 
-import Interfaces.Employee;
+import Users.Employee;
 
 public abstract class Message {
-	private Employee sender;
-	private Employee receiver;
+	private Users.Employee sender;
+	private Users.Employee receiver;
 	private String content;
 
 

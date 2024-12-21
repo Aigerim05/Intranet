@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Enums.Department;
 import Enums.Format;
 import Enums.Language;
+import Enums.ManagerType;
 import Enums.Position;
 
 public class UserOperation {
@@ -87,12 +88,14 @@ public class UserOperation {
 		}
 	}
 
-	public static void printResearchJournals() {
-
+	public static ManagerType enterManagerType(int choice) {
+		switch (choice) {
+		case 1:
+			return ManagerType.OR;
+		case 2:
+			return ManagerType.DEPARTMENT;
+		default:
+			return null;  
+		}
 	}
-
-	public static void printAllResearchers() {
-
-	}
-
 }

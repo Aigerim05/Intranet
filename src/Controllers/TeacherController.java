@@ -30,10 +30,7 @@ public class TeacherController {
 	}
 
 	public void viewCourses() {
-		if(teacher.getCourses().isEmpty()) {
-			System.out.println("No courses yet...");
-		}
-		UserOperation.printList(Data.getInstance().courses);
+		UserOperation.printList(teacher.getCourses());
 	}
 
 	public void viewStudents(Course c) {
@@ -71,43 +68,50 @@ public class TeacherController {
 				}
 				else if (choiceMenu == 2) {
 					chooseCourse: while (true) {
-						System.out.println("\n 1) Choose course \n 2) Return back");
+						System.out.println("1) Choose course \n2) Return back");
 						int choiceChooseCourse = in.nextInt();
 						if(choiceChooseCourse == 1) {
 							getCourse: while(true) {
-								viewCourses();
-								int choiceCourse = in.nextInt();
-								Course chosenCourse = teacher.getCourses().get(choiceCourse - 1);
+								if(teacher.getCourses().isEmpty()) {
+									System.out.println("No courses yet... Ask OR manager to assign courses.");
+									continue chooseCourse;
+								}
+								else {
 
-								getStudent: while(true) {
-									System.out.println(" 1) Option chooseStudent \n 2) Return back ");
+									viewCourses();
+									int choiceCourse = in.nextInt();
+									Course chosenCourse = teacher.getCourses().get(choiceCourse - 1);
 
-									int choiceGetStudent = in.nextInt();
-									if(choiceGetStudent == 1) {
+									getStudent: while(true) {
+										System.out.println(" 1) ChooseStudent \n 2) Return back ");
 
-										chooseStudent:while(true) {
-											viewStudents(chosenCourse);
-											System.out.println(" Student number: ");
-											int studentNumber = in.nextInt();
+										int choiceGetStudent = in.nextInt();
+										if(choiceGetStudent == 1) {
 
-											Student chosenStudent = chosenCourse.getParticipants().get(choiceGetStudent - 1);
-											putAssessment(chosenStudent, chosenCourse);
+											chooseStudent:while(true) {
+												viewStudents(chosenCourse);
+												System.out.println("Student number: ");
+												int studentNumber = in.nextInt();
 
-											System.out.println(" 1) Choose another student \n 2) Return back ");
-											int choiceAnotherStudent = in.nextInt();
-											if(choiceAnotherStudent == 1) {
-												continue chooseStudent;
-											}
-											else if(choiceAnotherStudent == 2) {
-												continue chooseCourse;
+												Student chosenStudent = chosenCourse.getParticipants().get(studentNumber - 1);
+												putAssessment(chosenStudent, chosenCourse);
+
+												System.out.println(" 1) Choose another student \n 2) Return back ");
+												int choiceAnotherStudent = in.nextInt();
+												if(choiceAnotherStudent == 1) {
+													continue chooseStudent;
+												}
+												else if(choiceAnotherStudent == 2) {
+													continue chooseCourse;
+												}
+
 											}
 
 										}
 
-									}
-
-									else if(choiceGetStudent == 2) {
-										continue chooseCourse;
+										else if(choiceGetStudent == 2) {
+											continue chooseCourse;
+										}
 									}
 
 								}
@@ -147,25 +151,6 @@ public class TeacherController {
 			save();
 		}
 	}
-
-
-
-
-
-
-	//	public void putMark() {
-	//
-	//
-	//
-	//		int selectedCourseIndex = in.nextInt() - 1; 
-	//		Course selectedCourse = teacher.getCourses().get(selectedCourseIndex);
-	//		showStudents(selectedCourse); 
-	//		int selectedStudentIndex = in.nextInt() - 1; 
-	//		Student student = selectedCourse.getParticipants().get(selectedStudentIndex);
-	//		putAssessment(student, selectedCourse);
-	//
-	//
-	//	}
 
 
 

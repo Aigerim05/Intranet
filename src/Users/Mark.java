@@ -1,81 +1,86 @@
 package Users;
 
-import java.util.*;
+import java.io.Serializable;
+import java.util.Objects;
 
-public class Mark {
+public class Mark implements Serializable{
 
-    private double firstAttestation = 0;
-    private double secondAttestation = 0;
-    private double finalExam = 0;
+	private double firstAttestation = 0;
+	private double secondAttestation = 0;
+	private double finalExam = 0;
 
-    public Mark() {
+	public Mark() {
 
-    }
+	}
 
-    public Mark(double firstAttestation) {
-        this();
-        this.firstAttestation = firstAttestation;
-    }
+	public Mark(double firstAttestation) {
+		this();
+		this.firstAttestation = firstAttestation;
+	}
 
-    public Mark(double firstAttestation, double secondAttestation) {
-        this(firstAttestation);
-        this.secondAttestation = secondAttestation;
-    }
+	public Mark(double firstAttestation, double secondAttestation) {
+		this(firstAttestation);
+		this.secondAttestation = secondAttestation;
+	}
 
-    public Mark(double firstAttestation, double secondAttestation, double finalExam) {
-        this(firstAttestation, secondAttestation);
-        this.finalExam = finalExam;
-    }
+	public Mark(double firstAttestation, double secondAttestation, double finalExam) {
+		this(firstAttestation, secondAttestation);
+		this.finalExam = finalExam;
+	}
 
-    public double getFirstAttestation() {
-        return firstAttestation;
-    }
+	public double getFirstAttestation() {
+		return firstAttestation;
+	}
 
-    public void setFirstAttestation(double firstAttestation) {
-        this.firstAttestation = firstAttestation;
-    }
+	public void setFirstAttestation(double firstAttestation) {
+		this.firstAttestation = firstAttestation;
+	}
 
-    public double getSecondAttestation() {
-        return secondAttestation;
-    }
+	public double getSecondAttestation() {
+		return secondAttestation;
+	}
 
-    public void setSecondAttestation(double secondAttestation) {
-        this.secondAttestation = secondAttestation;
-    }
+	public void setSecondAttestation(double secondAttestation) {
+		this.secondAttestation = secondAttestation;
+	}
 
-    public double getFinalExam() {
-        return finalExam;
-    }
+	public double getFinalExam() {
+		return finalExam;
+	}
 
-    public void setFinalExam(double finalExam) {
-        this.finalExam = finalExam;
-    }
+	public void setFinalExam(double finalExam) {
+		this.finalExam = finalExam;
+	}
 
-    public double getTotal() {
-        return firstAttestation + secondAttestation + finalExam;
-    }
+	public double getTotal() {
+		return firstAttestation + secondAttestation + finalExam;
+	}
 
-    @Override
-    public String toString() {
-        return "Mark{"
-                + "firstAttestation=" + firstAttestation
-                + ", secondAttestation=" + secondAttestation
-                + ", finalExam=" + finalExam
-                + '}';
-    }
+	@Override
+	public String toString() {
+		return "Mark{"
+				+ "firstAttestation=" + firstAttestation
+				+ ", secondAttestation=" + secondAttestation
+				+ ", finalExam=" + finalExam
+				+ '}';
+	}
 
-    @Override
-    public boolean equals(Object o) {
-      if(this == o) return true;
-      if(o == null || getClass() != o.getClass()) return false;
-      Mark mark = (Mark) o;
-      return firstAttestation == mark.firstAttestation
-              && secondAttestation == mark.secondAttestation
-              && finalExam == mark.finalExam;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) {
+			return true;
+		}
+		if(o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Mark mark = (Mark) o;
+		return firstAttestation == mark.firstAttestation
+				&& secondAttestation == mark.secondAttestation
+				&& finalExam == mark.finalExam;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstAttestation, secondAttestation, finalExam);
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(firstAttestation, secondAttestation, finalExam);
+	}
 }

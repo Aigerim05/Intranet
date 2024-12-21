@@ -27,6 +27,12 @@ public class Test {
 
 		// teacher: user@111, 111
 		// just a researcher: user@222, 222
+
+		//		Student student = new Student("Bob", "Jogn", "user@444", "444", Language.KZ, 3, 20, Department.SITE);
+		//		Data.getInstance().students.add(student);
+		//		Course course = new Course("CSCI201", 2, "OOP", "some description", CourseType.MAJOR, 75);
+		//		Data.getInstance().courses.add(course);
+		//		student.getJournal().put(course, new Mark(0, 0, 0));
 		DataOperation dataOperation = new DataOperation();
 		dataOperation.login();
 

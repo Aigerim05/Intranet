@@ -136,6 +136,7 @@ public class Teacher extends Employee implements Employeeable
 			Mark mark = student.getJournal().get(course);
 
 			if (attType == 1) {
+
 				mark.setFirstAttestation(score);  
 			} else if (attType == 2) {
 				mark.setSecondAttestation(score);  

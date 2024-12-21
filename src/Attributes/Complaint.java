@@ -1,7 +1,7 @@
 package Attributes;
 
 import Enums.Urgency;
-import Interfaces.Employee;
+import Users.Employee;
 import Users.Student;
 
 public class Complaint extends Message {
@@ -12,7 +12,7 @@ public class Complaint extends Message {
 		super(); 
 	}
 
-	public Complaint(Employee sender, Employee receiver, String content, Urgency urgencyLevel, Student student) {
+	public Complaint(Users.Employee sender, Employee receiver, String content, Urgency urgencyLevel, Student student) {
 		super(sender, receiver, content);
 		this.urgencyLevel = urgencyLevel;
 		this.student = student;

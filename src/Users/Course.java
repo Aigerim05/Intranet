@@ -1,11 +1,12 @@
 package Users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import Enums.CourseType;
 
-public class Course {
+public class Course implements Serializable{
 
 	private String code;
 	private int numberOfCredits;
@@ -60,15 +61,7 @@ public class Course {
 		this.maxCountOfStudents = maxCountOfStudents;
 	}
 
-	public Course(String code, int numberOfCredits, String courseName, String description, CourseType courseType, int maxCountOfStudents, ArrayList<Student> participants) {
-		this(code, numberOfCredits, courseName, description, courseType, maxCountOfStudents);
-		this.participants = participants;
-	}
 
-	public Course(String code, int numberOfCredits, String courseName, String description, CourseType courseType, int maxCountOfStudents, ArrayList<Student> participants, ArrayList<Course> prerequisites) {
-		this(code, numberOfCredits, courseName, description, courseType, maxCountOfStudents);
-		this.prerequisites = prerequisites;
-	}
 
 	public String getCode() {
 		return code;

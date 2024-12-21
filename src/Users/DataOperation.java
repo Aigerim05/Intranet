@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Controllers.AdminController;
+import Controllers.ManagerController;
 import Controllers.ResearcherController;
 import Controllers.StudentController;
 import Controllers.TeacherController;
@@ -70,13 +71,10 @@ public class DataOperation {
 					StudentController studentController = new StudentController(student);
 					studentController.run();
 				}
-
-				//				else if(user instanceof Employee) {
-				//                // логика в основном с месседж связана в EmployeeController
-				//				}
-
-
-
+				else if (user instanceof Manager manager) {
+					ManagerController managerController = new ManagerController(manager);
+					managerController.run();
+				}
 
 			}
 
