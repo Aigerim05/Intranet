@@ -17,16 +17,13 @@ public class Test {
 		//		teacher.getCourses().add(course);
 		//		Student student1 = new Student("Dayana", "Smith", "student1@kbtu.kz", "pass1", Language.KZ, 2, 20, Department.SITE);
 		//		Student student2 = new Student("Malika", "Jones", "student2@kbtu.kz", "pass2", Language.KZ, 2, 19, Department.SITE);
-		//		//		student1.rateTeacher(teacher);
+		//			student1.rateTeacher(teacher);
 		//		student2.rateTeacher(teacher);
 
 
 		//		Data.getInstance().researchProjects.add(new ResearchProject("Fuzzy", "project@111"));
 		//		Data.getInstance().researchJournals.add(new ResearchJournal("Fancy journal"));
 
-
-		// teacher: user@111, 111
-		// just a researcher: user@222, 222
 
 		//		Student student = new Student("Bob", "Jogn", "user@444", "444", Language.KZ, 3, 20, Department.SITE);
 		//		Data.getInstance().students.add(student);

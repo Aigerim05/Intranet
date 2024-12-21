@@ -40,7 +40,7 @@ public class TeacherController {
 
 	public void putAssessment(Student student, Course course) {
 		System.out.println("Enter 1 for first attestation \nEnter 2 for second attestation \nEnter 3 for final scores");
-		int attType = Integer.parseInt(DataOperation.readFromConsole());
+		int attType = in.nextInt();
 		System.out.println("Enter Score:");
 		double score = Double.parseDouble(DataOperation.readFromConsole());
 		teacher.putMark(student, course, attType, score);

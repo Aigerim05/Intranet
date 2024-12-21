@@ -15,6 +15,13 @@ public class Student extends User{
 	private Department department;
 	private HashMap<Course, Mark> takenCourses;
 
+	{
+
+		this.journal = new HashMap<>();
+		this.takenCourses = new HashMap<>();
+		currCredit = 0;
+	}
+
 
 	public Student(){
 
@@ -25,8 +32,6 @@ public class Student extends User{
 		this.yearOfStudy = yearOfStudy;
 		this.maxCredit = maxCredit;
 		this.department = department;
-		this.journal = new HashMap<>();  
-		this.takenCourses = new HashMap<>();
 
 	}
 
