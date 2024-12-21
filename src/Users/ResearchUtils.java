@@ -41,9 +41,8 @@ public class ResearchUtils {
 		ResearcherController researcherController= new ResearcherController(researcher);
 		researcherController.run();
 	}
-	//	public static ResearchPaper createResearchPaper() {
-	//
-	//	}
+
+
 }
 
 

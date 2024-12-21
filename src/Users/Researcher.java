@@ -70,6 +70,7 @@ public class Researcher implements Serializable{
 		if (researchJournal != null && paper != null) {
 			researchJournal.getListOfResearchPapers().add(paper);
 			getResearchPapers().add(paper);
+			Data.getInstance().researchPapers.add(paper);
 			System.out.println("The " + paper.getName() + " is succesfully published in " + paper.getResearchJournal().getName());
 		}
 		else {

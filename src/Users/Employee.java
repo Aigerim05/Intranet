@@ -6,6 +6,8 @@ import Attributes.Message;
 import Enums.Language;
 
 public class Employee extends User{
+
+
 	ArrayList<Message> messages;
 	double salary;
 
@@ -40,6 +42,14 @@ public class Employee extends User{
 	}
 
 
-
+	@Override
+	public String toString() {
+		return "EResearcher{" +
+				"userId=" + super.getUserId() +"," +
+				"password=" +super.getPassword() + "," +
+				"firstName=" +super.getFirstName() + ',' +
+				"lastName=" + super.getLastName() + ',' +
+				"salary=" + salary;
+	}
 
 }

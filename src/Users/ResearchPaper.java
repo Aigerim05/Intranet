@@ -107,7 +107,6 @@ public class ResearchPaper implements Serializable{
 
 		StringBuilder citation = new StringBuilder();
 
-		citation.append("Authors: ");
 		for (int i = 0; i < authors.size(); i++) {
 			citation.append(authors.get(i).toString());
 			if (i < authors.size() - 1) {
@@ -115,18 +114,18 @@ public class ResearchPaper implements Serializable{
 			}
 		}
 
-		citation.append("\nTitle: ").append(name);
+		citation.append(" , ").append(name);
 
-		citation.append("\nJournal: ").append(researchJournal.getName());
+		citation.append(" , ").append(researchJournal.getName());
 
-		citation.append("\nPages: ").append(pages);
+		citation.append(" , ").append(pages);
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		citation.append("\nPublication Date: ").append(dateFormat.format(publicationDate));
+		citation.append(" , ").append(dateFormat.format(publicationDate));
 
-		citation.append("\nFree Access: ").append(isFreeAccess ? "Yes" : "No");
+		citation.append(" , ").append(isFreeAccess ? "Yes" : "No");
 
-		citation.append("\nNumber of Citations: ").append(numberOfCitations);
+		citation.append(" , ").append(numberOfCitations);
 
 		return citation.toString();
 	}

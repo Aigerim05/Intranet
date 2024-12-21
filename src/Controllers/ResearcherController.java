@@ -100,6 +100,10 @@ public class ResearcherController {
 		int journalNumber =  in.nextInt();
 		ResearchJournal theJournal = Data.getInstance().researchJournals.get(journalNumber - 1);
 
+		System.out.print("Time to enter the authors! How many researchers are authors? Enter single number \n");
+		int authorCount =  in.nextInt();
+		ArrayList authors = chooseAuthors(authorCount);
+
 		System.out.print("Enter the number of pages in the research paper: \n");
 		int pages = in.nextInt();
 
@@ -115,9 +119,10 @@ public class ResearcherController {
 
 		System.out.print("Enter the number of citations: ");
 		int numberOfCitations = in.nextInt();
+		ResearchPaper newPaper = new ResearchPaper(name, theJournal, pages, new Date(), freeAccess, numberOfCitations);
+		assignAuthors(authors, newPaper);
 
-
-		return new ResearchPaper(name, theJournal, pages, new Date(), freeAccess, numberOfCitations);
+		return newPaper;
 	}  
 
 
@@ -127,7 +132,8 @@ public class ResearcherController {
 		try {
 			System.out.println("Welcome, Researcher " + researcher.getUser().getFirstName() + "!");
 			menu : while(true){
-				System.out.println("What do you want to do?\n 1) Calculate h-index \n 2) View my research papers \n 3) Publish research paper \n 4) Join the research project \n 5) Drop from research project \n 6) View my research projects \n 7) Get citation in format \n 8) Exit");
+				System.out.println("What do you want to do?\n 1) Calculate h-index \n 2) View my research papers \n 3) Publish research paper \n 4) Join the research project \n 5) Drop from research project \n 6) View my research projects \n 7) Get citation in format \n 8) View"
+						+ " research papers of all researchers \n 9) Exit");
 				int choiceMenu  = in.nextInt();
 				if(choiceMenu == 1){
 					calculateHIndex: while(true){
@@ -220,6 +226,18 @@ public class ResearcherController {
 
 					}
 				}
+
+				else if (choiceMenu == 8) {
+					printAllPapers: while(true) {
+						printPapersOfAllResearchers();
+						System.out.println("1) Return back \n");
+						int choice = in.nextInt();
+						if(choice  == 1) {
+							continue menu;
+						}
+
+					}
+				}
 				else if (choiceMenu == 8) {exit(); break menu;}
 				break;
 			}
@@ -270,7 +288,7 @@ public class ResearcherController {
 			System.out.println("Choose research paper you want the citation of: \n");
 			int paperChoice = in.nextInt();
 			ResearchPaper paper = researcher.getResearchPapers().get(paperChoice - 1);
-			System.out.println("Choose format: 1) BIBTEX \n 2) PLAINTEXT");
+			System.out.println("Choose format: \n 1) BIBTEX \n 2) PLAINTEXT");
 			int choice = in.nextInt();
 			Format format = UserOperation.enterFormat(choice);
 			String citation = paper.getCitation(format);
@@ -279,6 +297,45 @@ public class ResearcherController {
 		}
 		else {
 			System.out.println("You have no research papers yet.");
+		}
+	}
+
+	public void printAllResearchers() {
+		if(!Data.getInstance().researchers.isEmpty()) {
+			UserOperation.printList(Data.getInstance().researchers);
+		}
+		else {
+			System.out.println("No researchers found in the system.");
+		}
+	}
+
+	public void printPapersOfAllResearchers() {
+		ArrayList<ResearchPaper> papers = Data.getInstance().researchPapers;
+		if(papers.isEmpty()) {
+			System.out.println("There is no research papers in the system for now.");
+		}
+		else{
+			papers.sort((p1, p2) -> Integer.compare(p2.getNumberOfCitations(), p1.getNumberOfCitations()));
+			UserOperation.printList(papers);
+		}
+	}
+
+	public ArrayList<Researcher> chooseAuthors(int count) {
+		System.out.println("Researchers in our system: \n");
+		printAllResearchers();
+		System.out.println("Enter the number (delimeted by enter) of researchers who you include as authors: \n");
+		ArrayList<Researcher> authors = new ArrayList<>();
+		for(int i = 0; i < count; i++) {
+			int num = in.nextInt();
+			authors.add(Data.getInstance().researchers.get(num - 1));
+		}
+		return authors;
+	}
+
+	public void assignAuthors(ArrayList<Researcher> authors, ResearchPaper paper) {
+		ArrayList<Researcher> paperAuthors = paper.getAuthors();
+		for(int i = 0; i < authors.size(); i++) {
+			paperAuthors.add(authors.get(i));
 		}
 	}
 }
