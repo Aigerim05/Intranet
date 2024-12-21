@@ -1,5 +1,6 @@
 package Enums;
 
 public enum Format {
-	BIBTEXT, PLAINTEXT;
+	PLAIN_TEXT,
+	BIBTEX;
 }

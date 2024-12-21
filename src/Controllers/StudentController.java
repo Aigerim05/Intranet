@@ -41,6 +41,10 @@ public class StudentController {
 				System.out.println("4) Register for a Course");
 				System.out.println("5) Rate a Teacher");
 				System.out.println("6) View Transcript");
+				// option to switch to researcher mode
+				// in case #7 check if the student has researcher field
+				// if student.getResearcher() is not null -> ResearcherController.run()
+				// student.getResearcher() is null -> exception or system.out.println ("you are not a researcher") + return to menu
 				System.out.println("7) Logout");
 				System.out.print("Enter your choice: ");
 				String input = DataOperation.readFromConsole();

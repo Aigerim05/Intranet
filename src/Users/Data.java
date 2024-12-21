@@ -24,8 +24,9 @@ public class Data implements Serializable {
 	public ArrayList<Student> students = new ArrayList<>();
 	public ArrayList<Manager> managers = new ArrayList<>();
 	public ArrayList<Admin> admins = new ArrayList<>();
-	//public ArrayList<Researcher> researchers = new ArrayList<>();
-	//public ArrayList<ResearchJournal> researchJournals = new ArrayList<>();
+	public ArrayList<Researcher> researchers = new ArrayList<>();
+	public ArrayList<ResearchJournal> researchJournals = new ArrayList<>();
+	public ArrayList<ResearchProject> researchProjects = new ArrayList<>();
 
 	static{
 		if(new File("data.ser").exists()){

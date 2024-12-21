@@ -11,7 +11,7 @@ public class Master extends GraduateStudent{
 	}
 
 	public Master(String firstName, String lastName, String userId, String password, Language language, int yearOfStudy,
-			int maxCredit, Department department, ResearchDecorator supervisor, 
+			int maxCredit, Department department, Researcher supervisor, 
 			ResearchProject researchProject) {
 		super(firstName, lastName, userId, password, language, yearOfStudy, maxCredit, department, supervisor, 
 				researchProject);

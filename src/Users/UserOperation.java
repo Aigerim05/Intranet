@@ -3,6 +3,7 @@ package Users;
 import java.util.ArrayList;
 
 import Enums.Department;
+import Enums.Format;
 import Enums.Language;
 import Enums.Position;
 
@@ -67,10 +68,31 @@ public class UserOperation {
 		}
 	}
 
+
+	public static Format enterFormat(int choice) {
+		switch (choice) {
+		case 1:
+			return Format.BIBTEX;
+		case 2:
+			return Format.PLAIN_TEXT;
+
+		default:
+			return null;  
+		}
+	}
+
 	public static void printList(ArrayList list) {
 		for(int i=0; i<list.size(); i++) {
 			System.out.println(i+1+ ")" +list.get(i));
 		}
+	}
+
+	public static void printResearchJournals() {
+
+	}
+
+	public static void printAllResearchers() {
+
 	}
 
 }

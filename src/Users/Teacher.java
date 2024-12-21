@@ -5,9 +5,10 @@ import java.util.Objects;
 import Enums.Department;
 import Enums.Language;
 import Enums.Position;
-public class Teacher extends User 
+import Interfaces.Employeeable;
+public class Teacher extends Employee implements Employeeable
 {
-	private ResearchDecorator researcher;
+	private Researcher researcher;
 
 	private Position position;
 	private Department department;
@@ -25,12 +26,13 @@ public class Teacher extends User
 
 
 	public Teacher(String firstName, String lastName,
-			String userId, String password,  Language language, Position position, Department department) {
-		super(firstName,lastName,userId,password,language);
+			String userId, String password,  Language language, Position position, Department department, double salary) {
+		super(firstName,lastName,userId,password,language, salary);
 		this.position = position;
 		this.department = department;
 		if (position == Position.PROFESSOR) {
 			this.researcher = ResearchUtils.createResearcher(this);
+
 		}
 		else {
 			this.researcher = ResearchUtils.askForResearcherRole(this);
@@ -39,12 +41,12 @@ public class Teacher extends User
 
 
 
-	public ResearchDecorator getResearcher() {
+	public Researcher getResearcher() {
 		return researcher;
 	}
 
 
-	public void setResearcher(ResearchDecorator researcher) {
+	public void setResearcher(Researcher researcher) {
 		this.researcher = researcher;
 	}
 

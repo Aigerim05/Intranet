@@ -1,6 +1,8 @@
 package Users;
 
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -8,15 +10,17 @@ import java.util.Objects;
 import Enums.Format;
 
 
-public class ResearchPaper {
+public class ResearchPaper implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private String name;
-	private ArrayList<ResearchDecorator> authors;
+	private ArrayList<Researcher> authors;
 	private ResearchJournal researchJournal;
 	private int pages;
 	private Date publicationDate;
 	private boolean isFreeAccess;
 	private int numberOfCitations;
-	protected Format format;
+
 
 	{
 		authors = new ArrayList<>();
@@ -42,11 +46,11 @@ public class ResearchPaper {
 		this.name = name;
 	}
 
-	public ArrayList<ResearchDecorator> getAuthors() {
+	public ArrayList<Researcher> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(ArrayList<ResearchDecorator> authors) {
+	public void setAuthors(ArrayList<Researcher> authors) {
 		this.authors = authors;
 	}
 
@@ -88,6 +92,75 @@ public class ResearchPaper {
 		this.numberOfCitations = numberOfCitations;
 	}
 
+
+	public String getCitation(Format f) {
+		if (f == Format.PLAIN_TEXT) {
+			return getPlainTextCitation();
+		} else if (f == Format.BIBTEX) {
+			return getBibtexCitation();
+		} else {
+			return ""; 
+		}
+	}
+
+	private String getPlainTextCitation() {
+
+		StringBuilder citation = new StringBuilder();
+
+		citation.append("Authors: ");
+		for (int i = 0; i < authors.size(); i++) {
+			citation.append(authors.get(i).toString());
+			if (i < authors.size() - 1) {
+				citation.append(", ");
+			}
+		}
+
+		citation.append("\nTitle: ").append(name);
+
+		citation.append("\nJournal: ").append(researchJournal.getName());
+
+		citation.append("\nPages: ").append(pages);
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		citation.append("\nPublication Date: ").append(dateFormat.format(publicationDate));
+
+		citation.append("\nFree Access: ").append(isFreeAccess ? "Yes" : "No");
+
+		citation.append("\nNumber of Citations: ").append(numberOfCitations);
+
+		return citation.toString();
+	}
+
+	private String getBibtexCitation() {
+		StringBuilder citation = new StringBuilder();
+
+		citation.append("@article{").append(name.replaceAll(" ", "_")).append(",\n");
+
+		citation.append("  author = {");
+		for (int i = 0; i < authors.size(); i++) {
+			citation.append(authors.get(i).toString());
+			if (i < authors.size() - 1) {
+				citation.append(", ");
+			}
+		}
+		citation.append("},\n");
+
+		citation.append("  title = {").append(name).append("},\n");
+
+
+		citation.append("  journal = {").append(researchJournal.getName()).append("},\n");
+
+		SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+		citation.append("  year = {").append(yearFormat.format(publicationDate)).append("},\n");
+
+		citation.append("  pages = {").append(pages).append("},\n");
+
+		citation.append("  numberOfCitations = {").append(numberOfCitations).append("}\n");
+
+		citation.append("}");
+
+		return citation.toString();
+	}
 	@Override
 	public String toString() {
 		return "name=" + name + ", authors=" + authors + ", researchJournal=" + researchJournal + " ,pages=" + pages
@@ -112,20 +185,9 @@ public class ResearchPaper {
 			return false;
 		}
 		ResearchPaper other = (ResearchPaper) obj;
-		return Objects.equals(authors, other.authors) && isFreeAccess == other.isFreeAccess
-				&& Objects.equals(name, other.name) && numberOfCitations == other.numberOfCitations
-				&& Objects.equals(pages, other.pages)
-				&& Objects.equals(publicationDate, other.publicationDate)
-				&& Objects.equals(researchJournal, other.researchJournal);
+		return Objects.equals(name, other.name);
 	}
 
-	public void getCitation(Format format) {
-		if (format == Format.PLAINTEXT) {
-			System.out.println(authors);
-		} else if (format == Format.BIBTEXT) {
-			System.out.println("Research Paper {\n authors={" + authors + " }");
-		}
-	}
 
 
 }

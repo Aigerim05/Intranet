@@ -4,7 +4,7 @@ import Enums.Department;
 import Enums.Language;
 
 public class Bachelor extends Student{
-	private ResearchDecorator researcher;
+	private Researcher researcher;
 
 	// fields related to organizations (not now)
 
@@ -22,11 +22,11 @@ public class Bachelor extends Student{
 
 	}
 
-	public ResearchDecorator getResearcher() {
+	public Researcher getResearcher() {
 		return researcher;
 	}
 
-	public void setResearcher(ResearchDecorator researcher) {
+	public void setResearcher(Researcher researcher) {
 		this.researcher = researcher;
 	}
 

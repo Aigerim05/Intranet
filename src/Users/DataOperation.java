@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import Controllers.AdminController;
+import Controllers.ResearcherController;
+import Controllers.StudentController;
 import Controllers.TeacherController;
 
 public class DataOperation {
@@ -57,6 +59,25 @@ public class DataOperation {
 					TeacherController teacherController = new TeacherController(teacher);
 					teacherController.run();
 				}
+				else if(user instanceof EResearcher) {
+					EResearcher eResearcher = (EResearcher) user;
+					ResearcherController eResearcherController = new ResearcherController(eResearcher.getResearcher());
+					eResearcherController.run();
+				}
+
+				else if(user instanceof Student) {
+					Student student = (Student) user;
+					StudentController studentController = new StudentController(student);
+					studentController.run();
+				}
+
+				//				else if(user instanceof Employee) {
+				//                // логика в основном с месседж связана в EmployeeController
+				//				}
+
+
+
+
 			}
 
 			else {

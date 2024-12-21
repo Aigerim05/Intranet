@@ -1,12 +1,17 @@
 package Users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ResearchProject {
+public class ResearchProject implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String topic;
 	private String projectId;
-	private ArrayList<ResearchDecorator> participants;
+	private ArrayList<Researcher> participants;
 	private ArrayList<ResearchPaper> publishedPapers;
 
 
@@ -39,11 +44,11 @@ public class ResearchProject {
 		this.projectId = projectId;
 	}
 
-	public ArrayList<ResearchDecorator> getParticipants() {
+	public ArrayList<Researcher> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(ArrayList<ResearchDecorator> participants) {
+	public void setParticipants(ArrayList<Researcher> participants) {
 		this.participants = participants;
 	}
 
@@ -84,14 +89,14 @@ public class ResearchProject {
 	}
 
 
-	public boolean addParticipants(ResearchDecorator participant) {
+	public boolean addParticipants(Researcher participant) {
 		if (participant != null && !participants.contains(participant)) {
 			return participants.add(participant);
 		}
 		return false;
 	}
 
-	public boolean removeParticipants(ResearchDecorator participant) {
+	public boolean removeParticipants(Researcher participant) {
 		if (participants.contains(participant)) {
 			return participants.remove(participant);
 		}
@@ -116,7 +121,7 @@ public class ResearchProject {
 		if (participants == null || participants.isEmpty()) {
 			System.out.println("No participants found.");
 		} else {
-			for (ResearchDecorator participant : participants) {
+			for (Researcher participant : participants) {
 				System.out.println(participant.toString());
 			}
 		}

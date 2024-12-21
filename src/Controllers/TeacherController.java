@@ -5,6 +5,8 @@ import java.util.Scanner;
 import Users.Course;
 import Users.Data;
 import Users.DataOperation;
+import Users.ResearchUtils;
+import Users.Researcher;
 import Users.Student;
 import Users.Teacher;
 import Users.UserOperation;
@@ -50,14 +52,11 @@ public class TeacherController {
 	}
 
 
-
-
-
 	public void run() throws IOException {
 		try {
-			System.out.println("Welcome!");
+			System.out.println("Welcome, " + teacher.getFirstName() + "!");
 			menu : while(true){
-				System.out.println("What do you want to do?\n 1) View courses \n 2) Put Mark \n 3) View my rating \n 4) Exit");
+				System.out.println("What do you want to do?\n 1) View courses \n 2) Put Mark \n 3) View my rating \n 4) Switch to researcher mode \n 5) Exit");
 				int choiceMenu  = in.nextInt();
 				if(choiceMenu == 1){
 					viewCourse: while(true){
@@ -65,11 +64,10 @@ public class TeacherController {
 						System.out.println("1) Return back \n");
 						int choiceViewCourses = in.nextInt();
 						if(choiceViewCourses  == 1) {
-							break viewCourse;
+							continue menu;
 						}
 
 					}
-					continue menu;
 				}
 				else if (choiceMenu == 2) {
 					chooseCourse: while (true) {
@@ -122,18 +120,25 @@ public class TeacherController {
 
 				}
 				else if (choiceMenu == 3) {
-
-					displayTeacherRating();
-					System.out.println("\n 1) Return back \n 2) Exit");
-					int subChoice = in.nextInt();
-					if (subChoice == 1) {
-						continue menu;
-					} else if (subChoice == 2) {
-						exit();
-						break;
+					displayRating: while(true) {
+						displayTeacherRating();
+						System.out.println("\n 1) Return back");
+						int subChoice = in.nextInt();
+						if (subChoice == 1) {
+							continue menu;
+						} 
 					}
 				}
-				else if (choiceMenu == 4) {exit(); break menu;}
+
+				else if (choiceMenu == 4) {
+					launchResearcherMode: while(true) {
+						Researcher researcher = teacher.getResearcher();
+						ResearchUtils.launchResearcherMode(researcher);
+						continue menu;
+					}
+
+				}
+				else if (choiceMenu == 5) {exit(); break menu;}
 				break;
 			}
 		} catch (Exception e) {

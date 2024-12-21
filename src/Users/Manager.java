@@ -7,9 +7,9 @@ import Attributes.Request;
 import Enums.CourseType;
 import Enums.Language;
 import Enums.ManagerType;
-import Interfaces.Employee;
+import Interfaces.Employeeable;
 
-public class Manager extends User implements Employee
+public class Manager extends Employee implements Employeeable
 {
 
 	private ManagerType managerType;
@@ -24,8 +24,8 @@ public class Manager extends User implements Employee
 	}
 
 	public Manager(String password, String email, String firstName, String lastName,
-			String userId, Language language,ManagerType managerType) {
-		super(firstName,lastName,userId,password,language);
+			String userId, Language language,ManagerType managerType, double salary) {
+		super(firstName,lastName,userId,password,language, salary);
 		this.managerType = managerType;
 	}
 

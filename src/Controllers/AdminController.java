@@ -47,12 +47,13 @@ public class AdminController {
 	public void createUser() throws NumberFormatException {
 		UserFactory uf = new UserFactory();
 		System.out.println("Who do you want to add?\n");
-		System.out.println("1) Student \n 2) Teacher \n 3) Manager");
+		System.out.println("1) Student \n 2) Teacher \n 3) Manager \n 4) EResearcher");
 		int option = Integer.parseInt(DataOperation.readFromConsole());
 		switch(option) {
 		case 1: {admin.addUser(uf.createUser("Student"));break;}
 		case 2: {admin.addUser(uf.createUser("Teacher"));break;}
 		case 3: {admin.addUser(uf.createUser("Manager"));break;}
+		case 4: {admin.addUser(uf.createUser("EResearcher"));break;}
 		}
 	} 
 

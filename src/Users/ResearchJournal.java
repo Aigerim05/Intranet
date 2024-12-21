@@ -1,9 +1,16 @@
 package Users;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ResearchJournal {
+public class ResearchJournal implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//	private static final long serialVersionUID = 1L;
 	private String name;
 	private ArrayList<ResearchPaper> listOfSubscribers;
 	private ArrayList<ResearchPaper> listOfResearchPapers;
@@ -60,20 +67,15 @@ public class ResearchJournal {
 			return false;
 		}
 		ResearchJournal other = (ResearchJournal) obj;
-		return Objects.equals(listOfResearchPapers, other.listOfResearchPapers)
-				&& Objects.equals(listOfSubscribers, other.listOfSubscribers) && Objects.equals(name, other.name);
+		return Objects.equals(other.getName(), name);
+
 	}
 
 	@Override
 	public String toString() {
-		return "name=" + name + ", listOfSubscribers=" + listOfSubscribers + ", listOfResearchPapers="
-				+ listOfResearchPapers;
+		return "name=" + name;
 	}
 
-	public void addPaper(ResearchPaper paper) {
-
-
-	}
 
 
 

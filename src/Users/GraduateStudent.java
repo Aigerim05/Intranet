@@ -4,8 +4,8 @@ import Enums.Department;
 import Enums.Language;
 
 public class GraduateStudent extends Student{
-	private ResearchDecorator supervisor;
-	private ResearchDecorator researcher;
+	private Researcher supervisor;
+	private Researcher researcher;
 
 	private ResearchProject researchProject;
 
@@ -14,28 +14,29 @@ public class GraduateStudent extends Student{
 	}
 
 	public GraduateStudent(String firstName, String lastName, String userId, String password, Language language,
-			int yearOfStudy, int maxCredit, Department department, ResearchDecorator supervisor, 
+			int yearOfStudy, int maxCredit, Department department, Researcher supervisor, 
 			ResearchProject researchProject) {
 		super(firstName, lastName, userId, password, language, yearOfStudy, maxCredit, department);
 		this.supervisor = supervisor;
 		this.researcher = ResearchUtils.createResearcher(this);
+
 		this.researchProject = researchProject;
 		researchProject.getParticipants().add(researcher);
 	}
 
-	public ResearchDecorator getSupervisor() {
+	public Researcher getSupervisor() {
 		return supervisor;
 	}
 
-	public void setSupervisor(ResearchDecorator supervisor) {
+	public void setSupervisor(Researcher supervisor) {
 		this.supervisor = supervisor;
 	}
 
-	public ResearchDecorator getResearcher() {
+	public Researcher getResearcher() {
 		return researcher;
 	}
 
-	public void setResearcher(ResearchDecorator researcher) {
+	public void setResearcher(Researcher researcher) {
 		this.researcher = researcher;
 	}
 
