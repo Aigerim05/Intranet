@@ -2,7 +2,7 @@ package Users;
 
 import java.util.ArrayList;
 
-import Users.Messages.*;
+import Messages.*;
 
 public class Dean extends Employee{
 

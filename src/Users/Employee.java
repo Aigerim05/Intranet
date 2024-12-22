@@ -1,31 +1,76 @@
 package Users;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
-import Users.Messages.Message;
-import Users.Messages.MessageFactory;
+import Attributes.Message;
+import Enums.Language;
 
-public class Employee {
-	private String name;
-	private Scanner inp = new Scanner(System.in);
-	private ArrayList<Message> messages = new ArrayList<>();
+public class Employee extends User{
 
-	public Employee(String name, String department) {
-		this.name = name;
+
+	ArrayList<Message> messages;
+	double salary;
+
+
+	// 1. in Data class create ArrayList<Employee>
+	// 2. 
+
+	//
+	//	1) Amina   0
+	//2) Aigerim    1
+	//3) 
+	//
+	//Choose number of employee
+	//int choice = in.nextInt();
+	//1
+
+
+	// -> "To whom you want to send message?"
+	// -> UserOperation.printList(Data.getInstance().employees)
+	//	Employee chosenEmployee = Data.getInstance().Employees.get(choice - 1);
+	// 
+	// message.send(teacher, chosenEmployee, content){
+	//      MessageFactory.create
+	{
+		messages = new ArrayList<>();
 	}
 
-	public String getName() {
-		return name;
+	public Employee() {
+		super();
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public Employee(String firstName, String lastName, String userId, String password, Language language, double salary) {
+		super(firstName, lastName, userId, password, language);
+		this.salary = salary;
 	}
 
-	public void addMessage(Message m) {
-		this.messages.add(m);
+	public ArrayList<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(ArrayList<Message> messages) {
+		this.messages = messages;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"userId=" + super.getUserId() +"," +
+				"password=" +super.getPassword() + "," +
+				"firstName=" +super.getFirstName() + ',' +
+				"lastName=" + super.getLastName() + ',' +
+				"salary=" + salary;
 	}
 	public void sendMessage() {
 		System.out.println("Which Type of Message you want to send?\n1) WorkMessage\n2) Request\n3) Complaint");
