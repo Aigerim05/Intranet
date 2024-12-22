@@ -7,10 +7,13 @@ import Users.Course;
 import Users.Data;
 import Users.DataOperation;
 import Users.Manager;
+import Users.ResearchUtils;
+import Users.Researcher;
 import Users.Student;
 import Users.Teacher;
 
 public class StudentController {
+
 	private Student student;
 
 	public StudentController(Student student) {
@@ -32,140 +35,111 @@ public class StudentController {
 
 	public void run() {
 		try {
-			System.out.println("Welcome, " + student.getFirstName() + "!");
-			menu: while (true) {
-				System.out.println("\nWhat would you like to do?");
+			while (true) {
+				System.out.println("What would you like to do?");
 				System.out.println("1) View Courses");
 				System.out.println("2) View Marks");
 				System.out.println("3) View Instructors");
 				System.out.println("4) Register for a Course");
 				System.out.println("5) Rate a Teacher");
 				System.out.println("6) View Transcript");
-				// option to switch to researcher mode
-				// in case #7 check if the student has researcher field
-				// if student.getResearcher() is not null -> ResearcherController.run()
-				// student.getResearcher() is null -> exception or system.out.println ("you are not a researcher") + return to menu
-				System.out.println("7) Logout");
+				System.out.println("7) Switch to Researcher Mode");
+				System.out.println("8) Logout");
 				System.out.print("Enter your choice: ");
-				String input = DataOperation.readFromConsole();
-				if (input.isEmpty()) {
-					System.out.println("No input provided. Please enter a choice.");
-					continue;
-				}
-				int choice;
-				try {
-					choice = Integer.parseInt(input);
-				} catch (NumberFormatException e) {
-					System.out.println("Invalid input. Please enter a number between 1 and 7.");
-					continue;
-				}
+				String choice = DataOperation.readFromConsole();
 
 				switch (choice) {
-				case 1:
-					student.viewCourses();
+				case "1":
+					do {
+						student.viewCourses();
+					} while (repeatOperation());
 					break;
-				case 2:
-					student.viewMarksForCourses();
+				case "2":
+					do {
+						student.viewMarksForCourses();
+					} while (repeatOperation());
 					break;
-				case 3:
-					student.viewInstructors();
+				case "3":
+					do {
+						student.viewInstructors();
+					} while (repeatOperation());
 					break;
-				case 4:
-					registerCourseLoop:
-						while (true) {
-							registerForCourse();
-							System.out.println("\n1) Register for another course");
-							System.out.println("2) Return to main menu");
-							String regInput = DataOperation.readFromConsole();
-							if (regInput.equals("1")) {
-								continue registerCourseLoop;
-							} else if (regInput.equals("2")) {
-								break registerCourseLoop;
-							} else {
-								System.out.println("Invalid choice. Returning to main menu.");
-								break registerCourseLoop;
-							}
-						}
+				case "4":
+					do {
+						registerForCourse();
+					} while (repeatOperation());
 					break;
-				case 5:
-					rateTeacherLoop:
-						while (true) {
-							rateTeacher();
-							System.out.println("\n1) Rate another teacher");
-							System.out.println("2) Return to main menu");
-							String rateInput = DataOperation.readFromConsole();
-							if (rateInput.equals("1")) {
-								continue rateTeacherLoop;
-							} else if (rateInput.equals("2")) {
-								break rateTeacherLoop;
-							} else {
-								System.out.println("Invalid choice. Returning to main menu.");
-								break rateTeacherLoop;
-							}
-						}
+				case "5":
+					do {
+						rateTeacher();
+					} while (repeatOperation());
 					break;
-				case 6:
-					student.viewTranscript();
+				case "6":
+					do {
+						student.viewTranscript();
+					} while (repeatOperation());
 					break;
-				case 7:
+				case "7":
+					if (student.getResearcher() != null) {
+						Researcher researcher = student.getResearcher();
+						ResearchUtils.launchResearcherMode(researcher);
+					} else {
+						System.out.println("You are not a researcher.");
+					}
+					break;
+				case "8":
 					exit();
-					break menu;
+					return;
 				default:
-					System.out.println("Invalid choice. Please enter a number between 1 and 7.");
-					break;
+					System.out.println("Invalid choice. Try again.");
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("An error occurred. Saving data...");
 			e.printStackTrace();
-			save();
 		}
+	}
+
+	private boolean repeatOperation() {
+		System.out.println("\n1) Repeat this operation");
+		System.out.println("2) Return to main menu");
+		String input = DataOperation.readFromConsole();
+		return input.equals("1");
 	}
 
 	private void registerForCourse() {
 		System.out.println("Available Courses:");
 		ArrayList<Course> availableCourses = Data.getInstance().courses;
 		if (availableCourses.isEmpty()) {
-			System.out.println("No courses available at the moment.");
+			System.out.println("No courses available.");
 			return;
 		}
 
 		int index = 1;
 		for (Course course : availableCourses) {
-			System.out.println(index + ") " + course.getCourseName() + " (" + course.getCode() + ")");
-			index++;
+			System.out.println(index++ + ") " + course.getCourseName());
 		}
 
 		System.out.print("Enter the number of the course you want to register for: ");
 		String input = DataOperation.readFromConsole();
 		if (input.isEmpty()) {
-			System.out.println("No input provided. Returning.");
-			return;
-		}
-		int courseChoice;
-		try {
-			courseChoice = Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			System.out.println("Invalid input. Please enter a valid course number.");
+			System.out.println("No input provided. Please enter a choice.");
 			return;
 		}
 
-		if (courseChoice < 1 || courseChoice > availableCourses.size()) {
-			System.out.println("Invalid course selection.");
+		int courseNumber = Integer.parseInt(input);
+		if (courseNumber < 1 || courseNumber > availableCourses.size()) {
+			System.out.println("Invalid course number.");
 			return;
 		}
 
-		Course selectedCourse = availableCourses.get(courseChoice - 1);
-		if (Data.getInstance().managers.isEmpty()) {
-			System.out.println("No managers available to approve registration.");
-			return;
-		}
+		Course course = availableCourses.get(courseNumber - 1);
+		Manager ORManager = Data.getInstance().managers.get(0);
+		ORManager.approveStudent(student, course);
 
-		Manager manager = Data.getInstance().managers.get(0);
-		student.registerToCourse(selectedCourse, manager);
+		System.out.println("Successfully registered for the course: " + course.getCourseName());
 	}
 
-	private void rateTeacher() { 
+	private void rateTeacher() {
 		if (student.getJournal() == null || student.getJournal().isEmpty()) {
 			System.out.println("You are not enrolled in any courses to rate teachers.");
 			return;

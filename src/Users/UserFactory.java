@@ -60,20 +60,13 @@ public class UserFactory {
 				int departmentChoice = Integer.parseInt(scanner.nextLine());
 				Department department = UserOperation.enterDepartment(departmentChoice);
 			}
-			return new Manager(password, firstName, lastName, userId, language, managerType);
+			System.out.println("Enter salary:");
+			double salary = Double.parseDouble(scanner.nextLine());
+			return new Manager(password, firstName, lastName, userId, language, managerType, salary);
 		} 
-		//		else if (userType.equalsIgnoreCase("Employee")) {
-		//			System.out.println("Enter salary: \n"); 
-		//			double salary = Double.parseDouble(scanner.nextLine());
-		//			return new Employee(firstName, lastName, userId, password, language, salary);
-		//		} 
 
 
 
-		// else if (userType.equalsIgnoreCase("Manager")) {
-
-		//			создание менеджера
-		//			return new Manager(firstName, secondName, .......);
 		else {
 			System.out.println("Invalid user type");
 			return null;

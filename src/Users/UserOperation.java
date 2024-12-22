@@ -88,6 +88,8 @@ public class UserOperation {
 		}
 	}
 
+
+
 	public static ManagerType enterManagerType(int choice) {
 		switch (choice) {
 		case 1:

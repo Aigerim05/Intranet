@@ -15,6 +15,16 @@ public class Student extends User{
 	private Department department;
 	private HashMap<Course, Mark> takenCourses;
 
+	protected Researcher researcher;
+
+	public Researcher getResearcher() {
+		return researcher;
+	}
+
+	public void setResearcher(Researcher researcher) {
+		this.researcher = researcher;
+	}
+
 	{
 
 		this.journal = new HashMap<>();
@@ -122,10 +132,6 @@ public class Student extends User{
 		System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
 	}
 
-
-	public void registerToCourse(Course course, Manager manager) {
-		manager.approveStudent(this, course);
-	}
 
 	public void viewMarksForCourses() {
 		System.out.println(this.getFirstName() + " " + this.getLastName() + "has marks for the following courses:");

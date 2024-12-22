@@ -324,6 +324,7 @@ public class ResearcherController {
 		System.out.println("Researchers in our system: \n");
 		printAllResearchers();
 		System.out.println("Enter the number (delimeted by enter) of researchers who you include as authors: \n");
+		
 		ArrayList<Researcher> authors = new ArrayList<>();
 		for(int i = 0; i < count; i++) {
 			int num = in.nextInt();

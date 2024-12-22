@@ -4,7 +4,6 @@ import Enums.Department;
 import Enums.Language;
 
 public class Bachelor extends Student{
-	private Researcher researcher;
 
 	// fields related to organizations (not now)
 

@@ -71,7 +71,7 @@ public class Manager extends User{
 
 
 
-	public void addCourse(CourseType courseType, String code, int numberOfCredits, String courseName, String description, int maxCountOfStudents) {
+	public void addCourse(CourseType courseType, String code, int numberOfCredits, String courseName, String description, int maxCountOfStudents, ArrayList<Course> prerequisites) {
 		Course newCourse = new Course();
 		newCourse.setCode(code);
 		newCourse.setNumberOfCredits(numberOfCredits);
@@ -79,17 +79,11 @@ public class Manager extends User{
 		newCourse.setDescription(description);
 		newCourse.setCourseType(courseType);
 		newCourse.setMaxCountOfStudents(maxCountOfStudents);
-
+		newCourse.setPrerequisites(prerequisites);
 		Data.getInstance().courses.add(newCourse);
 	} 
-	public void assignCourseToTeacher(Teacher teacher, Course course) {
-		if (teacher != null && course != null) {
-			teacher.addCourse(course);
-			System.out.println(course.getCode() + " " + course.getCourseName() + " has been assigned to " + teacher.getFirstName() + " " + teacher.getLastName()+ ".");
-		} else {
-			System.out.println("Failed to assign course. Teacher or course is null.");
-		}
-	}
+
+
 	public void removeCourseByCode(String code) {
 		for (Course course : Data.getInstance().courses) {
 			if (course.getCode().equals(code)) {

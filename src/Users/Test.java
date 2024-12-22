@@ -1,12 +1,14 @@
 package Users;
 import java.io.IOException;
 
+import Enums.Language;
+
 public class Test {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-		//		Admin admin = new Admin("Tech", "Guy", "somUserId", "111", Language.KZ);
-		//		Data.getInstance().users.add(admin);
+		Admin admin = new Admin("Tech", "Guy", "somUserId", "111", Language.KZ);
+		Data.getInstance().users.add(admin);
 		//user@111 pass:111
 		//		
 		//		Course course = new Course("CsCI332", 3, "OOP", "", CourseType.MAJOR, 30);
@@ -20,6 +22,9 @@ public class Test {
 		//			student1.rateTeacher(teacher);
 		//		student2.rateTeacher(teacher);
 
+		//		Bachelor bachelor = new Bachelor("Bob", "john", "user@333", "333", Language.KZ, 2, 20, Department.SITE);
+		//		System.out.println("Now lets create Masters");
+		//		Master master = new Master();
 
 		//		Data.getInstance().researchProjects.add(new ResearchProject("Fuzzy", "project@111"));
 		//		Data.getInstance().researchJournals.add(new ResearchJournal("Fancy journal"));

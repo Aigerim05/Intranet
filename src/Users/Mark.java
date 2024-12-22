@@ -5,26 +5,18 @@ import java.util.Objects;
 
 public class Mark implements Serializable{
 
-	private double firstAttestation = 0;
-	private double secondAttestation = 0;
-	private double finalExam = 0;
+	private double firstAttestation;
+	private double secondAttestation;
+	private double finalExam;
 
 	public Mark() {
 
 	}
 
-	public Mark(double firstAttestation) {
-		this();
-		this.firstAttestation = firstAttestation;
-	}
-
-	public Mark(double firstAttestation, double secondAttestation) {
-		this(firstAttestation);
-		this.secondAttestation = secondAttestation;
-	}
-
 	public Mark(double firstAttestation, double secondAttestation, double finalExam) {
-		this(firstAttestation, secondAttestation);
+
+		this.firstAttestation = firstAttestation;
+		this.secondAttestation = secondAttestation;
 		this.finalExam = finalExam;
 	}
 

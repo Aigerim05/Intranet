@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Enums.CourseType;
@@ -96,9 +97,30 @@ public class ManagerController {
 		System.out.println("Enter course max Students:");
 		int maxCountOfStudents = Integer.parseInt(in.nextLine());
 
-		manager.addCourse(courseType, code, numberOfCredits, courseName, description, maxCountOfStudents);
+		System.out.println("Courses in our system: \n"); 
+		viewCourses(); 
+		System.out.println("Enter the number of prerequisites (0 if none): ");
+		int prereqsCount = in.nextInt();
+		ArrayList<Course> prerequisites = new ArrayList<>();
+		if (prereqsCount > 0) {
+			prerequisites = chooseAuthors(prereqsCount);
+		}
+		manager.addCourse(courseType, code, numberOfCredits, courseName, description, maxCountOfStudents, prerequisites);
 		System.out.println("Course added successfully.");
 	}
+
+	public ArrayList<Course> chooseAuthors(int count) { 
+
+		System.out.println("Enter the number of courses that you want to add as a prerequisite"); 
+
+		ArrayList<Course> prereqs = new ArrayList<>(); 
+		for(int i = 0; i < count; i++) { 
+			int num = in.nextInt(); 
+			prereqs.add(Data.getInstance().courses.get(num - 1)); 
+		} 
+		return prereqs; 
+	}
+
 
 	public void removeCourse() {
 		System.out.println("Enter the course code: ");
@@ -113,8 +135,9 @@ public class ManagerController {
 		viewTeachers();
 		System.out.println("Enter teacher number: ");
 		int teacherChoice = in.nextInt();
+
 		System.out.println("Select course: ");
-		viewCourses(); 
+		viewCourses();
 		System.out.println("Enter course number: ");
 		int courseChoice = in.nextInt();
 
@@ -124,7 +147,11 @@ public class ManagerController {
 			Teacher selectedTeacher = Data.getInstance().teachers.get(teacherChoice - 1);
 			Course selectedCourse = Data.getInstance().courses.get(courseChoice - 1);
 
-			manager.assignCourseToTeacher(selectedTeacher, selectedCourse);
+			selectedTeacher.addCourse(selectedCourse);
+			if (!selectedCourse.getInstructors().contains(selectedTeacher)) {
+				selectedCourse.getInstructors().add(selectedTeacher);
+			}
+			System.out.println(selectedCourse.getCode() + " " + selectedCourse.getCourseName() + " has been assigned to " + selectedTeacher.getFirstName() + " " + selectedTeacher.getLastName());
 		} else {
 			System.out.println("Invalid selection. Please try again.");
 		}
@@ -179,16 +206,16 @@ public class ManagerController {
 
 	public void run() throws IOException {
 		try {
-			System.out.println("Welcome " + manager.getFirstName() + "!");
+			System.out.println("Welcome!");
 			menu: while (true) {
-				System.out.println("What do you want to do?\n 1) Add course \n 2) Remove course \n 3) Update course \n 4) Assign course to Teacher \n 5) Assign Supervisor to Student  \n 6) View information about teachers \n 7) View information about students \n 8) Report Generation \n 9) View Courses \n 10) Exit");
+				System.out.println("What do you want to do?\n 1) Add course \n 2) Remove course \n 3)Update course \n 4)Assign course to Teacher \n 5) Assign Supervisor to Student  \n 6)View information about teachers \n 7) View information about students \n 8) Report Generation \n 9) View Courses \n 10) Exit");
 				int choiceMenu = in.nextInt();
 				in.nextLine();
 
 				if (choiceMenu == 1) {
 					chooseAddCourse: while (true) {
 						addCourse();
-						System.out.println("1) Return back \n2) Continue adding ");
+						System.out.println("1) Return back \n 2) Continue adding ");
 						int choiceAdd = in.nextInt();
 						in.nextLine();
 
@@ -216,7 +243,7 @@ public class ManagerController {
 						Course selectedCourse = Data.getInstance().courses.get(courseIndex);
 						while (true) {
 							System.out.println("What do you want to change?");
-							System.out.println("1) Course code\n2) Course name\n 3) Course description\n 4) Course type\n5) Return back");
+							System.out.println("1) Course code\n2) Course name\n3) Course description\n4) Course type\n5) Return back");
 							int choice = in.nextInt();
 							in.nextLine();
 

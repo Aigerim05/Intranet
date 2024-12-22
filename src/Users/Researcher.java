@@ -83,11 +83,6 @@ public class Researcher implements Serializable{
 		return paper;
 	}
 
-
-
-
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(user.getUserId());
