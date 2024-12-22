@@ -32,7 +32,7 @@ public class Data implements Serializable {
 	public ArrayList<Employee> employees = new ArrayList<>();
 
 	static{
-		if(new File("data.ser").exists()){
+		if(new File("data.txt").exists()){
 			try {
 				INSTANCE = read();
 			} catch (IOException | ClassNotFoundException e) {
@@ -61,7 +61,7 @@ public class Data implements Serializable {
 
 
 	public static Data read() throws IOException, ClassNotFoundException {
-		try (FileInputStream fis = new FileInputStream("data.ser");
+		try (FileInputStream fis = new FileInputStream("data.txt");
 				ObjectInputStream oin = new ObjectInputStream(fis)) {
 			return (Data) oin.readObject();
 		}
@@ -69,7 +69,7 @@ public class Data implements Serializable {
 
 	public static synchronized void write() throws IOException {
 		if (INSTANCE != null) {
-			try (FileOutputStream fos = new FileOutputStream("data.ser");
+			try (FileOutputStream fos = new FileOutputStream("data.txt");
 					ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 				oos.writeObject(INSTANCE);
 			}

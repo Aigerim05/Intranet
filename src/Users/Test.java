@@ -5,7 +5,7 @@ public class Test {
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-
+		//
 		//		Admin admin = new Admin("Tech", "Guy", "user@5", "5", Language.KZ);
 		//		Data.getInstance().users.add(admin);
 		//user@111 pass:111

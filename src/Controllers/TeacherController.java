@@ -50,25 +50,25 @@ public class TeacherController {
 
 	public void putMark(Student student, Course course) {
 		System.out.println("Enter 1 for first attestation \nEnter 2 for second attestation \nEnter 3 for final scores");
-		int attType = Integer.parseInt(DataOperation.readFromConsole());
+		int attType = in.nextInt();
 		System.out.println("Enter Score:");
+
 		double score = Double.parseDouble(DataOperation.readFromConsole());
 
-		Mark m = null;
-		for(HashMap.Entry<Course,Mark> entry : student.getJournal().entrySet()) {
-			if (entry.getKey().equals(course)) {
-				m = entry.getValue();
-			}
-		}
+		HashMap<Course, Mark> targetJournal = student.getJournal();
+		Mark targetMark = targetJournal.get(course);
+
+
 		if (attType == 1) {
-			m.setFirstAttestation(score);
+			targetMark.setFirstAttestation(score);
 		}
-		if (attType == 2) {
-			m.setSecondAttestation(score);
-		}
-		if (attType == 2) {
-			m.setFinalExam(score);
-		}
+		//		if (attType == 2) {
+		//			student.getJournal().get(course).setSecondAttestation(score);
+		//		}
+		//		if (attType == 2) {
+		//			student.getJournal().get(course).setFinalExam(score);
+		//		}
+		System.out.println("Succefully put the mark!");
 	}
 	//		if (student.getJournal().containsKey(course)) {
 	//			Mark mark = student.getJournal().get(course);
@@ -122,13 +122,9 @@ public class TeacherController {
 
 
 											int choiceCourse = in.nextInt();
-											final Course chosenCourse = teacher.getCourses().get(choiceCourse - 1);
-											Course realCourse = Data.getInstance().courses
-													.stream()
-													.filter(c -> c.equals(chosenCourse))
-													.findFirst()
-													.orElse(null);
-											if (realCourse == null) {
+											Course chosenCourse = teacher.getCourses().get(choiceCourse - 1);
+
+											if ( chosenCourse == null) {
 												System.out.println("Course not found in Data.");
 												break;
 											}
@@ -147,7 +143,7 @@ public class TeacherController {
 																int studentNumber = in.nextInt();
 
 																Student chosenStudent = chosenCourse.getParticipants().get(studentNumber - 1);
-																putMark(chosenStudent, realCourse);
+																putMark(chosenStudent, chosenCourse);
 
 																System.out.println(" 1) Choose another student \n 2) Return back ");
 																int choiceAnotherStudent = in.nextInt();

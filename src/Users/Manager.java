@@ -122,9 +122,9 @@ public class Manager extends Employee{
 				return;
 			}
 			Mark mark = new Mark(0, 0, 0);  
-			System.out.println("Created Mark: " + mark);  // Debugging output
+
 			student.getJournal().put(course, mark);
-			System.out.println("Student's journal after adding mark: " + student.getJournal());
+
 
 			course.addParticipant(student);
 			System.out.println(student.getFirstName() + " was added to the course " + course.getCourseName() + ' ' + course.getCode());
