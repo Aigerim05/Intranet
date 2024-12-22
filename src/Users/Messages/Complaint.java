@@ -12,9 +12,8 @@ public class Complaint extends Message {
         super();
     }
 
-    public Complaint(Employee sender, Employee receiver, String content, String messageId, String department) {
-        super(sender, receiver, content);
-        this.department = department;
+    public Complaint(Employee sender, String content) {
+        super(sender, null, content);
     }
     
     public String getDepartment() {
