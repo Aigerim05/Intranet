@@ -11,12 +11,14 @@ public class News implements Comparable<News>{
 	private NewsTopic topic;
 	private final Queue<Comment> comments = new LinkedList<>();
 	private Date publicationDate;
+	private boolean isPinned = false;
 	
 	public News(String content, NewsTopic topic) {
 		this.content = content;
 		this.topic = topic;
 		this.publicationDate = new Date();
 		this.id = idGenerator();
+		if(topic.equals(NewsTopic.RESEARCH)) this.isPinned = true;s
 	}
 	
 	private String idGenerator() {
@@ -50,6 +52,18 @@ public class News implements Comparable<News>{
 		return "News[id=" + id + ", topic=" + topic + ", publicationDate=" + publicationDate + "]";
 	}
 
+	public void pinNews() {
+		this.isPinned = true;
+	}
+	
+	public void unpinNews() {
+		this.isPinned = false;
+	}
+	
+	public boolean isPinned() {
+		return this.isPinned;
+	}
+	
 	@Override
 	public int compareTo(News o) {
 		return this.publicationDate.compareTo(o.publicationDate);
