@@ -2,6 +2,7 @@ package Users;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Objects;
 
@@ -65,6 +66,30 @@ public class Researcher implements Serializable{
 		return false;
 	}
 
+	public int calculateHIndex() {
+		ArrayList<Integer> citations = new ArrayList<>();
+		if(!this.getResearchPapers().isEmpty()) {
+			for(ResearchPaper paper: this.getResearchPapers()) {
+				citations.add(paper.getNumberOfCitations());
+			}
+			Collections.sort(citations, Collections.reverseOrder());
+
+			int hIndex = 0;
+			for (int i = 0; i < citations.size(); i++) {
+				if (citations.get(i) >= i + 1) {
+					hIndex = i + 1; 
+				} else {
+					break; 
+				}
+			}
+
+			return hIndex;
+		}
+		else {
+			return -1;
+		}
+
+	}
 
 	public void publishPaper(ResearchJournal researchJournal, ResearchPaper paper) {
 		if (researchJournal != null && paper != null) {

@@ -131,22 +131,7 @@ public class Teacher extends Employee implements Employeeable
 		return courses.add(course);
 	}
 
-	public void putMark(Student student, Course course, int attType, double score) {
-		if (student.getJournal().containsKey(course)) {
-			Mark mark = student.getJournal().get(course);
 
-			if (attType == 1) {
-
-				mark.setFirstAttestation(score);  
-			} else if (attType == 2) {
-				mark.setSecondAttestation(score);  
-			} else if (attType == 3) {
-				mark.setFinalExam(score);  
-			}
-
-			student.getJournal().put(course, mark);
-		}
-	}
 
 	public double getAverageRating() {
 		if (ratings.isEmpty()) {

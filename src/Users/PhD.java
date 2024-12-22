@@ -9,11 +9,22 @@ public class PhD extends GraduateStudent{
 		super();
 	}
 
-	public PhD(String firstName, String lastName, String userId, String password, Language language,
-			int yearOfStudy, int maxCredit, Department department, Researcher supervisor, 
+	public PhD(String firstName,
+			String lastName,
+			String userId,
+			String password,
+			Language language,
+			int yearOfStudy,
+			int maxCredit,
+			Department department,
+			Researcher supervisor,
 			ResearchProject researchProject) {
-		super(firstName, lastName, userId, password, language, yearOfStudy, maxCredit, department, supervisor,
-				researchProject);
+
+		// Chain to GraduateStudent
+		super(firstName, lastName, userId, password, language, yearOfStudy, maxCredit, department, supervisor, researchProject);
+
+		// Use the inherited setResearcher(...) method
+		setResearcher(ResearchUtils.createResearcher(this));
 	}
 
 

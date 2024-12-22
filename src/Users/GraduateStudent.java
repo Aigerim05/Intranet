@@ -4,16 +4,12 @@ import Enums.Department;
 import Enums.Language;
 
 public class GraduateStudent extends Student{
+
+	private static final long serialVersionUID = 1L;
+
+
 	private Researcher supervisor;
 
-
-	// Student (credits, year of study, ...)
-	// Graduate Student (supervisor, researchProject)
-	// Master, PhD (reseacher)
-
-
-	// Student
-	// Bachelor (researcher)
 	private ResearchProject researchProject;
 
 	public GraduateStudent() {
@@ -25,10 +21,11 @@ public class GraduateStudent extends Student{
 			ResearchProject researchProject) {
 		super(firstName, lastName, userId, password, language, yearOfStudy, maxCredit, department);
 		this.supervisor = supervisor;
-		this.researcher = ResearchUtils.createResearcher(this);
 
 		this.researchProject = researchProject;
-		researchProject.getParticipants().add(researcher);
+		if (researchProject != null && getResearcher() != null) {
+			researchProject.getParticipants().add(getResearcher());
+		}
 	}
 
 	public Researcher getSupervisor() {
@@ -39,15 +36,13 @@ public class GraduateStudent extends Student{
 		this.supervisor = supervisor;
 	}
 
-	@Override
-	public Researcher getResearcher() {
-		return researcher;
-	}
+	// public Researcher getResearcher() {
+	// 	return researcher;
+	// }
 
-	@Override
-	public void setResearcher(Researcher researcher) {
-		this.researcher = researcher;
-	}
+	// public void setResearcher(Researcher researcher) {
+	// 	this.researcher = researcher;
+	// }
 
 	public ResearchProject getResearchProject() {
 		return researchProject;

@@ -103,13 +103,13 @@ public class ManagerController {
 		int prereqsCount = in.nextInt();
 		ArrayList<Course> prerequisites = new ArrayList<>();
 		if (prereqsCount > 0) {
-			prerequisites = chooseAuthors(prereqsCount);
+			prerequisites = choosePrereqs(prereqsCount);
 		}
 		manager.addCourse(courseType, code, numberOfCredits, courseName, description, maxCountOfStudents, prerequisites);
 		System.out.println("Course added successfully.");
 	}
 
-	public ArrayList<Course> chooseAuthors(int count) { 
+	public ArrayList<Course> choosePrereqs(int count) { 
 
 		System.out.println("Enter the number of courses that you want to add as a prerequisite"); 
 

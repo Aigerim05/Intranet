@@ -6,6 +6,12 @@ import Interfaces.Employeeable;
 public class EResearcher extends Employee implements Employeeable{
 
 
+	@Override
+	public String toString() {
+		return "EResearcher [researcher=" + researcher + "]";
+	}
+
+
 	private Researcher researcher;
 
 	public EResearcher() {

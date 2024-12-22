@@ -7,15 +7,34 @@ import java.util.Scanner;
 import Enums.Department;
 import Enums.Language;
 
-public class Student extends User{
+public class Student extends User {
+
 	private int yearOfStudy;
 	private HashMap<Course, Mark> journal;
 	private int maxCredit;
 	private int currCredit = 0;
 	private Department department;
 	private HashMap<Course, Mark> takenCourses;
+	private Researcher researcher;
 
-	protected Researcher researcher;
+	{
+
+		this.journal = new HashMap<>();
+		this.takenCourses = new HashMap<>();
+		currCredit = 0;
+	}
+
+	public Student() {
+
+	}
+
+	public Student(String firstName, String lastName, String userId, String password, Language language, int yearOfStudy, int maxCredit, Department department) {
+		super(firstName, lastName, userId, password, language);
+		this.yearOfStudy = yearOfStudy;
+		this.maxCredit = maxCredit;
+		this.department = department;
+
+	}
 
 	public Researcher getResearcher() {
 		return researcher;
@@ -25,60 +44,50 @@ public class Student extends User{
 		this.researcher = researcher;
 	}
 
-	{
-
-		this.journal = new HashMap<>();
-		this.takenCourses = new HashMap<>();
-		currCredit = 0;
-	}
-
-
-	public Student(){
-
-	}
-
-	public Student(String firstName, String lastName, String userId, String password, Language language, int yearOfStudy, int maxCredit, Department department) {
-		super(firstName,lastName,userId,password,language);
-		this.yearOfStudy = yearOfStudy;
-		this.maxCredit = maxCredit;
-		this.department = department;
-
-	}
-
-
 	public int getYearOfStudy() {
 		return yearOfStudy;
 	}
+
 	public void setYearOfStudy(int yearOfStudy) {
 		this.yearOfStudy = yearOfStudy;
 	}
+
 	public HashMap<Course, Mark> getJournal() {
 		return journal;
 	}
+
 	public HashMap<Course, Mark> getTakenCourses() {
 		return takenCourses;
 	}
+
 	public void addToJournal(Course course, Mark mark) {
 		this.journal.put(course, mark);
 	}
+
 	public int getMaxCredit() {
 		return maxCredit;
 	}
+
 	public void setMaxCredit(int maxCredit) {
 		this.maxCredit = maxCredit;
 	}
+
 	public Department getDepartment() {
 		return department;
 	}
+
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+
 	public int getCurrCredit() {
 		return currCredit;
 	}
+
 	public void setCurrCredit(int currCredit) {
 		this.currCredit = currCredit;
 	}
+
 	@Override
 	public String toString() {
 		return super.toString() + "Student [yearOfStudy=" + yearOfStudy + ", maxCredit=" + maxCredit
@@ -100,15 +109,15 @@ public class Student extends User{
 		System.out.println(this.getFirstName() + " " + this.getLastName() + " has marks for the following courses:");
 		for (Course course : journal.keySet()) {
 			Mark mark = journal.get(course);
-			char grade = (mark.getTotal() >= 90) ? 'A' :
-				(mark.getTotal() >= 80) ? 'B' :
-					(mark.getTotal() >= 70) ? 'C' :
-						(mark.getTotal() >= 60) ? 'D' : 'F';
+			char grade = (mark.getTotal() >= 90) ? 'A'
+					: (mark.getTotal() >= 80) ? 'B'
+							: (mark.getTotal() >= 70) ? 'C'
+									: (mark.getTotal() >= 60) ? 'D' : 'F';
 			System.out.println(course.getCode() + " | " + course.getCourseName() + " : " + grade);
 		}
 	}
 
-	public void rateTeacher(Teacher teacher) { 
+	public void rateTeacher(Teacher teacher) {
 		//		Scanner scanner = new Scanner(System.in);
 		//
 		//		try (scanner) {
@@ -132,12 +141,18 @@ public class Student extends User{
 		System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
 	}
 
+	public void registerToCourse(Course course, Manager manager) {
+		manager.approveStudent(this, course);
+		if (!journal.containsKey(course)) {
+			journal.put(course, new Mark()); // <-- Initialize Mark here
+		}
+	}
 
 	public void viewMarksForCourses() {
 		System.out.println(this.getFirstName() + " " + this.getLastName() + "has marks for the following courses:");
 		for (Course course : journal.keySet()) {
 			Mark mark = journal.get(course);
-			System.out.println(course.getCode() + " | " + course.getCourseName() + " : " 
+			System.out.println(course.getCode() + " | " + course.getCourseName() + " : "
 					+ mark);
 			//					+ mark.getFirstAttestation() + " | " 
 			//					+ mark.getSecondAttestation() + " | " 

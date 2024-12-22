@@ -8,7 +8,7 @@ import Enums.CourseType;
 import Enums.Language;
 import Enums.ManagerType;
 
-public class Manager extends User{
+public class Manager extends Employee{
 
 	private ManagerType managerType;
 	private ArrayList<Request> requests;
@@ -22,8 +22,8 @@ public class Manager extends User{
 	}
 
 	public Manager(String password, String firstName, String lastName,
-			String userId, Language language,ManagerType managerType) {
-		super(firstName,lastName,userId,password,language);
+			String userId, Language language,ManagerType managerType, double salary) {
+		super(firstName,lastName,userId,password,language, salary);
 		this.managerType = managerType;
 	}
 
@@ -121,10 +121,14 @@ public class Manager extends User{
 				System.out.println("Student does not meet prerequisites.");
 				return;
 			}
-
-			Mark mark = new Mark(0,0,0); 
+			Mark mark = new Mark(0, 0, 0);  
+			System.out.println("Created Mark: " + mark);  // Debugging output
 			student.getJournal().put(course, mark);
-			course.addParticipant(student);  
+			System.out.println("Student's journal after adding mark: " + student.getJournal());
+
+			course.addParticipant(student);
+			System.out.println(student.getFirstName() + " was added to the course " + course.getCourseName() + ' ' + course.getCode());
+
 		}
 		else {
 			System.out.println("The course " + course.getCode() + " " + course.getCourseName() + " has no available places.");

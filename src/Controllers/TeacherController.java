@@ -1,14 +1,13 @@
 package Controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 
-import Attributes.Message;
-import Attributes.MessageFactory;
 import Users.Course;
 import Users.Data;
 import Users.DataOperation;
-import Users.Employee;
+import Users.Mark;
 import Users.ResearchUtils;
 import Users.Researcher;
 import Users.Student;
@@ -48,15 +47,50 @@ public class TeacherController {
 		UserOperation.printList(c.getParticipants());
 	}
 
-	public void putAssessment(Student student, Course course) {
+
+	public void putMark(Student student, Course course) {
 		System.out.println("Enter 1 for first attestation \nEnter 2 for second attestation \nEnter 3 for final scores");
 		int attType = Integer.parseInt(DataOperation.readFromConsole());
 		System.out.println("Enter Score:");
 		double score = Double.parseDouble(DataOperation.readFromConsole());
-		teacher.putMark(student, course, attType, score);
-		System.out.println("Succesfully put mark");
 
+		Mark m = null;
+		for(HashMap.Entry<Course,Mark> entry : student.getJournal().entrySet()) {
+			if (entry.getKey().equals(course)) {
+				m = entry.getValue();
+			}
+		}
+		if (attType == 1) {
+			m.setFirstAttestation(score);
+		}
+		if (attType == 2) {
+			m.setSecondAttestation(score);
+		}
+		if (attType == 2) {
+			m.setFinalExam(score);
+		}
 	}
+	//		if (student.getJournal().containsKey(course)) {
+	//			Mark mark = student.getJournal().get(course);
+	//
+	//			if (mark != null) {
+	//				System.out.println("Retrieved mark: " + mark);
+	//				if (attType == 1) {
+	//					mark.setFirstAttestation(score);  
+	//				} else if (attType == 2) {
+	//					mark.setSecondAttestation(score);  
+	//				} else if (attType == 3) {
+	//					mark.setFinalExam(score);  
+	//				}
+	//				System.out.println("Updated mark: " + mark);
+	//			} else {
+	//				System.out.println("Mark object is null for this course.");
+	//			}
+	//		} else {
+	//			System.out.println("Course not found in the student's journal.");
+	//		}
+	//	}
+
 
 	public void run() throws IOException {
 		try {
@@ -85,6 +119,8 @@ public class TeacherController {
 									getCourse:
 										while (true) {
 											viewCourses();
+
+
 											int choiceCourse = in.nextInt();
 											final Course chosenCourse = teacher.getCourses().get(choiceCourse - 1);
 											Course realCourse = Data.getInstance().courses
@@ -111,7 +147,7 @@ public class TeacherController {
 																int studentNumber = in.nextInt();
 
 																Student chosenStudent = chosenCourse.getParticipants().get(studentNumber - 1);
-																putAssessment(chosenStudent, realCourse);
+																putMark(chosenStudent, realCourse);
 
 																System.out.println(" 1) Choose another student \n 2) Return back ");
 																int choiceAnotherStudent = in.nextInt();
@@ -164,40 +200,40 @@ public class TeacherController {
 			save();
 		}
 	}
-
-	public void sendMessage() {
-		System.out.println("Which Type of Message you want to send?\n1) WorkMessage\n2) Request\n3) Complaint");
-
-		Message newMessage = null;
-		switch(in.nextInt()) {
-		case 1:
-			newMessage = MessageFactory.getMessage("WorkMessage");
-		case 2:
-			newMessage = MessageFactory.getMessage("Request");
-		case 3:
-			if(this instanceof Teacher) {
-				newMessage = MessageFactory.getMessage("Complaint");
-			} else {
-				System.out.println("Only teacher can send complaints");
-			}
-		default:
-			System.out.println("Invalid message type");
-			// sendMessage() abort? можно сделать цикл пока не введет правильный тип или 0 - чтобы выйти
-		}
-
-		System.out.println("Select Employee you want to send message to");
-		UserOperation.printList(Data.getInstance().employees); 
-		Employee chosenEmployee = Data.getInstance().employees.get(inp.nextInt() - 1); // тоже нужно будет сделать проверку на инвалид чойс
-
-		System.out.println("Write a content of the message");
-		String content = inp.nextLine();
-		newMessage.setSender(this);
-		newMessage.setReceiver(chosenEmployee);
-		newMessage.setContent(content);
-		// здесь можно выписать весь мессадж перед отправлением и спросить вы готовы отправить? и можно также его отредактирова
-		newMessage.send();
-		System.out.println("Message has been sent!");
-	}
+	//
+	//	public void sendMessage() {
+	//		System.out.println("Which Type of Message you want to send?\n1) WorkMessage\n2) Request\n3) Complaint");
+	//
+	//		Message newMessage = null;
+	//		switch(in.nextInt()) {
+	//		case 1:
+	//			newMessage = MessageFactory.getMessage("WorkMessage");
+	//		case 2:
+	//			newMessage = MessageFactory.getMessage("Request");
+	//		case 3:
+	//			if(this instanceof Teacher) {
+	//				newMessage = MessageFactory.getMessage("Complaint");
+	//			} else {
+	//				System.out.println("Only teacher can send complaints");
+	//			}
+	//		default:
+	//			System.out.println("Invalid message type");
+	//			// sendMessage() abort? можно сделать цикл пока не введет правильный тип или 0 - чтобы выйти
+	//		}
+	//
+	//		System.out.println("Select Employee you want to send message to");
+	//		UserOperation.printList(Data.getInstance().employees); 
+	//		Employee chosenEmployee = Data.getInstance().employees.get(inp.nextInt() - 1); // тоже нужно будет сделать проверку на инвалид чойс
+	//
+	//		System.out.println("Write a content of the message");
+	//		String content = inp.nextLine();
+	//		newMessage.setSender(this);
+	//		newMessage.setReceiver(chosenEmployee);
+	//		newMessage.setContent(content);
+	//		// здесь можно выписать весь мессадж перед отправлением и спросить вы готовы отправить? и можно также его отредактирова
+	//		newMessage.send();
+	//		System.out.println("Message has been sent!");
+	//	}
 	public void displayTeacherRating() {
 		if (teacher.getRatings().isEmpty()) {
 			System.out.println("No ratings yet for " + teacher.getFirstName() + " " + teacher.getLastName());

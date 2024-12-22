@@ -65,7 +65,7 @@ public class Employee extends User{
 
 	@Override
 	public String toString() {
-		return "EResearcher{" +
+		return "Employee{" +
 				"userId=" + super.getUserId() +"," +
 				"password=" +super.getPassword() + "," +
 				"firstName=" +super.getFirstName() + ',' +

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -52,30 +51,7 @@ public class ResearcherController {
 		}
 	}
 
-	public void calculateHIndex() {
-		ArrayList<Integer> citations = new ArrayList<>();
-		if(!researcher.getResearchPapers().isEmpty()) {
-			for(ResearchPaper paper: researcher.getResearchPapers()) {
-				citations.add(paper.getNumberOfCitations());
-			}
-			Collections.sort(citations, Collections.reverseOrder());
 
-			int hIndex = 0;
-			for (int i = 0; i < citations.size(); i++) {
-				if (citations.get(i) >= i + 1) {
-					hIndex = i + 1; 
-				} else {
-					break; 
-				}
-			}
-
-			System.out.println("Your h-index is " + hIndex);
-		}
-		else {
-			System.out.println("You have no research papers yet.");
-		}
-
-	}
 
 
 	public void printResearchPapers() {
@@ -137,7 +113,13 @@ public class ResearcherController {
 				int choiceMenu  = in.nextInt();
 				if(choiceMenu == 1){
 					calculateHIndex: while(true){
-						calculateHIndex();
+						if(researcher.calculateHIndex() != -1) {
+							System.out.println("Your h-index is " + researcher.calculateHIndex());
+						}
+						else {
+							System.out.println("You do not have published papers");
+						}
+
 						System.out.println("1) Return back \n");
 						int choiceHIndex = in.nextInt();
 						if(choiceHIndex  == 1) {
@@ -324,7 +306,7 @@ public class ResearcherController {
 		System.out.println("Researchers in our system: \n");
 		printAllResearchers();
 		System.out.println("Enter the number (delimeted by enter) of researchers who you include as authors: \n");
-		
+
 		ArrayList<Researcher> authors = new ArrayList<>();
 		for(int i = 0; i < count; i++) {
 			int num = in.nextInt();

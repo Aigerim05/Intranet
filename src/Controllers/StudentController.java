@@ -133,9 +133,8 @@ public class StudentController {
 		}
 
 		Course course = availableCourses.get(courseNumber - 1);
-		Manager ORManager = Data.getInstance().managers.get(0);
+		Manager ORManager = Data.getInstance().getManager();
 		ORManager.approveStudent(student, course);
-
 		System.out.println("Successfully registered for the course: " + course.getCourseName());
 	}
 

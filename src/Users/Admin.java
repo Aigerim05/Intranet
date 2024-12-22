@@ -95,10 +95,12 @@ public class Admin extends User {
 		} else if (user instanceof Manager) {
 			Data.getInstance().managers.add((Manager) user);
 		}
-		// For a Researcher the separate logic
-		//		} else if (user instanceof ResearchDecorator) {
-		//			Data.getInstance().researchDecorators.add((ResearchDecorator) user);
-		//		}
+		else if (user instanceof Employee) {
+			Data.getInstance().employees.add((Employee) user);
+		}
+		else if (user instanceof EResearcher) {
+			Data.getInstance().researchers.add(((EResearcher) user).getResearcher());
+		}
 	}
 
 	public void removeUser() {

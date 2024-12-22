@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import Attributes.News;
+import Enums.ManagerType;
 
 public class Data implements Serializable {
 
@@ -28,6 +29,7 @@ public class Data implements Serializable {
 	public ArrayList<ResearchJournal> researchJournals = new ArrayList<>();
 	public ArrayList<ResearchProject> researchProjects = new ArrayList<>();
 	public ArrayList<ResearchPaper> researchPapers = new ArrayList<>();
+	public ArrayList<Employee> employees = new ArrayList<>();
 
 	static{
 		if(new File("data.ser").exists()){
@@ -46,6 +48,17 @@ public class Data implements Serializable {
 	public static synchronized Data getInstance() {
 		return INSTANCE;
 	}
+
+
+	public Manager getManager(){
+		for(Manager manager: managers){
+			if(manager.getManagerType() == ManagerType.OR){
+				return manager;
+			}
+		}
+		return null;
+	}
+
 
 	public static Data read() throws IOException, ClassNotFoundException {
 		try (FileInputStream fis = new FileInputStream("data.ser");
