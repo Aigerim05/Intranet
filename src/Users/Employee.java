@@ -47,10 +47,19 @@ public class Employee {
     		newMessage = MessageFactory.getMessage("Complaint", this);
     	default:
     		System.out.println("Invalid message type");
-    		return; // sendMessage() abort? можно сделать цикл пока не введет правильный тип или 0 - чтобы выйти
+    		 // sendMessage() abort? можно сделать цикл пока не введет правильный тип или 0 - чтобы выйти
     	}
     	
+    	System.out.println("Select Employee you want to send message to");
+    	UserOperation.printList(Data.getInstance().employees); 
+    	Employee chosenEmployee = Data.getInstance().employees.get(inp.nextInt() - 1); 
     	
+    	System.out.println("Write a content of the message");
+    	String content = inp.nextLine();
+    	newMessage.setSender(this);
+    	newMessage.setReceiver(chosenEmployee);
+    	newMessage.setContent(content);
+    	newMessage.send();
     }
 
 }

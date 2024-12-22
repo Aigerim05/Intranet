@@ -16,7 +16,7 @@ public class Complaint extends Message {
         super(sender, receiver, content);
         this.department = department;
     }
-
+    
     public String getDepartment() {
         return department;
     }

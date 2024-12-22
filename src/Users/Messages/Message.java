@@ -30,7 +30,19 @@ public abstract class Message {
         return currentTime + Integer.toString(randomNum, 36);
     }
     
-    public Employee getSender() {
+    public void setSender(Employee sender) {
+		this.sender = sender;
+	}
+
+	public void setReceiver(Employee receiver) {
+		this.receiver = receiver;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Employee getSender() {
         return sender;
     }
     public Employee getReceiver() {
@@ -45,7 +57,7 @@ public abstract class Message {
     public String getMessageId() {
         return messageId;
     }
-
+    
 
     @Override
     public boolean equals(Object obj) {
