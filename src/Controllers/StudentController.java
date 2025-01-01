@@ -3,10 +3,13 @@ package Controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Users.Bachelor;
 import Users.Course;
 import Users.Data;
 import Users.DataOperation;
 import Users.Manager;
+import Users.Master;
+import Users.PhD;
 import Users.ResearchUtils;
 import Users.Researcher;
 import Users.Student;
@@ -42,9 +45,8 @@ public class StudentController {
 				System.out.println("3) View Instructors");
 				System.out.println("4) Register for a Course");
 				System.out.println("5) Rate a Teacher");
-				System.out.println("6) View Transcript");
-				System.out.println("7) Switch to Researcher Mode");
-				System.out.println("8) Logout");
+				System.out.println("6) Switch to Researcher Mode");
+				System.out.println("7) Logout");
 				System.out.print("Enter your choice: ");
 				String choice = DataOperation.readFromConsole();
 
@@ -74,20 +76,22 @@ public class StudentController {
 						rateTeacher();
 					} while (repeatOperation());
 					break;
+
 				case "6":
-					do {
-						student.viewTranscript();
-					} while (repeatOperation());
-					break;
-				case "7":
-					if (student.getResearcher() != null) {
-						Researcher researcher = student.getResearcher();
+					if (student instanceof Bachelor) {
+						Researcher researcher = ((Bachelor) student).getResearcher();
+						ResearchUtils.launchResearcherMode(researcher);
+					} else if (student instanceof Master) {
+						Researcher researcher = ((Master) student).getResearcher();
+						ResearchUtils.launchResearcherMode(researcher);
+					} else if (student instanceof PhD) {
+						Researcher researcher = ((PhD) student).getResearcher();
 						ResearchUtils.launchResearcherMode(researcher);
 					} else {
 						System.out.println("You are not a researcher.");
 					}
 					break;
-				case "8":
+				case "7":
 					exit();
 					return;
 				default:
@@ -133,9 +137,12 @@ public class StudentController {
 		}
 
 		Course course = availableCourses.get(courseNumber - 1);
-		Manager ORManager = Data.getInstance().getManager();
-		ORManager.approveStudent(student, course);
-		System.out.println("Successfully registered for the course: " + course.getCourseName());
+		Manager manager = Data.getInstance().getManager();
+		if (manager != null) {
+			student.registerToCourse(course, manager);
+		} else {
+			System.out.println("No manager with ManagerType.OR found.");
+		}
 	}
 
 	private void rateTeacher() {

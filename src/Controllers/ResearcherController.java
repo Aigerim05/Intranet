@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import Enums.Format;
 import Users.Data;
@@ -55,11 +57,12 @@ public class ResearcherController {
 
 
 	public void printResearchPapers() {
-		if(!researcher.getResearchPapers().isEmpty()) {
-			researcher.getResearchPapers().sort((p1, p2) -> Integer.compare(p2.getNumberOfCitations(), p1.getNumberOfCitations()));
-			UserOperation.printList(researcher.getResearchPapers());
-		}
-		else {
+		if (!researcher.getResearchPapers().isEmpty()) {
+			ArrayList<ResearchPaper> sortedPapers = (ArrayList<ResearchPaper>) researcher.getResearchPapers().stream()
+					.sorted(Comparator.comparingInt(ResearchPaper::getNumberOfCitations).reversed())
+					.collect(Collectors.toList());
+			UserOperation.printList(sortedPapers);
+		} else {
 			System.out.println("You have no research papers yet.");
 		}
 	}
@@ -319,6 +322,10 @@ public class ResearcherController {
 		ArrayList<Researcher> paperAuthors = paper.getAuthors();
 		for(int i = 0; i < authors.size(); i++) {
 			paperAuthors.add(authors.get(i));
+
+		}
+		for(int i = 0; i < paperAuthors.size(); i++) {
+			paperAuthors.get(i).getResearchPapers().add(paper);
 		}
 	}
 }

@@ -56,7 +56,7 @@ public class Researcher implements Serializable{
 
 	@Override
 	public String toString() {
-		return user.toString() + ", field=" + field;
+		return  "Name: " + user.getFirstName() + " userId: " + user.getUserId() +"  field: " + field ;
 	}
 
 	public boolean addProject(ResearchProject project) {
@@ -65,6 +65,8 @@ public class Researcher implements Serializable{
 		}
 		return false;
 	}
+
+	/* Calculates h-index from the published papers.*/
 
 	public int calculateHIndex() {
 		ArrayList<Integer> citations = new ArrayList<>();
@@ -91,6 +93,7 @@ public class Researcher implements Serializable{
 
 	}
 
+	/* Publishes research paper in research journal.*/
 	public void publishPaper(ResearchJournal researchJournal, ResearchPaper paper) {
 		if (researchJournal != null && paper != null) {
 			researchJournal.getListOfResearchPapers().add(paper);
@@ -102,7 +105,7 @@ public class Researcher implements Serializable{
 			System.out.println("Either the research journal or the paper is null.");
 		}
 	}
-
+	/*Creates research paper*/
 	public ResearchPaper createResearchPaper(String name, ResearchJournal researchJournal, int pages, Date publicationDate, boolean isFreeAccess, int numberOfCitations) {
 		ResearchPaper paper = new ResearchPaper(name, researchJournal, pages, publicationDate, isFreeAccess, numberOfCitations);
 		return paper;

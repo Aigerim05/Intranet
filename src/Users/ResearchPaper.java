@@ -103,6 +103,7 @@ public class ResearchPaper implements Serializable{
 		}
 	}
 
+	/*Gets citation in specific format.*/
 	private String getPlainTextCitation() {
 
 		StringBuilder citation = new StringBuilder();

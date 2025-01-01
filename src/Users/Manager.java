@@ -3,7 +3,6 @@ package Users;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import Attributes.Request;
 import Enums.CourseType;
 import Enums.Language;
 import Enums.ManagerType;
@@ -11,11 +10,6 @@ import Enums.ManagerType;
 public class Manager extends Employee{
 
 	private ManagerType managerType;
-	private ArrayList<Request> requests;
-
-	{
-		requests = new ArrayList<>();
-	}
 
 	public Manager(){
 		super();
@@ -33,14 +27,6 @@ public class Manager extends Employee{
 
 	public void setManagerType(ManagerType managerType) {
 		this.managerType = managerType;
-	}
-
-	public ArrayList<Request> getRequests() {
-		return requests;
-	}
-
-	public void setRequests(ArrayList<Request> requests) {
-		this.requests = requests;
 	}
 
 	@Override
@@ -69,7 +55,7 @@ public class Manager extends Employee{
 	}
 
 
-
+	/* This method creates new Course.*/
 
 	public void addCourse(CourseType courseType, String code, int numberOfCredits, String courseName, String description, int maxCountOfStudents, ArrayList<Course> prerequisites) {
 		Course newCourse = new Course();
@@ -94,6 +80,8 @@ public class Manager extends Employee{
 		}
 		System.out.println("Course with code " + code + " not found.");
 	}
+
+	/* Updates the course's fields by user's choice.*/
 	public void updateCourse(String code, String newName, String newDescription, CourseType newCourseType) {
 		for (Course course : Data.getInstance().courses) {
 			if (course.getCode().equals(code)) {
@@ -109,7 +97,7 @@ public class Manager extends Employee{
 
 
 
-
+	/* Checks is the student can register to course, if it can, registers to course.*/
 	public void approveStudent(Student student, Course course) { 
 		if(course.isAvailableCourse()) {
 			if (student.getCurrCredit() + course.getNumberOfCredits() > student.getMaxCredit()) {
@@ -124,9 +112,9 @@ public class Manager extends Employee{
 			Mark mark = new Mark(0, 0, 0);  
 
 			student.getJournal().put(course, mark);
+			Course c2 = new Course("CS101");
+			System.out.println("check! "+student.getJournal().get(c2));
 
-
-			course.addParticipant(student);
 			System.out.println(student.getFirstName() + " was added to the course " + course.getCourseName() + ' ' + course.getCode());
 
 		}

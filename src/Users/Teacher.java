@@ -1,13 +1,15 @@
-package Users ;
+package Users;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 import Enums.Department;
 import Enums.Language;
 import Enums.Position;
-import Interfaces.Employeeable;
-public class Teacher extends Employee implements Employeeable
-{
+
+
+public class Teacher extends Employee{
+
 	private Researcher researcher;
 
 	private Position position;
@@ -20,36 +22,30 @@ public class Teacher extends Employee implements Employeeable
 		ratings = new ArrayList<Integer>();
 	}
 
-	public Teacher(){
+	public Teacher() {
 		super();
 	}
 
-
 	public Teacher(String firstName, String lastName,
-			String userId, String password,  Language language, Position position, Department department, double salary) {
-		super(firstName,lastName,userId,password,language, salary);
+			String userId, String password, Language language, Position position, Department department, double salary) {
+		super(firstName, lastName, userId, password, language, salary);
 		this.position = position;
 		this.department = department;
 		if (position == Position.PROFESSOR) {
 			this.researcher = ResearchUtils.createResearcher(this);
 
-		}
-		else {
+		} else {
 			this.researcher = ResearchUtils.askForResearcherRole(this);
 		}
 	}
-
-
 
 	public Researcher getResearcher() {
 		return researcher;
 	}
 
-
 	public void setResearcher(Researcher researcher) {
 		this.researcher = researcher;
 	}
-
 
 	public ArrayList<Integer> getRatings() {
 		return ratings;
@@ -75,7 +71,7 @@ public class Teacher extends Employee implements Employeeable
 		this.department = department;
 	}
 
-	public ArrayList<Course> getCourses(){
+	public ArrayList<Course> getCourses() {
 		return courses;
 	}
 
@@ -92,14 +88,13 @@ public class Teacher extends Employee implements Employeeable
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		if (!super.equals(o))
-		{
-			return false; 
+		if (!super.equals(o)) {
+			return false;
 		}
 
-		Teacher teacher = (Teacher) o;  
-		return this.department.equals(teacher.department) &&
-				this.position.equals(teacher.position);  
+		Teacher teacher = (Teacher) o;
+		return this.department.equals(teacher.department)
+				&& this.position.equals(teacher.position);
 	}
 
 	@Override
@@ -109,15 +104,14 @@ public class Teacher extends Employee implements Employeeable
 
 	@Override
 	public String toString() {
-		return "Teacher{" +
-				"courses=" + courses +
-				", position=" + position +
-				", department=" + department +
-				'}';
+		return "Teacher{"
+				+ "courses=" + courses
+				+ ", position=" + position
+				+ ", department=" + department
+				+ '}';
 	}
 
-
-	public void viewCourses() { 
+	public void viewCourses() {
 		if (courses != null && !courses.isEmpty()) {
 			for (Course course : courses) {
 				System.out.println("Course Code: " + course.getCode() + " | Course Name: " + course.getCourseName());
@@ -133,17 +127,17 @@ public class Teacher extends Employee implements Employeeable
 
 
 
+	/*Returns average rating ot teacher.*/
 	public double getAverageRating() {
 		if (ratings.isEmpty()) {
-			return 0.0;  
+			return 0.0;
 		}
 
 		int sum = 0;
 		for (int rating : ratings) {
 			sum += rating;
 		}
-		return sum / (double) ratings.size();  
+		return sum / (double) ratings.size();
 	}
-
 
 }

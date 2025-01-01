@@ -1,39 +1,13 @@
 package Users;
 
-import java.util.ArrayList;
-
-import Attributes.Message;
 import Enums.Language;
 
 public class Employee extends User{
 
 
-	ArrayList<Message> messages;
+
 	double salary;
 
-
-	// 1. in Data class create ArrayList<Employee>
-	// 2. 
-
-	//
-	//	1) Amina   0
-	//2) Aigerim    1
-	//3) 
-	//
-	//Choose number of employee
-	//int choice = in.nextInt();
-	//1
-
-
-	// -> "To whom you want to send message?"
-	// -> UserOperation.printList(Data.getInstance().employees)
-	//	Employee chosenEmployee = Data.getInstance().Employees.get(choice - 1);
-	// 
-	// message.send(teacher, chosenEmployee, content){
-	//      MessageFactory.create
-	{
-		messages = new ArrayList<>();
-	}
 
 	public Employee() {
 		super();
@@ -44,13 +18,6 @@ public class Employee extends User{
 		this.salary = salary;
 	}
 
-	public ArrayList<Message> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(ArrayList<Message> messages) {
-		this.messages = messages;
-	}
 
 	public double getSalary() {
 		return salary;

@@ -2,7 +2,6 @@ package Users;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import Enums.Department;
 import Enums.Language;
@@ -44,14 +43,14 @@ public class UserFactory {
 				return new Bachelor(firstName, lastName, userId, password, language, yearOfStudy, maxCredit, department);
 
 			case 2: { // Master
-				Researcher supervisor = selectSupervisor(scanner);
+				Researcher supervisor = selectSupervisor(scanner, true);
 				ResearchProject project = selectResearchProject(scanner);
 				return new Master(firstName, lastName, userId, password, language,
 						yearOfStudy, maxCredit, department, supervisor, project);
 			}
 
 			case 3: { // PhD
-				Researcher supervisor = selectSupervisor(scanner);
+				Researcher supervisor = selectSupervisor(scanner, true);
 				ResearchProject project = selectResearchProject(scanner);
 				return new PhD(firstName, lastName, userId, password, language,
 						yearOfStudy, maxCredit, department, supervisor, project);
@@ -79,14 +78,14 @@ public class UserFactory {
 			System.out.println("Enter position \n 1) OR \n 2) DEPARTMENT");
 			int managerTypeChoice = Integer.parseInt(scanner.nextLine());
 			ManagerType managerType = UserOperation.enterManagerType(managerTypeChoice);
+			System.out.println("Enter salary:");
+			double salary = Double.parseDouble(scanner.nextLine());
 			if (managerType == ManagerType.DEPARTMENT) {
 				System.out.println("Enter department: 1) SITE \n 2) ISE \n 3) SEOGI \n 4) SG \n 5) BS \n 6) KMA \n 7) SAM \n 8) SCE \n 9) SMSGT");
 				int departmentChoice = Integer.parseInt(scanner.nextLine());
 				Department department = UserOperation.enterDepartment(departmentChoice);
 
 			}
-			System.out.println("Enter salary:");
-			double salary = Double.parseDouble(scanner.nextLine());
 			return new Manager(password, firstName, lastName, userId, language, managerType, salary);
 		} 
 		else {
@@ -95,25 +94,32 @@ public class UserFactory {
 		}
 	}
 
-	public static Researcher selectSupervisor(Scanner scanner) {
-		ArrayList<Researcher> supervisors = Data.getInstance().researchers.stream()
-				.filter(researcher -> researcher.calculateHIndex() > 3) 
-				.collect(Collectors.toCollection(ArrayList::new)); 
+	public static Researcher selectSupervisor(Scanner scanner, boolean filterByHIndex) {
+		ArrayList<Researcher> supervisors = new ArrayList<>(Data.getInstance().researchers);
+
+		// Only filter if filterByHIndex is true
+		if (filterByHIndex) {
+			supervisors.removeIf(r -> r.calculateHIndex() <= 3);
+		}
+
 		if (supervisors.isEmpty()) {
 			System.out.println("No available supervisors found.");
 			return null;
 		}
+
 		System.out.println("Available supervisors:");
 		for (int i = 0; i < supervisors.size(); i++) {
 			Researcher r = supervisors.get(i);
-			System.out.println((i + 1) + ") " + r.getUser().getFirstName() + " " + r.getUser().getLastName() 
-					+ " (ID: " + r.getUser().getUserId() + ")");
+			System.out.println((i + 1) + ") " + r.getUser().getFirstName() + " "
+					+ r.getUser().getLastName() + " (ID: " + r.getUser().getUserId() + ")");
 		}
+
 		System.out.print("Enter the number of the supervisor or 0 to skip: ");
 		String input = scanner.nextLine();
 		if (input.isEmpty()) {
 			return null;
 		}
+
 		int choice = Integer.parseInt(input);
 		if (choice <= 0 || choice > supervisors.size()) {
 			System.out.println("Skipping supervisor selection...");

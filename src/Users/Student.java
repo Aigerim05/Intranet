@@ -91,7 +91,7 @@ public class Student extends User {
 	@Override
 	public String toString() {
 		return super.toString() + "Student [yearOfStudy=" + yearOfStudy + ", maxCredit=" + maxCredit
-				+ ", department=" + department + "current credits= " + currCredit + "]";
+				+ ", department=" + department + "current credits= " + currCredit + "journal: " + journal + "]";
 	}
 
 	public ArrayList<Course> getTakenCoursesArray() {
@@ -104,7 +104,7 @@ public class Student extends User {
 			System.out.println("Course Code: " + course.getCode() + ", Course Name: " + course.getCourseName() + ", Course Type: " + course.getCourseType());
 		}
 	}
-
+	/* Shows transcript of the student.*/
 	public void viewTranscript() {
 		System.out.println(this.getFirstName() + " " + this.getLastName() + " has marks for the following courses:");
 		for (Course course : journal.keySet()) {
@@ -116,22 +116,9 @@ public class Student extends User {
 			System.out.println(course.getCode() + " | " + course.getCourseName() + " : " + grade);
 		}
 	}
-
+	/*Rates teacher.*/
 	public void rateTeacher(Teacher teacher) {
-		//		Scanner scanner = new Scanner(System.in);
-		//
-		//		try (scanner) {
-		//			System.out.print("Rate the Teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " from 1 to 10: ");
-		//
-		//			int rating = scanner.nextInt();
-		//
-		//			teacher.getRatings().add(rating);
-		//			System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
-		//		} catch (NullPointerException e) {
-		//			System.out.println("Error: The teacher object or some of its properties are null.");
-		//		} catch (Exception e) {
-		//			System.out.println("An unexpected error occurred: " + e.getMessage());
-		//		}
+
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Rate the Teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " from 1 to 10: ");
 
@@ -141,23 +128,28 @@ public class Student extends User {
 		System.out.println("You rated the teacher " + teacher.getFirstName() + " " + teacher.getLastName() + " with a " + rating + "/10");
 	}
 
+	/*Student registeres to course.*/
+
 	public void registerToCourse(Course course, Manager manager) {
 		manager.approveStudent(this, course);
-		if (!journal.containsKey(course)) {
-			journal.put(course, new Mark()); // <-- Initialize Mark here
-		}
 	}
 
 	public void viewMarksForCourses() {
 		System.out.println(this.getFirstName() + " " + this.getLastName() + "has marks for the following courses:");
 		for (Course course : journal.keySet()) {
+
 			Mark mark = journal.get(course);
-			System.out.println(course.getCode() + " | " + course.getCourseName() + " : "
-					+ mark);
-			//					+ mark.getFirstAttestation() + " | " 
-			//					+ mark.getSecondAttestation() + " | " 
-			//					+ mark.getFinalExam() + " | "); 
-			//					+ mark.getTotal());
+
+
+			System.out.println(course.getCode() + " | " + course.getCourseName() + " first: "
+					+ mark.getFirstAttestation() + " | "  + " second: " +
+					+ mark.getSecondAttestation() + " | "  + " final: " + 
+					+ mark.getFinalExam() + " | " + " total: " +
+					mark.getTotal());
+
+			if((mark.getFirstAttestation() + mark.getSecondAttestation()) < 30 || mark.getFinalExam() < 20) {
+				System.out.println("RETAKE:");
+			}
 		}
 	}
 

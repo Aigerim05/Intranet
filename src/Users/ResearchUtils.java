@@ -6,11 +6,8 @@ import java.util.Scanner;
 import Controllers.ResearcherController;
 
 public class ResearchUtils {
-	//	public void printResearchPapersOfAllResearchers() {
-	//   get the researchers field like research paper, then its numberOf 
-	// основание получается User все таки 
-	//	}
 
+	/*Creeates Researcher.*/
 	public static Researcher createResearcher(User user) {
 		Scanner scanner = new Scanner(System.in);
 
@@ -23,7 +20,7 @@ public class ResearchUtils {
 		Data.getInstance().researchers.add(newResearcher);
 		return newResearcher;
 	}
-
+	/*Asks if user want to be a researcher.*/
 	public static Researcher askForResearcherRole(User user) {
 		Scanner scanner = new Scanner(System.in);
 

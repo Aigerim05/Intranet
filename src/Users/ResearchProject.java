@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ResearchProject implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private String topic;
 	private String projectId;
@@ -88,7 +86,7 @@ public class ResearchProject implements Serializable{
 		return "ResearchProject [topic=" + topic + ", projectId=" + projectId + "]";
 	}
 
-
+	/* Adds Researcher to researcher project.*/
 	public boolean addParticipants(Researcher participant) {
 		if (participant != null && !participants.contains(participant)) {
 			return participants.add(participant);

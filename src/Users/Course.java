@@ -8,7 +8,7 @@ import Enums.CourseType;
 
 public class Course implements Serializable{
 
-
+	private static final long serialVersionUID = 1L;
 	private String code;
 	private int numberOfCredits;
 	private String courseName;

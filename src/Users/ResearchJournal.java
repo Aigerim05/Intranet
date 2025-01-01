@@ -6,11 +6,8 @@ import java.util.Objects;
 
 public class ResearchJournal implements Serializable{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	//	private static final long serialVersionUID = 1L;
 	private String name;
 	private ArrayList<ResearchPaper> listOfSubscribers;
 	private ArrayList<ResearchPaper> listOfResearchPapers;

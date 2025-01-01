@@ -4,7 +4,6 @@ import Enums.Department;
 import Enums.Language;
 
 public class Bachelor extends Student{
-	private Researcher researcher;
 
 	// fields related to organizations (not now)
 
@@ -27,16 +26,6 @@ public class Bachelor extends Student{
 	public Bachelor() {
 		super();
 
-	}
-
-	@Override
-	public Researcher getResearcher() {
-		return researcher;
-	}
-
-	@Override
-	public void setResearcher(Researcher researcher) {
-		this.researcher = researcher;
 	}
 
 

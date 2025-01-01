@@ -12,6 +12,8 @@ public class GraduateStudent extends Student{
 
 	private ResearchProject researchProject;
 
+	private Researcher researcher;
+
 	public GraduateStudent() {
 		super();
 	}
@@ -36,13 +38,15 @@ public class GraduateStudent extends Student{
 		this.supervisor = supervisor;
 	}
 
-	// public Researcher getResearcher() {
-	// 	return researcher;
-	// }
+	@Override
+	public Researcher getResearcher() {
+		return researcher;
+	}
 
-	// public void setResearcher(Researcher researcher) {
-	// 	this.researcher = researcher;
-	// }
+	@Override
+	public void setResearcher(Researcher researcher) {
+		this.researcher = researcher;
+	}
 
 	public ResearchProject getResearchProject() {
 		return researchProject;

@@ -1,14 +1,13 @@
 package Users;
 
 import Enums.Language;
-import Interfaces.Employeeable;
 
-public class EResearcher extends Employee implements Employeeable{
+public class EResearcher extends Employee {
 
 
 	@Override
 	public String toString() {
-		return "EResearcher [researcher=" + researcher + "]";
+		return "EResearcher " + researcher.toString() + " employee info: " + super.toString() + "]";
 	}
 
 

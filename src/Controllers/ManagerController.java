@@ -2,6 +2,7 @@ package Controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import Enums.CourseType;
@@ -60,9 +61,9 @@ public class ManagerController {
 		if (Data.getInstance().teachers.isEmpty()) {
 			System.out.println("No teachers available yet...");
 		} else {
-			for (int i = 0; i < Data.getInstance().teachers.size(); i++) {
-				System.out.println((i + 1) + ". " + Data.getInstance().teachers.get(i).getUserId() + " " + Data.getInstance().teachers.get(i).getFirstName());
-			}
+			Data.getInstance().teachers.stream()
+			.sorted(Comparator.comparing(Teacher::getFirstName)) // Сортировка по имени
+			.forEach(teacher -> System.out.println(teacher.getUserId() + " " + teacher.getFirstName()));
 		}
 	}
 
@@ -208,7 +209,7 @@ public class ManagerController {
 		try {
 			System.out.println("Welcome!");
 			menu: while (true) {
-				System.out.println("What do you want to do?\n 1) Add course \n 2) Remove course \n 3)Update course \n 4)Assign course to Teacher \n 5) Assign Supervisor to Student  \n 6)View information about teachers \n 7) View information about students \n 8) Report Generation \n 9) View Courses \n 10) Exit");
+				System.out.println("What do you want to do?\n 1) Add course \n 2) Remove course \n 3)Update course \n 4)Assign course to Teacher \n 5) View all teachers  \n 6)View information about teachers \n 7) View information about students \n 8) Report Generation \n 9) View Courses \n 10) Exit");
 				int choiceMenu = in.nextInt();
 				in.nextLine();
 
